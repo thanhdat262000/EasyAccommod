@@ -1,6 +1,6 @@
 .login {
   z-index: 1;
-  top: 30%;
+  top: 20%;
   left: 35%;
   position: absolute;
   width: 30%;
@@ -8,4 +8,49 @@
   border-radius: 5px;
   background-color: white;
   position: fixed;
+  display: none;
+}
+.login input {
+  font-size: 1rem;
+  margin: 10px 0px;
+  padding-left: 1rem;
+  width: 70%;
+  height: 35px;
+  border-radius: 24px;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+.login img {
+  opacity: 0.5;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.buttons button {
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  margin: 10px;
+}
+.buttons button:active {
+  opacity: 0.8;
+}
+button[name="login"] {
+  background-color: #4694dc;
+  height: 50px;
+  width: 30%;
+}
+
+button[name="signup"] {
+  background-color: #f7fc14;
+  height: 30px;
+  width: 25%;
+}
+.buttons {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.login form {
+  margin-top: 20%;
 }
