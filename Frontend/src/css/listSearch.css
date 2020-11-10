@@ -1,0 +1,32 @@
+.list-searchAndFilter .search-title {
+  width: 100%;
+  height: 37px;
+  border-radius: 5px;
+  background-color: #4694dc;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: center;
+}
+.search-title span {
+  text-align: center;
+  font-size: 18px;
+  align-self: center;
+}
+.search-submit {
+  width: 100%;
+  height: 37px;
+  border-radius: 20px;
+  background-color: #4694dc;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.search-submit span {
+  margin: 0px 5px;
+  font-size: 18px;
+}
+.search-submit img {
+  margin: 0px 5px;
+}

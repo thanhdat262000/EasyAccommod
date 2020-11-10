@@ -1,16 +1,17 @@
 import "./App.css";
-import Apartment from "./components/layout/listApartments/apartment";
 import Background from "./components/layout/background";
 import Header from "./components/layout/header";
-import ListApartments from "./components/layout/listApartments/listApartments";
 import Footer from "./components/layout/footer";
+import Body from "./components/body";
+import Login from "./components/login";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Background />
-      <ListApartments />
+      <Body />
+      <Login />
       <Footer />
     </div>
   );
