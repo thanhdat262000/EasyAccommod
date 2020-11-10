@@ -4,6 +4,11 @@ import "../../css/header.css";
 import Building from "../../image/building.svg";
 
 export default class Header extends React.Component {
+  onClick(e) {
+    e.preventDefault();
+    console.log(document.getElementsByClassName("login")[0].style.display);
+    document.getElementsByClassName("login")[0].style.display = "block";
+  }
   render() {
     return (
       <div className="header">
@@ -15,7 +20,7 @@ export default class Header extends React.Component {
         </div>
         <div id="right-header">
           <a href="#" className="link">
-            <div id="signIn" className="sign">
+            <div id="signIn" className="sign" onClick={this.onClick}>
               Đăng nhập
             </div>
           </a>
