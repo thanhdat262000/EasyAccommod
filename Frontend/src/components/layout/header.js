@@ -5,9 +5,7 @@ import Building from "../../image/building.svg";
 
 export default class Header extends React.Component {
   onClick(e) {
-    e.preventDefault();
-    console.log(document.getElementsByClassName("login")[0].style.display);
-    document.getElementsByClassName("login")[0].style.display = "block";
+    document.getElementsByClassName("login-bg")[0].style.display = "flex";
   }
   render() {
     return (
