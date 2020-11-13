@@ -1,7 +1,10 @@
 const express = require('express');
 
-const ownnerRouter = express.Router();
+const ownerController = require('../controllers/ownerController')
+
+const ownerRouter = express.Router();
+
+ownerRouter.get('/', ownerController.index)
 
 
-
-module.exports = ownnerRouter;
+module.exports = ownerRouter;

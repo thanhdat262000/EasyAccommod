@@ -19,16 +19,9 @@ module.exports.renderId = async (req, res) => {
 module.exports.favorite = async (req, res) => {
     const apartment_id = req.params.id;
     const { account_id, isFavorite } = req.body;
-    let data = {
-        like_id: shortid.generate(),
-        account_id: account_id,
-        apartment_id: apartment_id,
-        status: isFavorite
-    }
+    const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
 
-    const sql = `INSERT INTO favorite(favorite_id, account_id, apartment_id, status) VALUES(${data});`
-
-    connection.query(sql, (err, results, fields) => {
+    connection.query(sql, [ account_id, apartment_id, isFavorite], (err, results, fields) => {
         try{
             res.send("Data is added")
         }catch(err){
@@ -39,7 +32,17 @@ module.exports.favorite = async (req, res) => {
 }
 
 module.exports.comment = async (req, res) => {
-    res.json('Create a comment apartment for a specific user')
+    const { account_id, comment} = req.body;
+    const apartment_id = req.params.id;
+    const status = 0;
+    const sql = "INSERT INTO comment SET  status=?, account_id=?, apartment_id=?, comment=? ";
+    connection.query(sql, [status, account_id, apartment_id, comment], (err, results, fields) => {
+        try{
+            res.send("Comment is added");
+        }catch(err){
+            res.send(err);
+        }
+    })
 }
 
 module.exports.report = async (req, res) => {
