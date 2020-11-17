@@ -20,7 +20,7 @@ class Login extends Component {
             alt="cancel"
             onClick={this.onCancel}
           />
-          <form name="login-form" method="POST">
+          <form name="login-form" >
             <div className="title">
               <h2>Đăng nhập</h2>
             </div>

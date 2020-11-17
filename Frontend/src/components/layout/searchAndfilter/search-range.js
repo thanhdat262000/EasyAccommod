@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../../css/range.css";
+import "../../../css/searchAndfilter/range.css";
 
 class SearchRange extends Component {
   constructor(props) {

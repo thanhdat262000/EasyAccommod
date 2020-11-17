@@ -1,12 +1,12 @@
-.login {
+.signup {
   position: absolute;
   width: 30%;
-  height: 60%;
+  height: 65%;
   border-radius: 5px;
   background-color: white;
   animation: popup 0.3s linear;
 }
-.login-bg {
+.signup-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +18,7 @@
   align-items: center;
   display: none;
 }
-.login input {
+.signup input {
   outline: none;
   font-size: 1rem;
   margin: 10px 0px;
@@ -28,7 +28,7 @@
   border-radius: 24px;
   border-color: rgba(0, 0, 0, 0.25);
 }
-.login img {
+.signup img {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -46,13 +46,13 @@
 .buttons button:active {
   opacity: 0.8;
 }
-button[name="login"] {
+button[name="continue-signup"] {
   background-color: #4694dc;
   height: 50px;
   width: 30%;
 }
 
-button[name="signup"] {
+button[name="redirect-login"] {
   background-color: #f7fc14;
   height: 30px;
   width: 25%;
@@ -62,7 +62,7 @@ button[name="signup"] {
   align-items: flex-end;
   justify-content: center;
 }
-.login form {
+.signup form {
   margin-top: 20%;
 }
 @keyframes popup {
@@ -71,6 +71,6 @@ button[name="signup"] {
   }
 
   100% {
-    top: 20%;
+    top: 17.5%;
   }
 }
