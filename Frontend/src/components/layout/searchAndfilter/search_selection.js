@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../../css/selection.css";
+import "../../../css/searchAndfilter/selection.css";
 class SearchSelection extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +19,6 @@ class SearchSelection extends Component {
                 {selection.name}
               </option>
             ))}
-            {/* <option value="flat">Căn hộ đầy đủ</option>
-            <option value="miniFlat">Căn hộ mini</option>
-            <option value="room">Phòng trọ</option>
-            <option value="residentalHouse">Nhà dân</option> */}
           </select>
         </div>
       </div>

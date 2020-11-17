@@ -1,0 +1,14 @@
+.checkbox {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.input-checkbox {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+}
+.checkbox label {
+  text-align: center;
+}

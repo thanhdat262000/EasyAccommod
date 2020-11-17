@@ -1,0 +1,9 @@
+.list-input {
+  background-color: white;
+  width: 30%;
+  height: 80%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

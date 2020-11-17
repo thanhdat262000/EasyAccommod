@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import SearchRange from "./search-range";
 import SearchSelection from "./search_selection";
-import "../../../css/listSearch.css";
+import "../../../css/searchAndfilter/listSearch.css";
 import Search from "../../../image/search.svg";
+import SearchCheckbox from "./search-checkbox";
 
 class ListSearchAndFilter extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class ListSearchAndFilter extends Component {
         { type: "range", criteria: "Giá", unit: "triệu VNĐ" },
         { type: "range", criteria: "Kích thước", unit: "" },
         { type: "range", criteria: "Số phòng ngủ", unit: "" },
+        { type: "checkbox", criteria: "Nội thất" },
       ],
     };
   }
@@ -55,7 +57,9 @@ class ListSearchAndFilter extends Component {
         {listSearchAndFilter.map((searchAndFilter) => {
           if (searchAndFilter.type === "selection")
             return <SearchSelection search={searchAndFilter} />;
-          else return <SearchRange search={searchAndFilter} />;
+          else if (searchAndFilter.type === "range")
+            return <SearchRange search={searchAndFilter} />;
+          else return <SearchCheckbox search={searchAndFilter} />;
         })}
         <div className="search-submit">
           <img src={Search} alt="search" width={20} height={20} />
