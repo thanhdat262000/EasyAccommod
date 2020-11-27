@@ -12,28 +12,13 @@ class CarouselApartment extends Component {
       <div className="carousel-apartment">
         <Slide easing="ease" autoplay="true">
           <div className="each-slide">
-            <img
-              src="https://picsum.photos/200/300"
-              alt="img"
-              width="100%"
-              height={300}
-            />
+            <img src="https://picsum.photos/200/300" alt="img" />
           </div>
           <div className="each-slide">
-            <img
-              src="https://picsum.photos/200/300"
-              alt="img"
-              width="100%"
-              height={300}
-            />
+            <img src="https://picsum.photos/200/300" alt="img" />
           </div>
           <div className="each-slide">
-            <img
-              src="https://picsum.photos/200/300"
-              alt="img"
-              width="100%"
-              height={300}
-            />
+            <img src="https://picsum.photos/200/300" alt="img" />
           </div>
         </Slide>
       </div>
