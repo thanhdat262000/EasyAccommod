@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../../css/screens/apartmentScreen/mainApartment.css";
-import ApartmentInfo from "./apartmentInfo";
+import ApartmentOwnerInfo from "./apartmentOwnerInfo";
+import ListApartmentProperties from "./apartmentPropertiesInfo/listApartmentProperties";
 import CarouselApartment from "./Carousel";
 class ApartmentDetails extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class ApartmentDetails extends Component {
       <div className="main-apartment">
         <div className="main-layout">
           <CarouselApartment />
-          <ApartmentInfo />
+          <ApartmentOwnerInfo />
+          <ListApartmentProperties />
         </div>
         {/* <CarouselApartment /> */}
       </div>

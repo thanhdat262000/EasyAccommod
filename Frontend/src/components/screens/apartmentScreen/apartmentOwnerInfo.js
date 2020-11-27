@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Avatar from "../../../image/user.svg";
 import SendMessageButton from "./sendMessageButton";
-import "../../../css/screens/apartmentScreen/apartmentInfo.css";
-class ApartmentInfo extends Component {
+import "../../../css/screens/apartmentScreen/apartmentOwnerInfo.css";
+class ApartmentOwnerInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -25,4 +25,4 @@ class ApartmentInfo extends Component {
   }
 }
 
-export default ApartmentInfo;
+export default ApartmentOwnerInfo;
