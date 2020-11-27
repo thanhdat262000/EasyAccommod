@@ -1,0 +1,9 @@
+.main-apartment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-apartment .main-layout {
+  width: 80%;
+}

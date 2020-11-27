@@ -3,6 +3,7 @@ import InputCheckbox from "./inputCheckbox";
 import InputSelection from "./inputSelection";
 import InputField from "./inputField";
 import "../../css/loginDetails/listInput.css";
+import Cancel from "../../image/cancel.svg";
 class ListInput extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +27,17 @@ class ListInput extends Component {
     const { listInput } = this.state;
     return (
       <div className="list-input">
+        <img
+          src={Cancel}
+          width={15}
+          height={15}
+          alt="cancel"
+          onClick={this.props.onCancel}
+        />
         <form name="signup-details">
+          <div className="title">
+            <h2>Đăng kí</h2>
+          </div>
           {listInput.map((input) => {
             if (input.type === "selection")
               return <InputSelection input={input} />;
