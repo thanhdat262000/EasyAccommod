@@ -1,21 +1,31 @@
 import "./App.css";
-import Background from "./components/layout/background";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
-import Body from "./components/screens/body";
 import Login from "./components/login";
 import Signup from "./components/signup";
+import HomeBody from "./components/screens/home/homeBody";
+import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Background />
-      <Body />
-      <Login />
-      <Signup/>
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/apartment">
+            <ApartmentDetails />
+          </Route>
+          <Route path="/" exact>
+            <HomeBody />
+          </Route>
+        </Switch>
+
+        <Login />
+        <Signup />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

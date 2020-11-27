@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 import "../../../css/apartment.css";
 import apartment from "../../../image/apartment.jpg";
 class Apartment extends Component {
@@ -6,13 +7,14 @@ class Apartment extends Component {
     const apartmentProps = this.props.apartmentInfo;
     console.log(apartment);
     return (
+      // <Link to="/apartment" >
       <div
         className="apartment"
         style={{
           backgroundImage: "url(" + apartmentProps.imagePath + ")",
         }}
       >
-        <a href="#" className="main-apartment">
+        <a href="/apartment" className="main-apartment">
           <div className="apartment-info">
             <div className="apartment-price">
               <label>{apartmentProps.rentPrice}</label>
@@ -24,6 +26,7 @@ class Apartment extends Component {
           </div>
         </a>
       </div>
+      // </Link>
     );
   }
 }
