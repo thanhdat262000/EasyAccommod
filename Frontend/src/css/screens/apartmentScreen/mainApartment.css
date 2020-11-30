@@ -6,4 +6,5 @@
 }
 .main-apartment .main-layout {
   width: 70%;
+  z-index: auto;
 }

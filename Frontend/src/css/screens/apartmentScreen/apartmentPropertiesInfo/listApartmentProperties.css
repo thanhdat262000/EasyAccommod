@@ -1,3 +1,6 @@
+form {
+  width: 100%;
+}
 .list-apartment-properties {
   width: 70%;
 }
@@ -13,4 +16,70 @@
 .list-apartment-properties .list-apartment-properties-title span {
   margin-left: 10px;
   margin-bottom: 10px;
+}
+.list-apartment-properties .apartment-property-description {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.list-apartment-properties .apartment-property-description p {
+  margin-left: 10px;
+  text-align: start;
+}
+.list-apartment-properties .apartment-property-description b {
+  margin-left: 10px;
+}
+.contact-owner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.contact-owner .contact-owner-text {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.contact-owner .contact-owner-text textarea {
+  flex-basis: 60%;
+  border-radius: 5px;
+  height: 145px;
+  border-color: rgb(0, 0, 0, 0.25);
+}
+.contact-owner .contact-owner-number {
+  height: 90px;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.contact-owner-number .contact-owner-number-inputField {
+  height: 100%;
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.contact-owner-number .contact-owner-number-inputField input[name="number"] {
+  height: 34px;
+  width: 100%;
+  border-radius: 5px;
+  border-color: rgb(0, 0, 0, 0.25);
+}
+.contact-owner .contact-owner-submit {
+  margin-top: 10%;
+  align-self: flex-end;
+  justify-self: flex-end;
+}
+.contact-owner > span {
+  text-transform: uppercase;
 }

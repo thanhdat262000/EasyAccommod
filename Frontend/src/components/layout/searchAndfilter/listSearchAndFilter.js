@@ -43,7 +43,7 @@ class ListSearchAndFilter extends Component {
         { type: "range", criteria: "Giá", unit: "triệu VNĐ" },
         { type: "range", criteria: "Kích thước", unit: "" },
         { type: "range", criteria: "Số phòng ngủ", unit: "" },
-        { type: "checkbox", criteria: "Nội thất" },
+        { type: "checkbox", criteria: "Nội thất", property: "facility" },
       ],
     };
   }

@@ -1,7 +1,4 @@
 .header {
-  z-index: 1;
-  position: sticky;
-  top: 0px;
   background-color: #4694dc;
   width: 100%;
   display: flex;
