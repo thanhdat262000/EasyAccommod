@@ -6,13 +6,13 @@ class SearchCheckbox extends Component {
     this.state = {};
   }
   render() {
-    const { criteria } = this.props.search;
+    const { criteria, property } = this.props.search;
     return (
       <div className="search-checkbox">
         <div className="criteria">{criteria}</div>
         <div className="checkbox">
-          <input type="checkbox" id="facility" name="facility" />
-          <label for="facility">Có nội thất</label>
+          <input type="checkbox" id={property} name={property} />
+          <label for={property}>Có nội thất</label>
         </div>
       </div>
     );

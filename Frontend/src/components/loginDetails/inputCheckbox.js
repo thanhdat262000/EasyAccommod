@@ -6,12 +6,12 @@ class InputCheckbox extends Component {
     this.state = {};
   }
   render() {
-    const { criteria } = this.props.input;
+    const { criteria, property } = this.props.input;
     return (
       <div className="input-checkbox">
         <div className="checkbox">
-          <input type="checkbox" id="facility" name="facility" />
-          <label for="facility">{criteria}</label>
+          <input type="checkbox" id={property} name={property} />
+          <label for={property}>{criteria}</label>
         </div>
       </div>
     );
