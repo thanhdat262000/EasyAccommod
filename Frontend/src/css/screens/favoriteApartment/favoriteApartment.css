@@ -1,0 +1,33 @@
+.favorite-apartment {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 15px 0px;
+}
+.favorite-apartment .favorite-apartment-image {
+  height: 100%;
+  flex-basis: 15%;
+}
+.favorite-apartment .favorite-apartment-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.favorite-apartment .favorite-apartment-details {
+  height: 100%;
+  flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.favorite-apartment .favorite-apartment-details .favorite-apartment-time {
+  opacity: 0.5;
+}
+.favorite-apartment > img {
+  cursor: pointer;
+}

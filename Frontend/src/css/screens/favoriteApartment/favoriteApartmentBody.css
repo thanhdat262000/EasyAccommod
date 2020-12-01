@@ -1,0 +1,12 @@
+.favorite-apartment-main-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.favorite-apartment-body {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

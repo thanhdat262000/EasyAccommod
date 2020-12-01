@@ -1,0 +1,11 @@
+.list-favorite-apartments {
+  flex-basis: 80%;
+}
+.list-favorite-apartment-title {
+  width: 100%;
+  border-bottom: 2px solid #4694dc;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import ApartmentProperty from "./apartmentProperty";
 import "../../../../css/screens/apartmentScreen/apartmentPropertiesInfo/listApartmentProperties.css";
-import SearchSelection from "../../../layout/searchAndfilter/search_selection";
-import InputCheckbox from "../../../loginDetails/inputCheckbox";
 import SendMessageButton from "../sendMessageButton";
 
 class ListApartmentProperties extends Component {
