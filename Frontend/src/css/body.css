@@ -1,6 +1,7 @@
 .main {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: flex-start;
-  margin: auto;
+  width: 80%;
 }

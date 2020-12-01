@@ -1,7 +1,7 @@
 .search-selection {
-  margin: 15px;
+  margin: 15px 0px;
   height: 60px;
-  width: 223px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;

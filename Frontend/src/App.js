@@ -1,11 +1,12 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import HomeBody from "./components/screens/home/homeBody";
 import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
+import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteApartmentBody";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         <Switch>
           <Route path="/apartment">
             <ApartmentDetails />
+          </Route>
+          <Route path="/favorite">
+            <FavoriteApartmentBody />
           </Route>
           <Route path="/" exact>
             <HomeBody />

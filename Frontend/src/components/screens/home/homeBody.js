@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Background from "./background";
 import Body from "./body";
+import "../../../css/mainBody.css";
+
 class HomeBody extends Component {
   constructor(props) {
     super(props);
