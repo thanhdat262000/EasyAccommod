@@ -6,6 +6,7 @@ const apartmentsRouter = require('./routes/apartmentsRouter');
 const apartmentRouter = require('./routes/apartmentRouter');
 const signinRouter = require('./routes/signin');
 const ownerRouter = require('./routes/owner');
+const registerRouter = require('./routes/register');
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use('/apartments', apartmentsRouter);
 app.use('/owner', ownerRouter);
 
 app.use('/signin', signinRouter);
-
+app.use('/register', registerRouter);
 
 
 app.listen(process.env.PORT | 3000,() => {

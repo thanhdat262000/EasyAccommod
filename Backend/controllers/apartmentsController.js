@@ -1,7 +1,7 @@
 const connection = require('../db');
 
 module.exports.index = async(req, res) => {
-    const sql = "SELECT * FROM apartment";
+    const sql = "SELECT * FROM apartment a JOIN apartment_detail ad ON a.apartment_id=ad.apartment_id";
     connection.query(sql,(err, results, fields) => {
         res.json(results);
     })
