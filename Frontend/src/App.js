@@ -7,7 +7,7 @@ import Signup from "./components/signup";
 import HomeBody from "./components/screens/home/homeBody";
 import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
 import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteApartmentBody";
-import ReceivedMessage from "./components/screens/messageScreen/receivedMessage";
+import MessageBody from "./components/screens/messageScreen/messageBody";
 
 function App() {
   return (
@@ -18,14 +18,15 @@ function App() {
           <Route path="/apartment">
             <ApartmentDetails />
           </Route>
-          <Route pơth="/received-message">
-            <ReceivedMessage />
-          </Route>
+
           <Route path="/favorite">
             <FavoriteApartmentBody />
           </Route>
           <Route path="/" exact>
             <HomeBody />
+          </Route>
+          <Route path="/received-messages" exact>
+            <MessageBody />
           </Route>
         </Switch>
 

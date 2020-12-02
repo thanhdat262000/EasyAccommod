@@ -1,41 +1,42 @@
 import React, { Component } from "react";
-import ReceivedMessage from "./receivedMessage";
-import "../../../css/screens/messageScreen/listReceivedMessages.css";
+import "../../../css/screens/messageScreen/listSentMessages.css";
 import Avatar from "../../../image/user.svg";
+import TitleForAnything from "../titleForAnything";
+import SentMessage from "./sentMessage";
 
-class ListReceivedMessages extends Component {
+class ListSentMessages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listReceivedMessages: [
+      listSentMessages: [
         {
-          senderAvatar: Avatar,
-          senderName: "Thanh D",
+          receiverAvatar: Avatar,
+          receiverName: "Thanh D",
           content:
             "Xin chào, tôi là Nguyễn Thành Đạt, tôi muốn được xem căn nhà của bạn",
           time: "11 thg 11",
         },
         {
-          senderAvatar: Avatar,
-          senderName: "To Huyen",
+          receiverAvatar: Avatar,
+          receiverName: "To Huyen",
           content: "Lorem Ipsum is simply dummy text of the prit",
           time: "11 thg 11",
         },
         {
-          senderAvatar: Avatar,
-          senderName: "John",
+          receiverAvatar: Avatar,
+          receiverName: "John",
           content: "Lorem Ipsum is simply dummy text of the prit",
           time: "11 thg 11",
         },
         {
-          senderAvatar: Avatar,
-          senderName: "Harry",
+          receiverAvatar: Avatar,
+          receiverName: "Harry",
           content: "Lorem Ipsum is simply dummy text of the prit",
           time: "11 thg 11",
         },
         {
-          senderAvatar: Avatar,
-          senderName: "Thanh D",
+          receiverAvatar: Avatar,
+          receiverName: "Thanh D",
           content: "Lorem Ipsum is simply dummy text of the prit",
           time: "11 thg 11",
         },
@@ -44,21 +45,22 @@ class ListReceivedMessages extends Component {
   }
   onDelete(item) {
     return () => {
-      const index = this.state.listReceivedMessages.indexOf(item);
+      const index = this.state.listSentMessages.indexOf(item);
       this.setState({
-        listReceivedMessages: [
-          ...this.state.listReceivedMessages.slice(0, index),
-          ...this.state.listReceivedMessages.slice(index + 1),
+        listSentMessages: [
+          ...this.state.listSentMessages.slice(0, index),
+          ...this.state.listSentMessages.slice(index + 1),
         ],
       });
     };
   }
   render() {
-    const { listReceivedMessages } = this.state;
+    const { listSentMessages } = this.state;
     return (
-      <div className="list-received-messages">
-        {listReceivedMessages.map((message, index) => (
-          <ReceivedMessage
+      <div className="list-sent-messages">
+        <TitleForAnything titles={["Tin đã gửi", "Tin đã nhận"]} />
+        {listSentMessages.map((message, index) => (
+          <SentMessage
             key={index}
             message={message}
             onDelete={this.onDelete(message)}
@@ -69,4 +71,4 @@ class ListReceivedMessages extends Component {
   }
 }
 
-export default ListReceivedMessages;
+export default ListSentMessages;
