@@ -25,7 +25,7 @@ function App() {
           <Route path="/" exact>
             <HomeBody />
           </Route>
-          <Route path="/received-messages" exact>
+          <Route path="/messages" exact>
             <MessageBody />
           </Route>
         </Switch>

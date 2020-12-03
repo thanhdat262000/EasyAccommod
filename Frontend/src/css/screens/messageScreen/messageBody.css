@@ -11,3 +11,21 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.message-body .message-body-list {
+  flex-basis: 80%;
+}
+.message-body .title-list {
+  margin-top: 15px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.message-body .title-list .title-list-item {
+  flex-basis: 20%;
+  height: 100%;
+  cursor: pointer;
+}
