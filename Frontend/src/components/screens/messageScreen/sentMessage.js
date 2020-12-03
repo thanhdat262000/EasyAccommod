@@ -15,7 +15,7 @@ class SentMessage extends Component {
         </div>
         <div className="sent-message-details">
           <span className="sent-message-text">{content}</span>
-          <span classname="sent-message-time">{time}</span>
+          <span className="sent-message-time">{time}</span>
         </div>
         <img
           src={Delete}

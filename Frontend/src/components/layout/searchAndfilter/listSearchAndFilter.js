@@ -54,12 +54,12 @@ class ListSearchAndFilter extends Component {
         <div className="search-title">
           <span>Thông tin phòng trọ</span>
         </div>
-        {listSearchAndFilter.map((searchAndFilter) => {
+        {listSearchAndFilter.map((searchAndFilter, index) => {
           if (searchAndFilter.type === "selection")
-            return <SearchSelection search={searchAndFilter} />;
+            return <SearchSelection search={searchAndFilter} key={index} />;
           else if (searchAndFilter.type === "range")
-            return <SearchRange search={searchAndFilter} />;
-          else return <SearchCheckbox search={searchAndFilter} />;
+            return <SearchRange search={searchAndFilter} key={index} />;
+          else return <SearchCheckbox search={searchAndFilter} key={index} />;
         })}
         <div className="search-submit">
           <img src={Search} alt="search" width={20} height={20} />

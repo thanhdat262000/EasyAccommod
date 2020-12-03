@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../../../css/screens/messageScreen/listSentMessages.css";
 import Avatar from "../../../image/user.svg";
-import TitleForAnything from "../titleForAnything";
 import SentMessage from "./sentMessage";
 
 class ListSentMessages extends Component {
@@ -58,7 +57,6 @@ class ListSentMessages extends Component {
     const { listSentMessages } = this.state;
     return (
       <div className="list-sent-messages">
-        <TitleForAnything titles={["Tin đã gửi", "Tin đã nhận"]} />
         {listSentMessages.map((message, index) => (
           <SentMessage
             key={index}
