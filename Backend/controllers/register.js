@@ -21,14 +21,19 @@ module.exports.register = async (req, res) => {
 
         // If dont find user in database
         else{
-            bcrypt.hash(password, saltRounds, (err, hashPassword) => {
-                // Now we can store the password hash in db.
-                let sql = "INSERT INTO account set account_name = ?, password = ?, privilege_id = ?, first_name = ?, last_name =?, phone = ?";
-                connection.query(sql, [email, hashPassword, privilege, firstName, lastName, phone], (err, results, fields) => {
-                    if(err) res.sendStatus(404);
-                    else res.send("Done");
-                })
-            });
+            if(privilege === 'admin' || privilege === 'owner' || privilege === 'user'){
+                bcrypt.hash(password, saltRounds, (err, hashPassword) => {
+                    // Now we can store the password hash in db.
+                    let sql = "INSERT INTO account set account_name = ?, password = ?, privilege_id = ?, first_name = ?, last_name =?, phone = ?";
+                    connection.query(sql, [email, hashPassword, privilege, firstName, lastName, phone], (err, results, fields) => {
+                        if(err) res.sendStatus(404);
+                        else res.send("Done");
+                    })
+                });
+            } 
+            else{
+                res.sendStatus(404);
+            }
         }
     })
 }
