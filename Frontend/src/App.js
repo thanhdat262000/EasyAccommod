@@ -8,6 +8,8 @@ import HomeBody from "./components/screens/home/homeBody";
 import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
 import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteApartmentBody";
 import MessageBody from "./components/screens/messageScreen/messageBody";
+import PostedApartment from "./components/screens/apartmentManagement/postedApartment";
+import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           <Route path="/apartment">
             <ApartmentDetails />
           </Route>
-
+          <Route path="/apartment-management">
+            <ApartmentManagementBody />
+          </Route>
           <Route path="/favorite">
             <FavoriteApartmentBody />
           </Route>

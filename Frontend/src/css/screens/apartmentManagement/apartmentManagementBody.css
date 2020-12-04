@@ -1,0 +1,15 @@
+.apartment-management-body .title-list {
+  margin-top: 15px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.apartment-management-body .title-list .title-list-item {
+  flex-basis: 20%;
+  height: 100%;
+  cursor: pointer;
+}

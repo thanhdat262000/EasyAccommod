@@ -1,0 +1,64 @@
+.posted-apartment {
+  height: 160px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.posted-apartment-property {
+  height: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.posted-apartment .posted-apartment-main-details {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-basis: 40%;
+}
+.posted-apartment .posted-apartment-main-details img {
+  height: 100%;
+  flex-basis: 45%;
+}
+.posted-apartment-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.posted-apartment-main-details,
+.posted-apartment-statistics,
+.posted-apartment-more-detail {
+  height: 100%;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+#statistic {
+  font-weight: bold;
+}
+.posted-apartment-statistics,
+.posted-apartment-more-detail {
+  flex-basis: 20%;
+}
+.posted-apartment-action {
+  align-self: flex-end;
+}
+.posted-apartment-action button {
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+  height: 2rem;
+  width: 6rem;
+}
+.posted-apartment-action #rented {
+  background-color: #1ccf18;
+  margin-right: 2rem;
+}
+.posted-apartment-action #delete {
+  background-color: #4694dc;
+}
