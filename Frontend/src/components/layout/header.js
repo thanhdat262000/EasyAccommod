@@ -2,6 +2,7 @@ import React from "react";
 
 import "../../css/header.css";
 import Building from "../../image/building.svg";
+import Noti from "../../image/bell.svg";
 
 export default class Header extends React.Component {
   onLoginClick(e) {
@@ -20,6 +21,10 @@ export default class Header extends React.Component {
           </a>
         </div>
         <div id="right-header">
+          <div className="noti">
+            <img src={Noti} alt="noti" width={20} height={20} />
+            <span>Thông báo</span>
+          </div>
           <a href="#" className="link">
             <div id="signIn" className="sign" onClick={this.onLoginClick}>
               Đăng nhập

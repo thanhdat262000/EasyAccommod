@@ -33,3 +33,10 @@
 #logo {
   margin-left: 5rem;
 }
+.noti {
+  margin-right: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
