@@ -51,6 +51,8 @@ form {
   border-radius: 5px;
   height: 145px;
   border-color: rgb(0, 0, 0, 0.25);
+  border-width: 2px;
+  resize: none;
 }
 .contact-owner .contact-owner-number {
   height: 90px;

@@ -1,6 +1,6 @@
 .posted-apartment {
   height: 160px;
-  width: 70%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
 }
 .posted-apartment .posted-apartment-main-details {
@@ -19,7 +19,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  flex-basis: 40%;
+  flex-basis: 35%;
+}
+.posted-apartment .posted-apartment-expiration {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  justify-self: stretch;
 }
 .posted-apartment .posted-apartment-main-details img {
   height: 100%;
@@ -42,7 +48,7 @@
 }
 .posted-apartment-statistics,
 .posted-apartment-more-detail {
-  flex-basis: 20%;
+  flex-basis: 15%;
 }
 .posted-apartment-action {
   align-self: flex-end;
@@ -54,11 +60,19 @@
   border: none;
   height: 2rem;
   width: 6rem;
+  cursor: pointer;
 }
 .posted-apartment-action #rented {
   background-color: #1ccf18;
-  margin-right: 2rem;
 }
-.posted-apartment-action #delete {
+.posted-apartment-action #delete,
+#cancel,
+#delay-expiration,
+#edit {
   background-color: #4694dc;
+}
+#rented,
+#edit,
+#delay-expiration {
+  margin-right: 2rem;
 }
