@@ -13,3 +13,11 @@
   height: 100%;
   cursor: pointer;
 }
+.apartment-management-main-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.apartment-management-body {
+  width: 75%;
+}
