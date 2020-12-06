@@ -1,0 +1,14 @@
+.post-apartment-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.post-apartment-selection select {
+  flex-basis: 70%;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+}
+.post-apartment-selection label {
+  flex-basis: 30%;
+  text-align: left;
+}

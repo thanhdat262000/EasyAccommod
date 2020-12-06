@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../../../css/screens/apartmentPost/apartmentPostSelection.css";
+
 class AparmentPostSelection extends Component {
   state = {};
   render() {
