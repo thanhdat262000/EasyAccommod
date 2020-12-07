@@ -1,0 +1,12 @@
+.list-apartment-post-property {
+  width: 100%;
+}
+.list-apartment-post-property form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.list-apartment-post-property-form-section-1,
+.list-apartment-post-property-form-section-2 {
+  flex-basis: 49%;
+}

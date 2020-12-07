@@ -1,9 +1,12 @@
 .post-apartment-selection {
+  height: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 .post-apartment-selection select {
+  outline: none;
   flex-basis: 70%;
   border-radius: 5px;
   border: 2px solid rgba(0, 0, 0, 0.5);
