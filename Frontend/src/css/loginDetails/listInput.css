@@ -14,3 +14,12 @@
   right: 10px;
   cursor: pointer;
 }
+.list-input .signup-details-body {
+  width: 75%;
+}
+form[name="signup-details"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

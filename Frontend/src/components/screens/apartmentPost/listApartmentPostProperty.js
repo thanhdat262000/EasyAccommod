@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ApartmentPostField from "./apartmentPostField";
 import AparmentPostSelection from "./apartmentPostSelection";
+import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
+import InputCheckbox from "../../loginDetails/inputCheckbox";
+
 class ListApartmentPostProperty extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +29,8 @@ class ListApartmentPostProperty extends Component {
           selections: ["Dịch Vọng Hậu", "Mai Dịch"],
           type: "selection",
         },
+        { criteria: "Địa chỉ chi tiết", field: "Địa chỉ", type: "field" },
+        { criteria: "Kích thước", field: "20", unit: "m2", type: "field" },
         {
           criteria: "Số phòng ngủ",
           selections: [1, 2, 3],
@@ -42,6 +47,16 @@ class ListApartmentPostProperty extends Component {
           type: "selection",
         },
         {
+          criteria: "Điều hòa",
+          property: "air-conditioning",
+          type: "checkbox",
+        },
+        {
+          criteria: "Ban công",
+          property: "terrace",
+          type: "checkbox",
+        },
+        {
           criteria: "Điện nước",
           selections: ["Giá dân", "Giá chung"],
           type: "selection",
@@ -51,8 +66,7 @@ class ListApartmentPostProperty extends Component {
           selections: ["VNĐ", "USD"],
           type: "selection",
         },
-        { criteria: "Địa chỉ chi tiết", field: "Địa chỉ", type: "field" },
-        { criteria: "Kích thước", field: "20", unit: "m2", type: "field" },
+
         {
           criteria: "Tiền thuê",
           field: "10",
@@ -68,22 +82,43 @@ class ListApartmentPostProperty extends Component {
     return (
       <div className="list-apartment-post-property">
         <form name="list-apartment-post-property-form" action="POST">
-          {listApartmentPostProperty.map((property, index) => {
-            if (property.type === "selection")
-              return (
-                <AparmentPostSelection
-                  post_apartment_selection={property}
-                  key={index}
-                />
-              );
-            else
-              return (
-                <ApartmentPostField
-                  post_apartment_field={property}
-                  key={index}
-                />
-              );
-          })}
+          <div className="list-apartment-post-property-form-section-1">
+            {listApartmentPostProperty.slice(0, 12).map((property, index) => {
+              if (property.type === "selection")
+                return (
+                  <AparmentPostSelection
+                    post_apartment_selection={property}
+                    key={index}
+                  />
+                );
+              else if (property.type === "field")
+                return (
+                  <ApartmentPostField
+                    post_apartment_field={property}
+                    key={index}
+                  />
+                );
+              else return <InputCheckbox input={property} />;
+            })}
+          </div>
+          <div className="list-apartment-post-property-form-section-2">
+            {listApartmentPostProperty.slice(13).map((property, index) => {
+              if (property.type === "selection")
+                return (
+                  <AparmentPostSelection
+                    post_apartment_selection={property}
+                    key={index}
+                  />
+                );
+              else
+                return (
+                  <ApartmentPostField
+                    post_apartment_field={property}
+                    key={index}
+                  />
+                );
+            })}
+          </div>
         </form>
       </div>
     );

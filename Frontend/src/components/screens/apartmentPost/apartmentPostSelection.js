@@ -10,7 +10,9 @@ class AparmentPostSelection extends Component {
         <label id="post-apartment-selection-label">{criteria}</label>
         <select name="post-apartment-select">
           {selections.map((selection, index) => (
-            <option value={selection.name}>{selection.name}</option>
+            <option value={selection.name} key={index}>
+              {selection}
+            </option>
           ))}
         </select>
       </div>

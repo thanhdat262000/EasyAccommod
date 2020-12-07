@@ -38,20 +38,22 @@ class ListInput extends Component {
           <div className="title">
             <h2>Đăng kí</h2>
           </div>
-          {listInput.map((input) => {
-            if (input.type === "selection")
-              return <InputSelection input={input} />;
-            else if (input.type === "field")
-              return <InputField input={input} />;
-            else return <InputCheckbox input={input} />;
-          })}
-          <div className="buttons">
-            <button type="submit" name="continue-signup">
-              Hoàn tất đăng kí
-            </button>
-            <button type="button" name="redirect-login">
-              Đăng nhập
-            </button>
+          <div className="signup-details-body">
+            {listInput.map((input) => {
+              if (input.type === "selection")
+                return <InputSelection input={input} />;
+              else if (input.type === "field")
+                return <InputField input={input} />;
+              else return <InputCheckbox input={input} />;
+            })}
+            <div className="buttons">
+              <button type="submit" name="continue-signup">
+                Hoàn tất đăng kí
+              </button>
+              <button type="button" name="redirect-login">
+                Đăng nhập
+              </button>
+            </div>
           </div>
         </form>
       </div>

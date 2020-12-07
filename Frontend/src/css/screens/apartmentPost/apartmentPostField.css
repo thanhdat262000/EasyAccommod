@@ -1,4 +1,6 @@
 .post-apartment-field {
+  margin-top: 2rem;
+  height: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
