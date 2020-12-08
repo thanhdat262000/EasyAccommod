@@ -59,8 +59,11 @@ class ListApartmentProperties extends Component {
         <div className="list-apartment-properties-title">
           <span>Thông tin phòng trọ</span>
         </div>
-        {listApartmentProperties.map((apartmentProperty) => (
-          <ApartmentProperty apartment_property={apartmentProperty} />
+        {listApartmentProperties.map((apartmentProperty, index) => (
+          <ApartmentProperty
+            apartment_property={apartmentProperty}
+            key={index}
+          />
         ))}
         <div className="apartment-property-description">
           <b>Chi tiết</b>

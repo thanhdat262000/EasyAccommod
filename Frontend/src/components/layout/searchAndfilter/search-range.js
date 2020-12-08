@@ -7,7 +7,7 @@ class SearchRange extends Component {
     this.state = {};
   }
   render() {
-    const { criteria, unit } = this.props.search;
+    const { criteria, unit, name } = this.props.search;
     return (
       <div className="search-range">
         <div className="criteria">
@@ -16,15 +16,15 @@ class SearchRange extends Component {
         <div className="range">
           <input
             type="text"
-            name="rent-price"
-            id="min"
+            name={`min-${name}`}
+            id={`min-${name}`}
             placeholder="Min..."
           ></input>
           <span>-</span>
           <input
             type="text"
-            name="rent-price"
-            id="max"
+            name={`max-${name}`}
+            id={`max-${name}`}
             placeholder="Max..."
           ></input>
           <label>{unit}</label>

@@ -1,0 +1,17 @@
+.apartment-post-check-duplicate .apartment-post-check-duplicate-report {
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(254, 45, 183, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.apartment-post-check-duplicate {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.apartment-post-check-duplicate h6,
+p {
+  text-align: left;
+}

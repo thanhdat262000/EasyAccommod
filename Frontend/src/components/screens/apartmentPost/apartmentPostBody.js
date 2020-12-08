@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import ListApartmentPostProperty from "./listApartmentPostProperty";
 import "../../../css/screens/apartmentPost/apartmentPostBody.css";
 import ApartmentPostImage from "./apartmentPostImage";
 import ListApartmentPostRenter from "./listApartmentPostRenter";
+import ApartmentPostCheckDuplicate from "./apartmentPostCheckDuplicate";
+import ApartmentPostExpiration from "./apartmentPostExpiration";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -41,7 +44,8 @@ class ApartmentPostBody extends Component {
     const { listTitles } = this.state;
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
-    console.log(title);
+    console.log(index);
+    if (index === 4) this.props.history.push("/");
     this.setState({
       listTitles: [
         ...listTitles.slice(0, index),
@@ -57,22 +61,25 @@ class ApartmentPostBody extends Component {
     const [state] = listTitles.filter((title) => title.isChosen === true);
     switch (state.name) {
       case "Nhập dữ liệu phòng":
-        apartmentPostBody = <ListApartmentPostProperty />;
+        apartmentPostBody = <ListApartmentPostProperty OnNext={this.OnNext} />;
         break;
       case "Tải lên ảnh":
-        apartmentPostBody = <ApartmentPostImage />;
+        apartmentPostBody = <ApartmentPostImage OnNext={this.OnNext} />;
         break;
       case "Người thuê":
-        apartmentPostBody = <ListApartmentPostRenter />;
+        apartmentPostBody = <ListApartmentPostRenter OnNext={this.OnNext} />;
         break;
       case "Kiểm tra trùng lặp":
-        apartmentPostBody = <ListApartmentPostProperty />;
+        apartmentPostBody = (
+          <ApartmentPostCheckDuplicate OnNext={this.OnNext} />
+        );
         break;
       case "Thời gian đăng bài":
-        apartmentPostBody = <ListApartmentPostProperty />;
+        apartmentPostBody = <ApartmentPostExpiration OnNext={this.OnNext} />;
         break;
       default:
         break;
+      // return <Redirect to="/apartment-management" />;
     }
     return (
       <div className="apartment-post-main-body">
@@ -110,13 +117,10 @@ class ApartmentPostBody extends Component {
             ))}
           </div>
           {apartmentPostBody}
-          <button className="apartment-post-continue" onClick={this.OnNext}>
-            Tiếp theo
-          </button>
         </div>
       </div>
     );
   }
 }
 
-export default ApartmentPostBody;
+export default withRouter(ApartmentPostBody);
