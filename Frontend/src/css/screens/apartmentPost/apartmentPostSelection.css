@@ -3,7 +3,7 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .post-apartment-selection select {
   outline: none;

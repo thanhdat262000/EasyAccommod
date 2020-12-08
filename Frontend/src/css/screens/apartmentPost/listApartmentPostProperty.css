@@ -3,10 +3,33 @@
 }
 .list-apartment-post-property form {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.list-apartment-post-property-form-section {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 .list-apartment-post-property-form-section-1,
 .list-apartment-post-property-form-section-2 {
   flex-basis: 49%;
+}
+.list-apartment-post-property
+  textarea[name="post-apartment-field-detailAddress"],
+textarea[name="post-apartment-field-roomDescription"] {
+  flex: 1;
+  height: 4rem;
+}
+.list-apartment-post-property textarea[name="post-apartment-field-size"],
+textarea[name="post-apartment-field-rentPrice"] {
+  flex-basis: 15%;
+  height: 1.5rem;
+}
+.list-apartment-post-property select[name="post-apartment-select-bathRoom"],
+select[name="post-apartment-select-kitchen"],
+select[name="post-apartment-select-electric"],
+select[name="post-apartment-select-unit"] {
+  flex-basis: 30%;
 }

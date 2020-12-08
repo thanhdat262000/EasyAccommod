@@ -67,8 +67,8 @@ class ListApartments extends Component {
     const { listApartments } = this.state;
     return (
       <div className="list-apartments">
-        {listApartments.map((apartment) => (
-          <Apartment apartmentInfo={apartment} />
+        {listApartments.map((apartment, index) => (
+          <Apartment apartmentInfo={apartment} key={index} />
         ))}
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApartmentPostField from "./apartmentPostField";
 import AparmentPostSelection from "./apartmentPostSelection";
-import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
+import "../../../css/screens/apartmentPost/listApartmentPostRenter.css";
 import InputCheckbox from "../../loginDetails/inputCheckbox";
 
 class ListApartmentPostRenter extends Component {
@@ -13,16 +13,19 @@ class ListApartmentPostRenter extends Component {
           criteria: "Độ tuổi",
           selections: ["Sinh viên", "Người đã đi làm"],
           type: "selection",
+          name: "age",
         },
         {
           criteria: "Số người",
           selections: [1, 2, 3, 4, 5],
           type: "selection",
+          name: "people",
         },
         {
           criteria: "Giới tính",
           selections: ["Nam", "Nữ"],
           type: "selection",
+          name: "gender",
         },
 
         {
@@ -35,6 +38,7 @@ class ListApartmentPostRenter extends Component {
   }
   render() {
     const { listApartmentPostRenter } = this.state;
+    const { OnNext } = this.props;
     return (
       <div className="list-apartment-post-renter">
         <form name="list-apartment-post-renter-form" action="POST">
@@ -54,9 +58,12 @@ class ListApartmentPostRenter extends Component {
                     key={index}
                   />
                 );
-              else return <InputCheckbox input={property} />;
+              else return <InputCheckbox input={property} key={index} />;
             })}
           </div>
+          <button className="apartment-post-continue" onClick={OnNext}>
+            Tiếp theo
+          </button>
         </form>
       </div>
     );

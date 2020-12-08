@@ -4,11 +4,11 @@ import "../../../css/screens/apartmentPost/apartmentPostSelection.css";
 class AparmentPostSelection extends Component {
   state = {};
   render() {
-    const { criteria, selections } = this.props.post_apartment_selection;
+    const { criteria, selections, name } = this.props.post_apartment_selection;
     return (
       <div className="post-apartment-selection">
         <label id="post-apartment-selection-label">{criteria}</label>
-        <select name="post-apartment-select">
+        <select name={`post-apartment-select-${name}`}>
           {selections.map((selection, index) => (
             <option value={selection.name} key={index}>
               {selection}

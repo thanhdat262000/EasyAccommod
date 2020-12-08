@@ -6,17 +6,17 @@ class SearchSelection extends Component {
     this.state = {};
   }
   render() {
-    const { criteria, selections } = this.props.search;
+    const { criteria, selections, name } = this.props.search;
     return (
       <div className="search-selection">
         <div className="criteria">
-          <label for="room-type">{criteria}</label>
+          <label for={name}>{criteria}</label>
         </div>
         <div className="selection">
-          <select name="selection" id="roomtype">
-            {selections.map((selection) => (
-              <option value={selection.name} key={selection.id}>
-                {selection.name}
+          <select name={`selection-${name}`} id={name}>
+            {selections.map((selection, index) => (
+              <option value={selection} key={index}>
+                {selection}
               </option>
             ))}
           </select>

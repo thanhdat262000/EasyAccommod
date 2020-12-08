@@ -1,6 +1,10 @@
 .apartment-post-image {
   width: 100%;
 }
+.apartment-post-image form {
+  display: flex;
+  flex-direction: column;
+}
 .apartment-post-image label {
   cursor: pointer;
   width: 18%;

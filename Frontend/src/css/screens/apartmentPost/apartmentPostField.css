@@ -3,7 +3,8 @@
   height: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
 }
 .post-apartment-field textarea {
   border-radius: 5px;
