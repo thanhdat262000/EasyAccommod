@@ -1,31 +1,29 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config()
+const express = require("express");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
-const apartmentsRouter = require('./routes/apartmentsRouter');
-const apartmentRouter = require('./routes/apartmentRouter');
-const signinRouter = require('./routes/signin');
-const ownerRouter = require('./routes/owner');
-const registerRouter = require('./routes/register');
+const apartmentsRouter = require("./routes/apartmentsRouter");
+const apartmentRouter = require("./routes/apartmentRouter");
+const signinRouter = require("./routes/signin");
+const ownerRouter = require("./routes/owner");
+const registerRouter = require("./routes/register");
 
 const app = express();
 
 // Use body-parser => req.body
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Apartment Router
-app.use('/apartment', apartmentRouter)
-app.use('/apartments', apartmentsRouter);
-
+app.use("/apartment", apartmentRouter);
+app.use("/apartments", apartmentsRouter);
 
 // Owner Router
-app.use('/owner', ownerRouter);
+app.use("/owner", ownerRouter);
 
-app.use('/signin', signinRouter);
-app.use('/register', registerRouter);
+app.use("/signin", signinRouter);
+app.use("/register", registerRouter);
 
-
-app.listen(process.env.PORT | 3000,() => {
-    console.log('Listening on port ...')
-})
+app.listen(process.env.PORT, () => {
+  console.log("Listening on port ...");
+});
