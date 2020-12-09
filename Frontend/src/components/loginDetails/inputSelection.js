@@ -6,13 +6,13 @@ class InputSelection extends Component {
     this.state = {};
   }
   render() {
-    const { selections } = this.props.input;
+    const { selections, name } = this.props.input;
     return (
       <div className="input-selection">
         <div className="selection">
-          <select name="selection">
-            {selections.map((selection) => (
-              <option value={selection} key={selection.id}>
+          <select name={name}>
+            {selections.map((selection, index) => (
+              <option value={selection} key={index}>
                 {selection}
               </option>
             ))}

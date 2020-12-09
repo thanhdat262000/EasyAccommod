@@ -6,10 +6,10 @@ class InputField extends Component {
     this.state = {};
   }
   render() {
-    const { inputType } = this.props.input;
+    const { inputType, name } = this.props.input;
     return (
       <div className="input-field">
-        <input type="text" placeholder={inputType} value="" />
+        <input type="text" placeholder={inputType} name={name} />
       </div>
     );
   }

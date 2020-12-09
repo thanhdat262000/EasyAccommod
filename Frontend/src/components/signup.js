@@ -1,9 +1,8 @@
 import React, { Component } from "react";
+import getFormData from "get-form-data";
+import axios from "axios";
 import "../css/signup.css";
 import Cancel from "../image/cancel.svg";
-import InputCheckbox from "./loginDetails/inputCheckbox";
-import InputSelection from "./loginDetails/inputSelection";
-import InputField from "./loginDetails/inputField";
 import ListInput from "./loginDetails/listInput";
 class Signup extends Component {
   constructor(props) {
@@ -11,46 +10,65 @@ class Signup extends Component {
     this.state = { continueSignup: false };
     this.OnContinue = this.OnContinue.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   onCancel(e) {
     e.target.parentNode.parentNode.style.display = "none";
-    this.setState({ continueSignup: !this.state.continueSignup });
+    if (this.state.continueSignup) {
+      this.setState({ continueSignup: !this.state.continueSignup });
+      document.getElementsByClassName("signup-form-step-1")[0].style.display =
+        "block";
+      document.getElementsByClassName("signup-form-step-2")[0].style.display =
+        "none";
+    }
   }
   OnContinue(e) {
-    this.setState({ continueSignup: !this.state.continueSignup });
+    if (!this.state.continueSignup) {
+      this.setState({ continueSignup: !this.state.continueSignup });
+      document.getElementsByClassName("signup-form-step-1")[0].style.display =
+        "none";
+      document.getElementsByClassName("signup-form-step-2")[0].style.display =
+        "block";
+    }
+  }
+  onSubmit() {
+    let form = document.querySelector("#signup-form");
+    let data = getFormData(form);
+    console.log(JSON.stringify(data));
   }
   render() {
-    const { continueSignup } = this.state;
     return (
       <div className="signup-bg">
-        {continueSignup ? (
-          <ListInput onCancel={this.onCancel} />
-        ) : (
-          <div className="signup">
-            <img
-              src={Cancel}
-              width={15}
-              height={15}
-              alt="cancel"
-              onClick={this.onCancel}
-            />
-            <form name="signup-form">
-              <div className="title">
-                <h2>Đăng kí</h2>
-              </div>
-
+        <div className="signup">
+          <img
+            src={Cancel}
+            width={15}
+            height={15}
+            alt="cancel"
+            onClick={this.onCancel}
+          />
+          <form name="signup-form" id="signup-form" onSubmit={this.onSubmit}>
+            <div className="title">
+              <h2>Đăng kí</h2>
+            </div>
+            <div className="signup-form-step-1">
               <div className="signup-input">
                 <input name="email" placeholder="Địa chỉ email"></input>
-                <input name="password" placeholder="Mật khẩu"></input>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Mật khẩu"
+                ></input>
                 <input
                   name="re-password"
+                  type="password"
                   placeholder="Nhập lại mật khẩu"
                 ></input>
               </div>
 
               <div className="buttons">
                 <button
-                  type="submit"
+                  type="button"
                   name="continue-signup"
                   onClick={this.OnContinue}
                 >
@@ -60,9 +78,12 @@ class Signup extends Component {
                   Đăng nhập
                 </button>
               </div>
-            </form>
-          </div>
-        )}
+            </div>
+            <div className="signup-form-step-2">
+              <ListInput />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

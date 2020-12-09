@@ -4,6 +4,6 @@ export const loginReducer = (state = initialState, action) => {
     case "LOGIN":
       return { ...state, isLogin: true };
     default:
-      return;
+      return state;
   }
 };
