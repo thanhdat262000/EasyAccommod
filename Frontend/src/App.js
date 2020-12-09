@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import Login from "./components/login";
@@ -8,42 +9,43 @@ import HomeBody from "./components/screens/home/homeBody";
 import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
 import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteApartmentBody";
 import MessageBody from "./components/screens/messageScreen/messageBody";
-import PostedApartment from "./components/screens/apartmentManagement/postedApartment";
 import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
-import ListApartmentPostProperty from "./components/screens/apartmentPost/listApartmentPostProperty";
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
+import { store } from "./redux/store";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route path="/apartment-post">
-            <ApartmentPostBody />
-          </Route>
-          <Route path="/apartment">
-            <ApartmentDetails />
-          </Route>
-          <Route path="/apartment-management">
-            <ApartmentManagementBody />
-          </Route>
-          <Route path="/favorite">
-            <FavoriteApartmentBody />
-          </Route>
-          <Route path="/" exact>
-            <HomeBody />
-          </Route>
-          <Route path="/messages" exact>
-            <MessageBody />
-          </Route>
-        </Switch>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header />
+          <Switch>
+            <Route path="/apartment-post">
+              <ApartmentPostBody />
+            </Route>
+            <Route path="/apartment">
+              <ApartmentDetails />
+            </Route>
+            <Route path="/apartment-management">
+              <ApartmentManagementBody />
+            </Route>
+            <Route path="/favorite">
+              <FavoriteApartmentBody />
+            </Route>
+            <Route path="/" exact>
+              <HomeBody />
+            </Route>
+            <Route path="/messages" exact>
+              <MessageBody />
+            </Route>
+          </Switch>
 
-        <Login />
-        <Signup />
-        <Footer />
-      </div>
-    </Router>
+          <Login />
+          <Signup />
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
