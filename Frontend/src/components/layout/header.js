@@ -3,8 +3,11 @@ import React from "react";
 import "../../css/header.css";
 import Building from "../../image/building.svg";
 import Noti from "../../image/bell.svg";
+import DropDownMenu from "./dropDownMenu";
+import { connect } from "react-redux";
+import { getLoginState } from "../../redux/selector/selectors";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   onLoginClick(e) {
     document.getElementsByClassName("login-bg")[0].style.display = "flex";
   }
@@ -20,23 +23,28 @@ export default class Header extends React.Component {
             <div>EasyAccommod</div>
           </a>
         </div>
-        <div id="right-header">
-          <div className="noti">
-            <img src={Noti} alt="noti" width={20} height={20} />
-            <span>Thông báo</span>
+        {this.props.isLogin ? (
+          <DropDownMenu userName="Thanh Dat" />
+        ) : (
+          <div id="right-header">
+            <div className="noti">
+              <img src={Noti} alt="noti" width={20} height={20} />
+              <span>Thông báo</span>
+            </div>
+            <a href="#" className="link">
+              <div id="signIn" className="sign" onClick={this.onLoginClick}>
+                Đăng nhập
+              </div>
+            </a>
+            <a href="#" className="link">
+              <div id="signUp" className="sign" onClick={this.onSignupClick}>
+                Đăng ký
+              </div>
+            </a>
           </div>
-          <a href="#" className="link">
-            <div id="signIn" className="sign" onClick={this.onLoginClick}>
-              Đăng nhập
-            </div>
-          </a>
-          <a href="#" className="link">
-            <div id="signUp" className="sign" onClick={this.onSignupClick}>
-              Đăng ký
-            </div>
-          </a>
-        </div>
+        )}
       </div>
     );
   }
 }
+export default connect(getLoginState, null)(Header);

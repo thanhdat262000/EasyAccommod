@@ -23,7 +23,7 @@ function App() {
             <Route path="/apartment-post">
               <ApartmentPostBody />
             </Route>
-            <Route path="/apartment">
+            <Route path="/apartment/:id">
               <ApartmentDetails />
             </Route>
             <Route path="/apartment-management">
