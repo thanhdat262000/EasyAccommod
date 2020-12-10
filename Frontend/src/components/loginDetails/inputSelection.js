@@ -12,8 +12,8 @@ class InputSelection extends Component {
         <div className="selection">
           <select name={name}>
             {selections.map((selection, index) => (
-              <option value={selection} key={index}>
-                {selection}
+              <option value={selection.value} key={index}>
+                {selection.name}
               </option>
             ))}
           </select>

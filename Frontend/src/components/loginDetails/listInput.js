@@ -12,12 +12,15 @@ class ListInput extends Component {
         { type: "field", inputType: "Tên", name: "firstName" },
         {
           type: "selection",
-          selections: ["Tôi là người thuê nhà", "Tôi là chủ sở hữu"],
+          selections: [
+            { value: "user", name: "Tôi là người thuê nhà" },
+            { value: "owner", name: "Tôi là chủ sở hữu" },
+          ],
           name: "privilege",
         },
         { type: "checkbox", criteria: "Cá nhân", property: "individual" },
         { type: "checkbox", criteria: "Doanh nghiệp", property: "company" },
-        { type: "field", inputType: "Số điện thoại", name: "number" },
+        { type: "field", inputType: "Số điện thoại", name: "phone" },
         { type: "field", inputType: "Ngày sinh", name: "birthday" },
         { type: "field", inputType: "Số chứng minh thư", name: "idCard" },
       ],

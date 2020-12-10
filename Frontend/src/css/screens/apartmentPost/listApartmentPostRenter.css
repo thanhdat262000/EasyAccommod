@@ -6,10 +6,6 @@
   display: flex;
   flex-direction: column;
 }
-.list-apartment-post-renter form {
-  display: flex;
-  flex-direction: column;
-}
 .list-apartment-post-renter select[name="post-apartment-select-age"],
 select[name="post-apartment-select-people"],
 select[name="post-apartment-select-gender"] {

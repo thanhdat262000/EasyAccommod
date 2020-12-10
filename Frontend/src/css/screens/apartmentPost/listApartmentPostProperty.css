@@ -1,11 +1,6 @@
 .list-apartment-post-property {
   width: 100%;
 }
-.list-apartment-post-property form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 .list-apartment-post-property-form-section {
   width: 100%;
   display: flex;
@@ -28,6 +23,7 @@ textarea[name="post-apartment-field-rentPrice"] {
   height: 1.5rem;
 }
 .list-apartment-post-property select[name="post-apartment-select-bathRoom"],
+select[name="post-apartment-select-bedRoom"],
 select[name="post-apartment-select-kitchen"],
 select[name="post-apartment-select-electric"],
 select[name="post-apartment-select-unit"] {

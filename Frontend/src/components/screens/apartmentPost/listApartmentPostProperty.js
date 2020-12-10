@@ -108,50 +108,48 @@ class ListApartmentPostProperty extends Component {
     const { listApartmentPostProperty } = this.state;
     return (
       <div className="list-apartment-post-property">
-        <form name="list-apartment-post-property-form">
-          <div className="list-apartment-post-property-form-section">
-            <div className="list-apartment-post-property-form-section-1">
-              {listApartmentPostProperty.slice(0, 12).map((property, index) => {
-                if (property.type === "selection")
-                  return (
-                    <AparmentPostSelection
-                      post_apartment_selection={property}
-                      key={index}
-                    />
-                  );
-                else if (property.type === "field")
-                  return (
-                    <ApartmentPostField
-                      post_apartment_field={property}
-                      key={index}
-                    />
-                  );
-                else return <InputCheckbox input={property} key={index} />;
-              })}
-            </div>
-            <div className="list-apartment-post-property-form-section-2">
-              {listApartmentPostProperty.slice(12).map((property, index) => {
-                if (property.type === "selection")
-                  return (
-                    <AparmentPostSelection
-                      post_apartment_selection={property}
-                      key={index}
-                    />
-                  );
-                else
-                  return (
-                    <ApartmentPostField
-                      post_apartment_field={property}
-                      key={index}
-                    />
-                  );
-              })}
-            </div>
+        <div className="list-apartment-post-property-form-section">
+          <div className="list-apartment-post-property-form-section-1">
+            {listApartmentPostProperty.slice(0, 12).map((property, index) => {
+              if (property.type === "selection")
+                return (
+                  <AparmentPostSelection
+                    post_apartment_selection={property}
+                    key={index}
+                  />
+                );
+              else if (property.type === "field")
+                return (
+                  <ApartmentPostField
+                    post_apartment_field={property}
+                    key={index}
+                  />
+                );
+              else return <InputCheckbox input={property} key={index} />;
+            })}
           </div>
-          <button className="apartment-post-continue" onClick={OnNext}>
-            Tiếp theo
-          </button>
-        </form>
+          <div className="list-apartment-post-property-form-section-2">
+            {listApartmentPostProperty.slice(12).map((property, index) => {
+              if (property.type === "selection")
+                return (
+                  <AparmentPostSelection
+                    post_apartment_selection={property}
+                    key={index}
+                  />
+                );
+              else
+                return (
+                  <ApartmentPostField
+                    post_apartment_field={property}
+                    key={index}
+                  />
+                );
+            })}
+          </div>
+        </div>
+        <button className="apartment-post-continue" onClick={OnNext}>
+          Tiếp theo
+        </button>
       </div>
     );
   }

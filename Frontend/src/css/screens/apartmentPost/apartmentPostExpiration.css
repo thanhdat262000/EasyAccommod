@@ -1,11 +1,7 @@
 .apartment-post-expiration {
   width: 100%;
-}
-.apartment-post-expiration form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
 }
 .apartment-post-expiration .apartment-post-expiration-total {

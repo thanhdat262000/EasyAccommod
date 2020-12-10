@@ -34,6 +34,15 @@ class Signup extends Component {
   onSubmit() {
     let form = document.querySelector("#signup-form");
     let data = getFormData(form);
+    axios
+      .post("http://localhost:8000/register/", data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     console.log(JSON.stringify(data));
   }
   render() {
@@ -47,7 +56,13 @@ class Signup extends Component {
             alt="cancel"
             onClick={this.onCancel}
           />
-          <form name="signup-form" id="signup-form" onSubmit={this.onSubmit}>
+          <form
+            name="signup-form"
+            id="signup-form"
+            onSubmit={this.onSubmit}
+            // method="POST"
+            // encType="multipart/form-data"
+          >
             <div className="title">
               <h2>Đăng kí</h2>
             </div>
