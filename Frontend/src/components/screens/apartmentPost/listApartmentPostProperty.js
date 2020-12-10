@@ -104,7 +104,6 @@ class ListApartmentPostProperty extends Component {
     };
   }
   render() {
-    const { OnNext } = this.props;
     const { listApartmentPostProperty } = this.state;
     return (
       <div className="list-apartment-post-property">
@@ -147,9 +146,6 @@ class ListApartmentPostProperty extends Component {
             })}
           </div>
         </div>
-        <button className="apartment-post-continue" onClick={OnNext}>
-          Tiếp theo
-        </button>
       </div>
     );
   }

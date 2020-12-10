@@ -7,7 +7,6 @@ class ApartmentPostExpiration extends Component {
     this.state = {};
   }
   render() {
-    const { OnNext } = this.props;
     return (
       <div className="apartment-post-expiration">
         <div>
@@ -37,9 +36,6 @@ class ApartmentPostExpiration extends Component {
           <span id="total">300000</span>
           <b> VNĐ</b>
         </div>
-        <button className="apartment-post-end" onClick={OnNext}>
-          Đăng bài
-        </button>
       </div>
     );
   }

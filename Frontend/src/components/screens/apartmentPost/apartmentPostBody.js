@@ -55,27 +55,94 @@ class ApartmentPostBody extends Component {
       ],
     });
   };
+  OnBack = () => {
+    const { listTitles } = this.state;
+    const [title] = listTitles.filter((title) => title.isChosen === true);
+    const index = listTitles.indexOf(title);
+    console.log(index);
+    this.setState({
+      listTitles: [
+        ...listTitles.slice(0, index - 1),
+        { ...listTitles[index - 1], isChosen: true },
+        { ...title, isChosen: false },
+
+        ...listTitles.slice(index + 1),
+      ],
+    });
+  };
+  nextButton = () => {
+    const [state] = this.state.listTitles.filter(
+      (title) => title.isChosen === true
+    );
+    switch (state.name) {
+      case "Nhập dữ liệu phòng":
+      case "Tải lên ảnh":
+      case "Người thuê":
+      case "Kiểm tra trùng lặp":
+        return (
+          <button
+            type="button"
+            className="apartment-post-continue"
+            onClick={this.OnNext}
+          >
+            Tiếp theo
+          </button>
+        );
+      case "Thời gian đăng bài":
+        return (
+          <button
+            type="button"
+            className="apartment-post-end"
+            onClick={this.OnNext}
+          >
+            Đăng bài
+          </button>
+        );
+      default:
+        return null;
+    }
+  };
+  previousButton = () => {
+    const [state] = this.state.listTitles.filter(
+      (title) => title.isChosen === true
+    );
+    switch (state.name) {
+      case "Tải lên ảnh":
+      case "Người thuê":
+      case "Kiểm tra trùng lặp":
+      case "Thời gian đăng bài":
+        return (
+          <button
+            type="button"
+            className="apartment-post-previous"
+            onClick={this.OnBack}
+          >
+            Trở lại
+          </button>
+        );
+      default:
+        return null;
+    }
+  };
   render() {
     let apartmentPostBody;
     const { listTitles } = this.state;
     const [state] = listTitles.filter((title) => title.isChosen === true);
     switch (state.name) {
       case "Nhập dữ liệu phòng":
-        apartmentPostBody = <ListApartmentPostProperty OnNext={this.OnNext} />;
+        apartmentPostBody = <ListApartmentPostProperty />;
         break;
       case "Tải lên ảnh":
-        apartmentPostBody = <ApartmentPostImage OnNext={this.OnNext} />;
+        apartmentPostBody = <ApartmentPostImage />;
         break;
       case "Người thuê":
-        apartmentPostBody = <ListApartmentPostRenter OnNext={this.OnNext} />;
+        apartmentPostBody = <ListApartmentPostRenter />;
         break;
       case "Kiểm tra trùng lặp":
-        apartmentPostBody = (
-          <ApartmentPostCheckDuplicate OnNext={this.OnNext} />
-        );
+        apartmentPostBody = <ApartmentPostCheckDuplicate />;
         break;
       case "Thời gian đăng bài":
-        apartmentPostBody = <ApartmentPostExpiration OnNext={this.OnNext} />;
+        apartmentPostBody = <ApartmentPostExpiration />;
         break;
       default:
         break;
@@ -116,7 +183,15 @@ class ApartmentPostBody extends Component {
               </div>
             ))}
           </div>
-          {apartmentPostBody}
+          <form name="apartment-post-form">
+            {" "}
+            {apartmentPostBody}
+            <div className="apartment-post-form-buttons">
+              {" "}
+              {this.previousButton()}
+              {this.nextButton()}
+            </div>
+          </form>
         </div>
       </div>
     );

@@ -18,7 +18,10 @@ class Footer extends Component {
           </div>
 
           <div className="contact-social">
-            <img src={facebook} alt="facebook" width={30} />
+            <a href="https://www.facebook.com/thanhdat262000/" target="blank">
+              <img src={facebook} alt="facebook" width={30} />
+            </a>
+
             <img src={instagram} alt="instagram" width={30} />
             <img src={google} alt="google" width={30} />
           </div>

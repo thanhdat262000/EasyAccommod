@@ -3,6 +3,9 @@
   display: flex;
   justify-content: center;
 }
+.apartment-post-body form {
+  width: 100%;
+}
 .apartment-post-main-body .apartment-post-body {
   margin-top: 3rem;
   width: 80%;
@@ -42,7 +45,14 @@ span#name {
   color: white;
   font-weight: 500;
 }
-.apartment-post-body button.apartment-post-continue {
+.apartment-post-body .apartment-post-form-buttons {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.apartment-post-body button.apartment-post-continue,
+button.apartment-post-previous {
   align-self: flex-end;
   height: 2rem;
   border-radius: 5px;
