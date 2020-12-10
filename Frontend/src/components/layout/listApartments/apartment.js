@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../../../css/apartment.css";
 import apartment from "../../../image/apartment.jpg";
 class Apartment extends Component {

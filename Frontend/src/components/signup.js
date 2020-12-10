@@ -23,12 +23,34 @@ class Signup extends Component {
     }
   }
   OnContinue(e) {
-    if (!this.state.continueSignup) {
-      this.setState({ continueSignup: !this.state.continueSignup });
-      document.getElementsByClassName("signup-form-step-1")[0].style.display =
-        "none";
-      document.getElementsByClassName("signup-form-step-2")[0].style.display =
-        "block";
+    let form = document.querySelector("#signup-form");
+    let { email, password, re_password } = getFormData(form);
+    if (
+      this.validateEmail(email) &&
+      this.validatePassword(password) &&
+      this.validateRepassword(password, re_password)
+    ) {
+      if (!this.state.continueSignup) {
+        this.setState({ continueSignup: !this.state.continueSignup });
+        document.getElementsByClassName("signup-form-step-1")[0].style.display =
+          "none";
+        document.getElementsByClassName("signup-form-step-2")[0].style.display =
+          "block";
+      } else return;
+    } else {
+      if (!this.validateEmail(email))
+        document.getElementsByClassName("email-alert")[0].innerHTML =
+          "Email chưa đúng";
+      else document.getElementsByClassName("email-alert")[0].innerHTML = "";
+      if (!this.validatePassword(password))
+        document.getElementsByClassName("password-alert")[0].innerHTML =
+          "Mật khẩu không thể để trống";
+      else document.getElementsByClassName("password-alert")[0].innerHTML = "";
+      if (!this.validateRepassword(password, re_password))
+        document.getElementsByClassName("repassword-alert")[0].innerHTML =
+          "Nhập lại mật khẩu chưa đúng";
+      else
+        document.getElementsByClassName("repassword-alert")[0].innerHTML = "";
     }
   }
   onSubmit() {
@@ -45,6 +67,16 @@ class Signup extends Component {
 
     console.log(JSON.stringify(data));
   }
+  validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+  validatePassword = (password) => {
+    return password !== "";
+  };
+  validateRepassword = (password, repassword) => {
+    return password === repassword;
+  };
   render() {
     return (
       <div className="signup-bg">
@@ -68,17 +100,28 @@ class Signup extends Component {
             </div>
             <div className="signup-form-step-1">
               <div className="signup-input">
-                <input name="email" placeholder="Địa chỉ email"></input>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Mật khẩu"
-                ></input>
-                <input
-                  name="re-password"
-                  type="password"
-                  placeholder="Nhập lại mật khẩu"
-                ></input>
+                <div className="signup-input-email">
+                  <input name="email" placeholder="Địa chỉ email"></input>{" "}
+                  <span className="email-alert alert"></span>
+                </div>
+                <div className="signup-input-password">
+                  {" "}
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Mật khẩu"
+                  ></input>
+                  <span className="password-alert alert"></span>
+                </div>
+                <div className="signup-input-repassword">
+                  {" "}
+                  <input
+                    name="re_password"
+                    type="password"
+                    placeholder="Nhập lại mật khẩu"
+                  ></input>
+                  <span className="repassword-alert alert"></span>
+                </div>
               </div>
 
               <div className="buttons">

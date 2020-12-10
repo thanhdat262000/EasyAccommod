@@ -38,7 +38,6 @@ class ListApartmentPostRenter extends Component {
   }
   render() {
     const { listApartmentPostRenter } = this.state;
-    const { OnNext } = this.props;
     return (
       <div className="list-apartment-post-renter">
         <div className="list-apartment-post-renter-form-section">
@@ -60,9 +59,6 @@ class ListApartmentPostRenter extends Component {
             else return <InputCheckbox input={property} key={index} />;
           })}
         </div>
-        <button className="apartment-post-continue" onClick={OnNext}>
-          Tiếp theo
-        </button>
       </div>
     );
   }

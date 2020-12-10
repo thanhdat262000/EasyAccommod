@@ -14,7 +14,6 @@ class ApartmentPostImage extends Component {
     image.src = URL.createObjectURL(event.target.files[0]);
   }
   render() {
-    const { OnNext } = this.props;
     return (
       <div className="apartment-post-image">
         <div className="apartment-post-image-custom-button">
@@ -41,9 +40,6 @@ class ApartmentPostImage extends Component {
         <div className="apartment-post-image-review">
           <img alt="review" id="output" width={200} />
         </div>
-        <button className="apartment-post-continue" onClick={OnNext}>
-          Tiếp theo
-        </button>
       </div>
     );
   }
