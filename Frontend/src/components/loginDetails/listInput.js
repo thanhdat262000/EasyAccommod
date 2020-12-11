@@ -8,8 +8,8 @@ class ListInput extends Component {
     super(props);
     this.state = {
       listInput: [
-        { type: "field", inputType: "Họ", name: "lastName" },
-        { type: "field", inputType: "Tên", name: "firstName" },
+        { type: "text", inputType: "Họ", name: "lastName" },
+        { type: "text", inputType: "Tên", name: "firstName" },
         {
           type: "selection",
           selections: [
@@ -20,25 +20,51 @@ class ListInput extends Component {
         },
         { type: "checkbox", criteria: "Cá nhân", property: "individual" },
         { type: "checkbox", criteria: "Doanh nghiệp", property: "company" },
-        { type: "field", inputType: "Số điện thoại", name: "phone" },
-        { type: "field", inputType: "Ngày sinh", name: "birthday" },
-        { type: "field", inputType: "Số chứng minh thư", name: "idCard" },
+        { type: "text", inputType: "Số điện thoại", name: "phone" },
+        { type: "date", inputType: "Ngày sinh", name: "birthday" },
+        { type: "text", inputType: "Số chứng minh thư", name: "idCard" },
       ],
     };
   }
   render() {
     const { listInput } = this.state;
+    const { values, onChange, onBlur, errors, touched } = this.props;
     return (
       <div className="signup-details-body">
         {listInput.map((input, index) => {
           if (input.type === "selection")
-            return <InputSelection input={input} key={index} />;
-          else if (input.type === "field")
-            return <InputField input={input} key={index} />;
-          else return <InputCheckbox input={input} key={index} />;
+            return (
+              <InputSelection
+                input={input}
+                key={index}
+                value={values[input.name]}
+              />
+            );
+          else if (input.type === "text" || input.type === "date")
+            return (
+              <InputField
+                input={input}
+                key={index}
+                value={values[input.name]}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={errors[input.name]}
+                touched={touched[input.name]}
+              />
+            );
+          else
+            return (
+              <InputCheckbox
+                input={input}
+                key={index}
+                value={values[input.name]}
+                onChange={onChange}
+                onBlur={onBlur}
+              />
+            );
         })}
         <div className="buttons">
-          <button type="submit" name="continue-signup">
+          <button type="button" name="continue-signup">
             Hoàn tất đăng kí
           </button>
           <button type="button" name="redirect-login">

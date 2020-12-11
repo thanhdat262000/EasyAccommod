@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { withFormik, Form, Formik } from "formik";
+import * as Yup from "yup";
 import getFormData from "get-form-data";
 import axios from "axios";
 import "../css/signup.css";
@@ -22,13 +24,21 @@ class Signup extends Component {
         "none";
     }
   }
+  onSwitchToLogin = (e) => {
+    document.getElementsByClassName("signup-bg")[0].style.display = "none";
+    document.getElementsByClassName("login-bg")[0].style.display = "flex";
+  };
   OnContinue(e) {
-    let form = document.querySelector("#signup-form");
-    let { email, password, re_password } = getFormData(form);
+    console.log(this.props.errors);
+    const { errors, values } = this.props;
+    if (!this.validateRepassword(values.password, values.re_password))
+      document.getElementsByClassName("repassword-alert")[0].innerHTML =
+        "Nhập lại mật khẩu chưa đúng";
+    else document.getElementsByClassName("repassword-alert")[0].innerHTML = "";
     if (
-      this.validateEmail(email) &&
-      this.validatePassword(password) &&
-      this.validateRepassword(password, re_password)
+      !errors.email &&
+      !errors.password &&
+      this.validateRepassword(values.password, values.re_password)
     ) {
       if (!this.state.continueSignup) {
         this.setState({ continueSignup: !this.state.continueSignup });
@@ -37,20 +47,6 @@ class Signup extends Component {
         document.getElementsByClassName("signup-form-step-2")[0].style.display =
           "block";
       } else return;
-    } else {
-      if (!this.validateEmail(email))
-        document.getElementsByClassName("email-alert")[0].innerHTML =
-          "Email chưa đúng";
-      else document.getElementsByClassName("email-alert")[0].innerHTML = "";
-      if (!this.validatePassword(password))
-        document.getElementsByClassName("password-alert")[0].innerHTML =
-          "Mật khẩu không thể để trống";
-      else document.getElementsByClassName("password-alert")[0].innerHTML = "";
-      if (!this.validateRepassword(password, re_password))
-        document.getElementsByClassName("repassword-alert")[0].innerHTML =
-          "Nhập lại mật khẩu chưa đúng";
-      else
-        document.getElementsByClassName("repassword-alert")[0].innerHTML = "";
     }
   }
   onSubmit() {
@@ -78,6 +74,7 @@ class Signup extends Component {
     return password === repassword;
   };
   render() {
+    const { values, handleChange, errors, handleBlur, touched } = this.props;
     return (
       <div className="signup-bg">
         <div className="signup">
@@ -101,8 +98,16 @@ class Signup extends Component {
             <div className="signup-form-step-1">
               <div className="signup-input">
                 <div className="signup-input-email">
-                  <input name="email" placeholder="Địa chỉ email"></input>{" "}
-                  <span className="email-alert alert"></span>
+                  <input
+                    name="email"
+                    placeholder="Địa chỉ email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></input>{" "}
+                  {touched.email && (
+                    <span className="email-alert alert">{errors.email}</span>
+                  )}
                 </div>
                 <div className="signup-input-password">
                   {" "}
@@ -110,8 +115,15 @@ class Signup extends Component {
                     type="password"
                     name="password"
                     placeholder="Mật khẩu"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                   ></input>
-                  <span className="password-alert alert"></span>
+                  {touched.password && (
+                    <span className="password-alert alert">
+                      {errors.password}
+                    </span>
+                  )}
                 </div>
                 <div className="signup-input-repassword">
                   {" "}
@@ -119,8 +131,15 @@ class Signup extends Component {
                     name="re_password"
                     type="password"
                     placeholder="Nhập lại mật khẩu"
+                    value={values.re_password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                   ></input>
-                  <span className="repassword-alert alert"></span>
+                  {touched.re_password && (
+                    <span className="repassword-alert alert">
+                      {errors.re_password}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -132,13 +151,23 @@ class Signup extends Component {
                 >
                   Tiếp tục đăng kí
                 </button>
-                <button type="button" name="redirect-login">
+                <button
+                  type="button"
+                  name="redirect-login"
+                  onClick={this.onSwitchToLogin}
+                >
                   Đăng nhập
                 </button>
               </div>
             </div>
             <div className="signup-form-step-2">
-              <ListInput />
+              <ListInput
+                values={values}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                errors={errors}
+                touched={touched}
+              />
             </div>
           </form>
         </div>
@@ -147,4 +176,31 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withFormik({
+  mapPropsToValues() {
+    return {
+      email: "",
+      password: "",
+      re_password: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      birthday: "",
+      idCard: "",
+    };
+  },
+  validationSchema: Yup.object().shape({
+    email: Yup.string().email("Email không hợp lệ"),
+    password: Yup.string()
+      .strict({ isStrict: true })
+      .required("Bạn chưa nhập mật khẩu")
+      .min(6, "Mật khẩu phải ít nhất 6 kí tự")
+      .max(24, "Mật khẩu không được quá 24 kí tự")
+      .trim("Mật khẩu không chứa dấu cách"),
+    firstName: Yup.string().required("Hãy nhập Họ"),
+    lastName: Yup.string().required("Hãy nhập Tên"),
+    phone: Yup.number().typeError("Chỉ nhập số").required("Nhập số điện thoại"),
+    birthday: Yup.date().typeError("Nhập ngày"),
+    idCard: Yup.number().typeError("Nhập số chứng minh thư"),
+  }),
+})(Signup);

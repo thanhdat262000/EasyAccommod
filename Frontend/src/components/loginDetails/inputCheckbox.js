@@ -7,10 +7,18 @@ class InputCheckbox extends Component {
   }
   render() {
     const { criteria, property } = this.props.input;
+    const { value, onChange, onBlur } = this.props;
     return (
       <div className="input-checkbox">
         <div className="checkbox">
-          <input type="checkbox" id={property} name={property} />
+          <input
+            type="checkbox"
+            id={property}
+            name={property}
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
           <label for={property}>{criteria}</label>
         </div>
       </div>

@@ -9,6 +9,10 @@ class Login extends Component {
   onCancel(e) {
     e.target.parentNode.parentNode.style.display = "none";
   }
+  onSwitchToSignup = (e) => {
+    document.getElementsByClassName("signup-bg")[0].style.display = "flex";
+    document.getElementsByClassName("login-bg")[0].style.display = "none";
+  };
   render() {
     return (
       <div className="login-bg">
@@ -20,7 +24,7 @@ class Login extends Component {
             alt="cancel"
             onClick={this.onCancel}
           />
-          <form name="login-form" >
+          <form name="login-form">
             <div className="title">
               <h2>Đăng nhập</h2>
             </div>
@@ -32,7 +36,11 @@ class Login extends Component {
               <button type="submit" name="login">
                 Đăng nhập
               </button>
-              <button type="button" name="signup">
+              <button
+                type="button"
+                name="signup"
+                onClick={this.onSwitchToSignup}
+              >
                 Đăng kí
               </button>
             </div>

@@ -47,4 +47,7 @@ class Header extends React.Component {
     );
   }
 }
-export default connect(getLoginState, null)(Header);
+export default connect(
+  (state) => ({ isLogin: getLoginState(state) }),
+  null
+)(Header);
