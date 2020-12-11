@@ -6,10 +6,19 @@ class InputField extends Component {
     this.state = {};
   }
   render() {
-    const { inputType, name } = this.props.input;
+    const { inputType, name, type } = this.props.input;
+    const { value, onChange, onBlur, touched, error } = this.props;
     return (
       <div className="input-field">
-        <input type="text" placeholder={inputType} name={name} />
+        <input
+          type={type}
+          placeholder={inputType}
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        {touched && <span className={`${name}-alert alert`}>{error}</span>}
       </div>
     );
   }
