@@ -23,7 +23,7 @@ class Header extends React.Component {
             <div>EasyAccommod</div>
           </a>
         </div>
-        {this.props.isLogin ? (
+        {this.props.isLogin === true ? (
           <DropDownMenu userName="Thanh Dat" />
         ) : (
           <div id="right-header">
