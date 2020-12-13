@@ -28,7 +28,7 @@ class ListInput extends Component {
   }
   render() {
     const { listInput } = this.state;
-    const { values, onChange, onBlur, errors, touched } = this.props;
+    const { values, onChange, onBlur, errors, touched, onSubmit } = this.props;
     return (
       <div className="signup-details-body">
         {listInput.map((input, index) => {
@@ -64,7 +64,7 @@ class ListInput extends Component {
             );
         })}
         <div className="buttons">
-          <button type="button" name="continue-signup">
+          <button type="button" name="continue-signup" onClick={onSubmit}>
             Hoàn tất đăng kí
           </button>
           <button type="button" name="redirect-login">

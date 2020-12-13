@@ -63,13 +63,6 @@ class Signup extends Component {
 
     console.log(JSON.stringify(data));
   }
-  validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-  validatePassword = (password) => {
-    return password !== "";
-  };
   validateRepassword = (password, repassword) => {
     return password === repassword;
   };
@@ -167,6 +160,7 @@ class Signup extends Component {
                 onBlur={handleBlur}
                 errors={errors}
                 touched={touched}
+                onSubmit={this.onSubmit}
               />
             </div>
           </form>
