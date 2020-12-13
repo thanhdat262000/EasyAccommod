@@ -6,6 +6,7 @@ import axios from "axios";
 import "../css/signup.css";
 import Cancel from "../image/cancel.svg";
 import ListInput from "./loginDetails/listInput";
+const url = "http://localhost:8000/register/";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +29,23 @@ class Signup extends Component {
     document.getElementsByClassName("signup-bg")[0].style.display = "none";
     document.getElementsByClassName("login-bg")[0].style.display = "flex";
   };
+  checkEmail = (email) => {
+    const data = { email: email };
+    axios({
+      method: "post",
+      url: url + "checkEmail",
+      data: data,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    }).then((response) => {
+      return response.data.isExist;
+    });
+  };
   OnContinue(e) {
-    console.log(this.props.errors);
     const { errors, values } = this.props;
+
     if (!this.validateRepassword(values.password, values.re_password))
       document.getElementsByClassName("repassword-alert")[0].innerHTML =
         "Nhập lại mật khẩu chưa đúng";
@@ -42,10 +57,16 @@ class Signup extends Component {
     ) {
       if (!this.state.continueSignup) {
         this.setState({ continueSignup: !this.state.continueSignup });
-        document.getElementsByClassName("signup-form-step-1")[0].style.display =
-          "none";
-        document.getElementsByClassName("signup-form-step-2")[0].style.display =
-          "block";
+        if (!this.checkEmail(values.email)) {
+          document.getElementsByClassName(
+            "signup-form-step-1"
+          )[0].style.display = "none";
+          document.getElementsByClassName(
+            "signup-form-step-2"
+          )[0].style.display = "block";
+        } else
+          document.getElementsByClassName["email-alert"][0].innerHTML =
+            "Email đã tồn tại";
       } else return;
     }
   }
