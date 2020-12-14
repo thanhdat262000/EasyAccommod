@@ -1,6 +1,6 @@
 const { actionTypes } = require("../actionTypes.js");
 
-export const login = (userName) => {
+export const loginAction = (userName) => {
   return {
     type: actionTypes.LOGIN,
     payload: userName,

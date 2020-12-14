@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import getFormData from "get-form-data";
-import axios from "axios";
 import "../css/signup.css";
 import Cancel from "../image/cancel.svg";
 import ListInput from "./loginDetails/listInput";
 import { connect } from "react-redux";
-import { login } from "../redux/actions/login";
-const url = "http://localhost:8000/register/";
+import { loginAction } from "../redux/actions/login.action";
+import { checkEmail, register } from "../service/auth.service";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -31,28 +30,16 @@ class Signup extends Component {
     document.getElementsByClassName("signup-bg")[0].style.display = "none";
     document.getElementsByClassName("login-bg")[0].style.display = "flex";
   };
-  checkEmail = (email) => {
-    const data = { email: email };
-    axios({
-      method: "post",
-      url: url + "checkEmail",
-      data: data,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      },
-    }).then((response) => {
-      console.log(response.data.isExist);
-      return response.data.isExist;
-    });
-  };
-  OnContinue(e) {
+
+  async OnContinue(e) {
     const { errors, values } = this.props;
 
     if (!this.validateRepassword(values.password, values.re_password))
-      document.getElementsByClassName("repassword-alert")[0].innerHTML =
+      document.getElementsByClassName("repassword-alert-signup")[0].innerHTML =
         "Nhập lại mật khẩu chưa đúng";
-    else document.getElementsByClassName("repassword-alert")[0].innerHTML = "";
+    else
+      document.getElementsByClassName("repassword-alert-signup")[0].innerHTML =
+        "";
     if (
       !errors.email &&
       !errors.password &&
@@ -60,34 +47,30 @@ class Signup extends Component {
     ) {
       if (!this.state.continueSignup) {
         this.setState({ continueSignup: !this.state.continueSignup });
-        if (this.checkEmail(values.email) === false) {
+        const response = await checkEmail(values.email);
+        console.log(response);
+        if (response.isExist === false) {
           document.getElementsByClassName(
             "signup-form-step-1"
           )[0].style.display = "none";
           document.getElementsByClassName(
             "signup-form-step-2"
           )[0].style.display = "block";
-        } else
-          document.getElementsByClassName("email-alert")[0].innerHTML =
+        } else {
+          document.getElementsByClassName("email-alert-signup")[0].innerHTML =
             "Email đã tồn tại";
+        }
       } else return;
     }
   }
-  onSubmit() {
+  async onSubmit() {
     let form = document.querySelector("#signup-form");
     let data = getFormData(form);
-    axios
-      .post(url, data)
-      .then((response) => {
-        if (response.data.isRegister) {
-          this.props.login("Thanh Dat");
-          console.log(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+    const response = await register(data);
+    if (response.isRegister) {
+      this.props.loginAction("Thanh Dat");
+      document.getElementsByClassName("signup-bg")[0].style.display = "none";
+    }
     console.log(JSON.stringify(data));
   }
   validateRepassword = (password, repassword) => {
@@ -125,7 +108,7 @@ class Signup extends Component {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   ></input>{" "}
-                  <span className="email-alert alert">
+                  <span className="email-alert-signup alert">
                     {touched.email && errors.email}
                   </span>
                 </div>
@@ -139,7 +122,7 @@ class Signup extends Component {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   ></input>
-                  <span className="password-alert alert">
+                  <span className="password-alert-signup alert">
                     {touched.password && errors.password}
                   </span>
                 </div>
@@ -153,7 +136,7 @@ class Signup extends Component {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   ></input>
-                  <span className="repassword-alert alert"></span>
+                  <span className="repassword-alert-signup alert"></span>
                 </div>
               </div>
 
@@ -225,4 +208,4 @@ const SignupForm = withFormik({
     idCard: Yup.number().typeError("Nhập số chứng minh thư"),
   }),
 })(Signup);
-export default connect(null, { login })(SignupForm);
+export default connect(null, { loginAction })(SignupForm);
