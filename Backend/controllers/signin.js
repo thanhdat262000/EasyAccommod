@@ -10,7 +10,8 @@ module.exports.signinPost = async(req, res) => {
     let sql = "SELECT password, email, privilege FROM account WHERE email = ?";
     connection.query(sql, [email], (err, results, fields) => {
         if(err) res.sendStatus(404);
-        if(results[0].email.length === 0){
+        // console.log(results);
+        if(results.length === 0){
             res.send("You must register if you want to signin")
         }
         else{
@@ -18,8 +19,9 @@ module.exports.signinPost = async(req, res) => {
             bcrypt.compare(password, results[0].password, function(err, result) {
                 // if result == true, password matched
                 // else wrong password
-                // console.log(results);
+                // console.log(result);
                 // console.log(password);
+                // console.log(results[0].password);
                 if(result){
                     console.log(results[0]);
 
@@ -27,7 +29,6 @@ module.exports.signinPost = async(req, res) => {
                     const token = jwt.sign({
                         data: results[0].email + ' ' + results[0].privilege
                     }, process.env.JWT_KEY, {expiresIn: 60*30});
-
                     // Send token
                     res.send(token);
                 }
