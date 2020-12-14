@@ -15,37 +15,35 @@ import { store } from "./redux/store";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <Header />
-          <Switch>
-            <Route path="/apartment-post">
-              <ApartmentPostBody />
-            </Route>
-            <Route path="/apartment/:id">
-              <ApartmentDetails />
-            </Route>
-            <Route path="/apartment-management">
-              <ApartmentManagementBody />
-            </Route>
-            <Route path="/favorite">
-              <FavoriteApartmentBody />
-            </Route>
-            <Route path="/" exact>
-              <HomeBody />
-            </Route>
-            <Route path="/messages" exact>
-              <MessageBody />
-            </Route>
-          </Switch>
+    <Router>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/apartment-post">
+            <ApartmentPostBody />
+          </Route>
+          <Route path="/apartment/:id">
+            <ApartmentDetails />
+          </Route>
+          <Route path="/apartment-management">
+            <ApartmentManagementBody />
+          </Route>
+          <Route path="/favorite">
+            <FavoriteApartmentBody />
+          </Route>
+          <Route path="/" exact>
+            <HomeBody />
+          </Route>
+          <Route path="/messages" exact>
+            <MessageBody />
+          </Route>
+        </Switch>
 
-          <Login />
-          <Signup />
-          <Footer />
-        </div>
-      </Router>
-    </Provider>
+        <Login />
+        <Signup />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

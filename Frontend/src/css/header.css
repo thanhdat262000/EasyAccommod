@@ -24,8 +24,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-right: 5rem;
+}
+#right-header #signIn,
+#signUp {
+  cursor: pointer;
+}
+#right-header #signIn {
+  margin-right: 3rem;
 }
 #right-header a {
   font-size: 16px;

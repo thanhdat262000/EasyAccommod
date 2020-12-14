@@ -23,7 +23,7 @@ class Header extends React.Component {
             <div>EasyAccommod</div>
           </a>
         </div>
-        {this.props.isLogin ? (
+        {this.props.isLogin === true ? (
           <DropDownMenu userName="Thanh Dat" />
         ) : (
           <div id="right-header">
@@ -31,16 +31,14 @@ class Header extends React.Component {
               <img src={Noti} alt="noti" width={20} height={20} />
               <span>Thông báo</span>
             </div>
-            <a href="#" className="link">
-              <div id="signIn" className="sign" onClick={this.onLoginClick}>
-                Đăng nhập
-              </div>
-            </a>
-            <a href="#" className="link">
-              <div id="signUp" className="sign" onClick={this.onSignupClick}>
-                Đăng ký
-              </div>
-            </a>
+
+            <div id="signIn" className="sign" onClick={this.onLoginClick}>
+              Đăng nhập
+            </div>
+
+            <div id="signUp" className="sign" onClick={this.onSignupClick}>
+              Đăng ký
+            </div>
           </div>
         )}
       </div>
