@@ -3,6 +3,10 @@ import { withFormik } from "formik";
 import * as Yup from "yup";
 import "../css/login.css";
 import Cancel from "../image/cancel.svg";
+import axios from "axios";
+import { connect } from "react-redux";
+import { login } from "../redux/actions/login";
+const url = "http://localhost:8000/signin/";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,10 +19,20 @@ class Login extends Component {
     document.getElementsByClassName("signup-bg")[0].style.display = "flex";
     document.getElementsByClassName("login-bg")[0].style.display = "none";
   };
-  onSubmit = () => {
-    const { errors, values } = this.props;
-    if (Object.keys(errors).length === 0) console.log(values);
-    else return;
+  onSubmit = (e) => {
+    const { values, errors } = this.props;
+    if (Object.keys(errors).length === 0) {
+      axios.post(url, values).then((response) => {
+        if (!response.data.isLogin) {
+          document.getElementsByClassName("password-alert")[0].innerHTML =
+            "Mật khẩu không chính xác";
+        } else {
+          this.props.login("Thanh Dat");
+          document.getElementsByClassName("login-bg")[0].style.display = "none";
+          localStorage.setItem("token", response.data.token);
+        }
+      });
+    }
   };
   render() {
     const { values, handleChange, errors, handleBlur, touched } = this.props;
@@ -32,7 +46,7 @@ class Login extends Component {
             alt="cancel"
             onClick={this.onCancel}
           />
-          <form name="login-form">
+          <form name="login-form" id="login-form">
             <div className="title">
               <h2>Đăng nhập</h2>
             </div>
@@ -45,9 +59,9 @@ class Login extends Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 ></input>{" "}
-                {touched.email && (
-                  <span className="email-alert alert">{errors.email}</span>
-                )}
+                <span className="email-alert alert">
+                  {touched.email && errors.email}
+                </span>
               </div>
               <div className="login-input-password">
                 {" "}
@@ -59,11 +73,9 @@ class Login extends Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 ></input>
-                {touched.password && (
-                  <span className="password-alert alert">
-                    {errors.password}
-                  </span>
-                )}
+                <span className="password-alert alert">
+                  {touched.password && errors.password}
+                </span>
               </div>
             </div>
             <div className="buttons">
@@ -85,7 +97,7 @@ class Login extends Component {
   }
 }
 
-export default withFormik({
+const LoginForm = withFormik({
   mapPropsToValues() {
     return {
       email: "",
@@ -102,3 +114,4 @@ export default withFormik({
       .trim("Mật khẩu không chứa dấu cách"),
   }),
 })(Login);
+export default connect(null, { login })(LoginForm);

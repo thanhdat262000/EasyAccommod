@@ -42,6 +42,7 @@ class Signup extends Component {
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
     }).then((response) => {
+      console.log(response.data.isExist);
       return response.data.isExist;
     });
   };
@@ -59,7 +60,7 @@ class Signup extends Component {
     ) {
       if (!this.state.continueSignup) {
         this.setState({ continueSignup: !this.state.continueSignup });
-        if (!this.checkEmail(values.email)) {
+        if (this.checkEmail(values.email) === false) {
           document.getElementsByClassName(
             "signup-form-step-1"
           )[0].style.display = "none";
@@ -213,8 +214,12 @@ const SignupForm = withFormik({
       .min(6, "Mật khẩu phải ít nhất 6 kí tự")
       .max(24, "Mật khẩu không được quá 24 kí tự")
       .trim("Mật khẩu không chứa dấu cách"),
-    firstName: Yup.string().required("Hãy nhập Họ"),
-    lastName: Yup.string().required("Hãy nhập Tên"),
+    firstName: Yup.string()
+      .required("Hãy nhập Họ")
+      .matches("[a-zA-Z'-]+", "Không hợp lệ"),
+    lastName: Yup.string()
+      .required("Hãy nhập Tên")
+      .matches("[a-zA-Z'-]+", "Không hợp lệ"),
     phone: Yup.number().typeError("Chỉ nhập số").required("Nhập số điện thoại"),
     birthday: Yup.date().typeError("Nhập ngày"),
     idCard: Yup.number().typeError("Nhập số chứng minh thư"),
