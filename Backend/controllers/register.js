@@ -29,7 +29,8 @@ module.exports.register = async (req, res) => {
         if (err) res.sendStatus(404);
         else res.json({
           isRegister: true,
-          notification: "Bạn đã đăng ký thành công"
+          notification: "Bạn đã đăng ký thành công",
+          userName: firstName + lastName
         })
       }
     );
