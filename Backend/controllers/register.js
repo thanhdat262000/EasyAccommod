@@ -30,7 +30,7 @@ module.exports.register = async (req, res) => {
         else res.json({
           isRegister: true,
           notification: "Bạn đã đăng ký thành công",
-          userName: firstName + lastName
+          userName: firstName + " " + lastName
         })
       }
     );
