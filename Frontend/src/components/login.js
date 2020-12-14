@@ -3,10 +3,10 @@ import { withFormik } from "formik";
 import * as Yup from "yup";
 import "../css/login.css";
 import Cancel from "../image/cancel.svg";
-import axios from "axios";
 import { connect } from "react-redux";
-import { login } from "../redux/actions/login";
-const url = "http://localhost:8000/signin/";
+import { loginAction } from "../redux/actions/login.action";
+import { login } from "../service/auth.service";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -19,19 +19,22 @@ class Login extends Component {
     document.getElementsByClassName("signup-bg")[0].style.display = "flex";
     document.getElementsByClassName("login-bg")[0].style.display = "none";
   };
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     const { values, errors } = this.props;
     if (Object.keys(errors).length === 0) {
-      axios.post(url, values).then((response) => {
-        if (!response.data.isLogin) {
-          document.getElementsByClassName("password-alert")[0].innerHTML =
-            "Mật khẩu không chính xác";
-        } else {
-          this.props.login("Thanh Dat");
-          document.getElementsByClassName("login-bg")[0].style.display = "none";
-          localStorage.setItem("token", response.data.token);
-        }
-      });
+      const response = await login(values);
+      console.log(response);
+      if (response.error === "password") {
+        document.getElementsByClassName("password-alert-login")[0].innerHTML =
+          "Mật khẩu không chính xác";
+      } else if (response.error === "email") {
+        document.getElementsByClassName("email-alert-login")[0].innerHTML =
+          "Email chưa được đăng kí";
+      } else {
+        this.props.loginAction("Thanh Dat");
+        document.getElementsByClassName("login-bg")[0].style.display = "none";
+        localStorage.setItem("token", response.token);
+      }
     }
   };
   render() {
@@ -59,7 +62,7 @@ class Login extends Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 ></input>{" "}
-                <span className="email-alert alert">
+                <span className="email-alert-login alert">
                   {touched.email && errors.email}
                 </span>
               </div>
@@ -73,7 +76,7 @@ class Login extends Component {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 ></input>
-                <span className="password-alert alert">
+                <span className="password-alert-login alert">
                   {touched.password && errors.password}
                 </span>
               </div>
@@ -114,4 +117,4 @@ const LoginForm = withFormik({
       .trim("Mật khẩu không chứa dấu cách"),
   }),
 })(Login);
-export default connect(null, { login })(LoginForm);
+export default connect(null, { loginAction })(LoginForm);
