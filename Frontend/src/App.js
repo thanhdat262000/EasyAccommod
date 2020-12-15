@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Provider } from "react-redux";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import Login from "./components/login";
@@ -11,7 +10,6 @@ import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteA
 import MessageBody from "./components/screens/messageScreen/messageBody";
 import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
-import { store } from "./redux/store";
 
 function App() {
   return (
@@ -22,9 +20,7 @@ function App() {
           <Route path="/apartment-post">
             <ApartmentPostBody />
           </Route>
-          <Route path="/apartment/:id">
-            <ApartmentDetails />
-          </Route>
+          <Route path="/apartment/:id" component={ApartmentDetails} />
           <Route path="/apartment-management">
             <ApartmentManagementBody />
           </Route>

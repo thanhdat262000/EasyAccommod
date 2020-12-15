@@ -4,7 +4,7 @@ import apartment from "../../../image/apartment.jpg";
 class Apartment extends Component {
   render() {
     const apartmentProps = this.props.apartmentInfo;
-    const { id } = this.props.apartmentInfo;
+    const { apartment_id } = this.props.apartmentInfo;
     console.log(apartment);
     return (
       // <Link to="/apartment" >
@@ -14,14 +14,15 @@ class Apartment extends Component {
           backgroundImage: "url(" + apartmentProps.imagePath + ")",
         }}
       >
-        <a href={`/apartment/${id}`} className="main-apartment">
+        <a href={`/apartment/${apartment_id}`} className="main-apartment">
           <div className="apartment-info">
             <div className="apartment-price">
-              <label>{apartmentProps.rentPrice}</label>
+              <label>{apartmentProps.price}</label>
               <span>VNĐ/Tháng</span>
             </div>
             <div className="apartment-address">
-              <span>{apartmentProps.address}</span>
+              <span>{apartmentProps.city}</span>
+              <span>{apartmentProps.district}</span>
             </div>
           </div>
         </a>

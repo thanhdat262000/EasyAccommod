@@ -8,12 +8,15 @@ class ApartmentOwnerInfo extends Component {
     this.state = {};
   }
   render() {
+    const { name, phone } = this.props.ownerInfo;
     return (
       <div className="owner-info">
         <div className="avatar">
           <img src={Avatar} alt="avatar" width={60} height={60} />
           <div className="owner-name-number">
-            <span>Thành Đạt, 0966998657</span>
+            <span>
+              {name}, {phone}
+            </span>
           </div>
         </div>
 

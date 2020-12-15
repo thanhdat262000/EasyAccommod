@@ -6,7 +6,6 @@
 }
 .apartment {
   flex-basis: 30%;
-  flex: 1;
   height: 240px;
   border-radius: 5px;
   margin: 15px;
@@ -34,9 +33,17 @@
   font-size: 2rem;
   margin-right: 5px;
 }
-.apartment-info div {
-  margin-left: 5px;
+.apartment-price {
+  margin-left: 0.8rem;
 }
 .apartment-info .apartment-address {
   margin-bottom: 10px;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.apartment-info .apartment-address span:first-child {
+  text-transform: uppercase;
+  margin-right: 0.5rem;
 }

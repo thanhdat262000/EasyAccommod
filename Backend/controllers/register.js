@@ -33,11 +33,11 @@ module.exports.register = async (req, res) => {
           const token = jwt.sign(
             {
               //results[0].email + " " + results[0].privilege,
-              data:{
-                email: results[0].email,
-                privilege: results[0].privilege,
-                userName: results[0].first_name + " " + results[0].last_name
-              }
+              data: {
+                email: email,
+                privilege: privilege,
+                userName: firstName + " " + lastName,
+              },
             },
             process.env.JWT_KEY,
             { expiresIn: 60 * 30 }
@@ -45,7 +45,7 @@ module.exports.register = async (req, res) => {
 
           // Send token
           res.json({
-            token: token
+            token: token,
           });
         }
       }
