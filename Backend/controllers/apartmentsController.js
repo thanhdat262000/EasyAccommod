@@ -1,20 +1,14 @@
 const connection = require('../db');
 
+// Send all apartments
 module.exports.index = async(req, res) => {
-    const sql = "SELECT * FROM apartment a JOIN apartment_detail ad ON a.apartment_id=ad.apartment_id";
+    const sql = `SELECT apartment.apartment_id, apartment_detail.price, city.name, district.name 
+        FROM apartment 
+        JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id 
+        JOIN city ON apartment.city_id = city.city_id 
+        JOIN district ON district.city_id = city.city_id`;
     connection.query(sql,(err, results, fields) => {
+        if(err) res.sendStatus(400)
         res.json(results);
-    })
-}
-
-module.exports.pagination = async(req, res) => {
-    const page = req.params.id;
-    const apartmentEachPage = 2;
-    const begin = (page-1)*apartmentEachPage;
-    const end = begin + apartmentEachPage;
-    const sql = "SELECT * FROM apartment";
-    connection.query(sql, (err, results, fields) => {
-        results = results.slice(begin, end);
-        results.length !== 0 ? res.json(results) : res.sendStatus(404);
     })
 }

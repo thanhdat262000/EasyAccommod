@@ -10,7 +10,10 @@ module.exports.index = async (req, res) => {
 
 module.exports.renderId = async (req, res) => {
     const id = req.params.id;
-    const sql = "SELECT * FROM apartment WHERE apartment_id=?";
+    const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, apartment_detail.* 
+            FROM apartment 
+            JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id 
+            JOIN account ON apartment.account_id = account.account_id WHERE apartment.apartment_id = ?`;
     connection.query(sql,[id] ,(err, results, fields) => {
         res.json(results);
     })

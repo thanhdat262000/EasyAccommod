@@ -7,7 +7,5 @@ const apartmentsRouter = express.Router();
 
 apartmentsRouter.get('/', apartmentsController.index)
 
-apartmentsRouter.get('/page/:id', apartmentsController.pagination)
-
 
 module.exports = apartmentsRouter;
