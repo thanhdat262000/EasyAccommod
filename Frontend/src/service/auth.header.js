@@ -1,5 +1,5 @@
 export const authHeader = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   if (token) {
     return { "x-access-token": token };
   } else return {};

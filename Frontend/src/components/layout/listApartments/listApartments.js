@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Apartment from "./apartment";
 import "../../../css/listApartments.css";
+import { getAllApartments } from "../../../service/user.service";
 class ListApartments extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,13 @@ class ListApartments extends Component {
         },
       ],
     };
+  }
+  componentDidMount() {
+    getAllApartments().then((data) => {
+      this.setState({
+        listApartments: data,
+      });
+    });
   }
   render() {
     const { listApartments } = this.state;

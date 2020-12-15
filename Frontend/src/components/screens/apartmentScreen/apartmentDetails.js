@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../../css/screens/apartmentScreen/mainApartment.css";
+import { getApartment } from "../../../service/user.service";
 import ApartmentMap from "./apartmentMap";
 import ApartmentOwnerInfo from "./apartmentOwnerInfo";
 import ListApartmentProperties from "./apartmentPropertiesInfo/listApartmentProperties";
@@ -8,17 +9,31 @@ import CarouselApartment from "./Carousel";
 class ApartmentDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      apartmentInfo: {},
+    };
+  }
+  componentDidMount() {
+    const {
+      match: { params },
+    } = this.props;
+    getApartment(params.id).then((data) => {
+      this.setState({
+        apartmentInfo: data[0],
+      });
+    });
   }
   render() {
+    const { apartmentInfo } = this.state;
+    console.log(apartmentInfo);
     return (
       <div className="main-apartment">
         <div className="main-layout">
-          <CarouselApartment />
+          <CarouselApartment images={apartmentInfo} />
           <div className="main-layout-body">
             <div className="main-layout-body-info">
-              <ApartmentOwnerInfo />
-              <ListApartmentProperties />
+              <ApartmentOwnerInfo ownerInfo={apartmentInfo} />
+              <ListApartmentProperties info={apartmentInfo} />
             </div>
             <div className="main-layout-body-advancedInfo">
               {" "}
