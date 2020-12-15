@@ -9,6 +9,7 @@ const apartmentRouter = require("./routes/apartmentRouter");
 const signinRouter = require("./routes/signin");
 const ownerRouter = require("./routes/owner");
 const registerRouter = require("./routes/register");
+const adminRouter = require("./routes/admin");
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
@@ -28,6 +29,9 @@ app.use("/apartments", apartmentsRouter);
 
 // Owner Router
 app.use("/owner", ownerRouter);
+
+// Admin Router
+app.use('/admin', adminRouter);
 
 app.use("/signin", signinRouter);
 app.use("/register", registerRouter);
