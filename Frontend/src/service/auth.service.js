@@ -1,4 +1,6 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
+require("dotenv").config();
 const url = "http://localhost:8000/";
 
 export const checkEmail = async (email) => {
@@ -23,4 +25,8 @@ export const logout = () => {
 };
 export const saveToken = (token) => {
   localStorage.setItem("token", token);
+};
+export const decodeToken = (token) => {
+  const decoded = jwt.verify(token, process.env.REACT_APP_JWT_KEY);
+  return decoded.data;
 };
