@@ -8,3 +8,14 @@
   width: 70%;
   z-index: auto;
 }
+.main-apartment .main-layout-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-apartment .main-layout-body .main-layout-body-info {
+  flex-basis: 70%;
+}
+.main-apartment .main-layout-body .main-layout-body-advancedInfo {
+  flex-basis: 28%;
+}
