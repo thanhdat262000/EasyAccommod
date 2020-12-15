@@ -5,7 +5,7 @@ import "../css/login.css";
 import Cancel from "../image/cancel.svg";
 import { connect } from "react-redux";
 import { loginAction } from "../redux/actions/login.action";
-import { login } from "../service/auth.service";
+import { login, saveToken } from "../service/auth.service";
 
 class Login extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Login extends Component {
       } else {
         this.props.loginAction("Thanh Dat");
         document.getElementsByClassName("login-bg")[0].style.display = "none";
-        localStorage.setItem("token", response.token);
+        saveToken(response.token);
       }
     }
   };
