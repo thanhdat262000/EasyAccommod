@@ -27,7 +27,12 @@ module.exports.signinPost = async (req, res) => {
           // Create token by jwt
           const token = jwt.sign(
             {
-              data: results[0].email + " " + results[0].privilege,
+              //results[0].email + " " + results[0].privilege,
+              data:{
+                email: results[0].email,
+                privilege: results[0].privilege,
+                userName: results[0].first_name + " " + results[0].last_name
+              }
             },
             process.env.JWT_KEY,
             { expiresIn: 60 * 30 }
@@ -35,9 +40,7 @@ module.exports.signinPost = async (req, res) => {
 
           // Send token
           res.json({
-            error: "none",
-            token: token,
-            userName: results[0].first_name + " " + results[0].last_name,
+            token: token
           });
         } else {
           res.json({

@@ -9,8 +9,14 @@ const apartmentRouter = require("./routes/apartmentRouter");
 const signinRouter = require("./routes/signin");
 const ownerRouter = require("./routes/owner");
 const registerRouter = require("./routes/register");
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json');
+
 
 const app = express();
+
+// Swagger UI
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Use body-parser => req.body
 app.use(bodyParser.json());

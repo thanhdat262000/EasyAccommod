@@ -26,12 +26,15 @@ module.exports.register = async (req, res) => {
       sql,
       [email, hashPassword, privilege, firstName, lastName, phone, idCard],
       (err, results, fields) => {
-        if (err) res.sendStatus(404);
-        else res.json({
-          isRegister: true,
-          notification: "Bạn đã đăng ký thành công",
-          userName: firstName + " " + lastName
-        })
+        if (err) res.sendStatus(400);
+        else {
+          res.status(200);
+          res.json({
+            isRegister: true,
+            notification: "Bạn đã đăng ký thành công",
+            userName: firstName + " " + lastName
+          })
+        }
       }
     );
   });
