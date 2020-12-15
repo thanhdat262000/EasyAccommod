@@ -3,6 +3,7 @@ const connection = require("../db");
 require("dotenv").config();
 
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const saltRounds = 5;
 
 module.exports.register = async (req, res) => {
@@ -29,11 +30,23 @@ module.exports.register = async (req, res) => {
         if (err) res.sendStatus(400);
         else {
           res.status(200);
+          const token = jwt.sign(
+            {
+              //results[0].email + " " + results[0].privilege,
+              data:{
+                email: results[0].email,
+                privilege: results[0].privilege,
+                userName: results[0].first_name + " " + results[0].last_name
+              }
+            },
+            process.env.JWT_KEY,
+            { expiresIn: 60 * 30 }
+          );
+
+          // Send token
           res.json({
-            isRegister: true,
-            notification: "Bạn đã đăng ký thành công",
-            userName: firstName + " " + lastName
-          })
+            token: token
+          });
         }
       }
     );
