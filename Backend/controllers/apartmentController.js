@@ -23,16 +23,14 @@ module.exports.renderId = async (req, res) => {
 
 module.exports.favorite = async (req, res) => {
     const apartment_id = req.params.id;
-    const { isFavorite } = req.body;
     jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
         if(err) console.log(err)
         else {
             console.log(decoded);
             let idDecode = decoded.data.id;
-            console.log(idDecode, apartment_id, isFavorite);
             const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
 
-            connection.query(sql, [ idDecode, apartment_id, isFavorite], (err, results, fields) => {
+            connection.query(sql, [ idDecode, apartment_id, 1], (err, results, fields) => {
                 try{
                     if(err) throw err
                     res.sendStatus(200);
