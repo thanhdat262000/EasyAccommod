@@ -5,7 +5,7 @@ import "../css/login.css";
 import Cancel from "../image/cancel.svg";
 import { connect } from "react-redux";
 import { loginAction } from "../redux/actions/login.action";
-import { login, saveToken } from "../service/auth.service";
+import { decodeToken, login, saveToken } from "../service/auth.service";
 
 class Login extends Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class Login extends Component {
     const { values, errors } = this.props;
     if (Object.keys(errors).length === 0) {
       const response = await login(values);
-      console.log(response);
       if (response.error === "password") {
         document.getElementsByClassName("password-alert-login")[0].innerHTML =
           "Mật khẩu không chính xác";
@@ -31,7 +30,8 @@ class Login extends Component {
         document.getElementsByClassName("email-alert-login")[0].innerHTML =
           "Email chưa được đăng kí";
       } else {
-        this.props.loginAction("Thanh Dat");
+        const decoded = decodeToken(response.token);
+        this.props.loginAction(decoded);
         document.getElementsByClassName("login-bg")[0].style.display = "none";
         saveToken(response.token);
       }

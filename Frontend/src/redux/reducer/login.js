@@ -1,10 +1,10 @@
-const initialState = { isLogin: false, userName: "" };
+const initialState = { isLogin: false };
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { ...state, isLogin: true, userName: action.payload };
+      return { ...action.payload, isLogin: true };
     case "LOGOUT":
-      return { ...state, isLogin: false, userName: "" };
+      return { isLogin: false };
     default:
       return state;
   }

@@ -7,7 +7,12 @@ import Cancel from "../image/cancel.svg";
 import ListInput from "./loginDetails/listInput";
 import { connect } from "react-redux";
 import { loginAction } from "../redux/actions/login.action";
-import { checkEmail, register, saveToken } from "../service/auth.service";
+import {
+  checkEmail,
+  decodeToken,
+  register,
+  saveToken,
+} from "../service/auth.service";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +73,8 @@ class Signup extends Component {
     let data = getFormData(form);
     const response = await register(data);
     if (response.token) {
-      this.props.loginAction("Thanh Dat");
+      const decoded = decodeToken(response.token);
+      this.props.loginAction(decoded);
       document.getElementsByClassName("signup-bg")[0].style.display = "none";
       saveToken(response.token);
     }
