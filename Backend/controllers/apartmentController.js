@@ -1,4 +1,6 @@
-const shortid = require("shortid");
+const jwt = require('jsonwebtoken');
+
+require('dotenv').config()
 const connection = require("../db");
 
 
@@ -21,14 +23,24 @@ module.exports.renderId = async (req, res) => {
 
 module.exports.favorite = async (req, res) => {
     const apartment_id = req.params.id;
-    const { account_id, isFavorite } = req.body;
-    const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
+    const { isFavorite } = req.body;
+    jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
+        if(err) console.log(err)
+        else {
+            console.log(decoded);
+            let idDecode = decoded.data.id;
+            console.log(idDecode, apartment_id, isFavorite);
+            const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
 
-    connection.query(sql, [ account_id, apartment_id, isFavorite], (err, results, fields) => {
-        try{
-            res.send("Data is added")
-        }catch(err){
-            res.send("Don't add a data. Please try again.")
+            connection.query(sql, [ idDecode, apartment_id, isFavorite], (err, results, fields) => {
+                try{
+                    if(err) throw err
+                    res.sendStatus(200);
+                }catch(err){
+                    res.status(400);
+                    res.send(err)
+                }
+            })
         }
     })
 

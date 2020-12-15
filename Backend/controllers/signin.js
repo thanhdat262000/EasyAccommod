@@ -31,7 +31,8 @@ module.exports.signinPost = async (req, res) => {
               data:{
                 email: results[0].email,
                 privilege: results[0].privilege,
-                userName: results[0].first_name + " " + results[0].last_name
+                userName: results[0].first_name + " " + results[0].last_name,
+                id: results[0].account_id
               }
             },
             process.env.JWT_KEY,

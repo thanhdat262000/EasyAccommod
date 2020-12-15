@@ -12,7 +12,7 @@ module.exports.authUser = async(req, res, next) => {
 
 module.exports.authRole = (role) => {
     return async(req, res, next) => {
-        jwt.verify( req.body.token, process.env.JWT_KEY, (err, decoded) => {
+        jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
             if(err) console.log(err)
             else {
                 console.log(decoded);
