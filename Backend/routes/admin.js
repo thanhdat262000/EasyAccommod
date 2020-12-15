@@ -9,6 +9,4 @@ const adminRouter = express.Router();
 
 adminRouter.get('/', authUser, authRole(ROLE.ADMIN),adminController.index)
 
-adminRouter.get('/apartments/queue', authUser, authRole(ROLE.ADMIN),adminController.apartmentsQueue)
-
 module.exports = adminRouter;

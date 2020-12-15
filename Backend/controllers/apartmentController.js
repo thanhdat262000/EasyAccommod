@@ -58,9 +58,10 @@ module.exports.comment = async (req, res) => {
             connection.query(sql, [0, idDecode, apartment_id, comment], (err, results, fields) => {
                 try{
                     if(err) throw err;
-                    res.send("Comment is added");
+                    res.sendStatus(200)
                 }catch(err){
-                    res.send(err);
+                    res.status(400)
+                    return res.send(err);
                 }
             })
         }
@@ -68,5 +69,23 @@ module.exports.comment = async (req, res) => {
 }
 
 module.exports.report = async (req, res) => {
-    res.json('Create a report apartment for a specific user')
+    const { report } = req.body;
+    const apartment_id = req.params.id;
+    jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
+        if(err) console.log(err)
+        else {
+            console.log(decoded);
+            let idDecode = decoded.data.id;
+            const sql = "INSERT INTO report SET status=?, account_id=?, apartment_id=?, report=? ";
+            connection.query(sql, [0, idDecode, apartment_id, report], (err, results, fields) => {
+                try{
+                    if(err) throw err;
+                    res.sendStatus(200)
+                }catch(err){
+                    res.status(400)
+                    return res.send(err);
+                }
+            })
+        }
+    })
 }
