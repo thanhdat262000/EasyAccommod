@@ -47,15 +47,22 @@ module.exports.favorite = async (req, res) => {
 }
 
 module.exports.comment = async (req, res) => {
-    const { account_id, comment} = req.body;
+    const { comment } = req.body;
     const apartment_id = req.params.id;
-    const status = 0;
-    const sql = "INSERT INTO comment SET  status=?, account_id=?, apartment_id=?, comment=? ";
-    connection.query(sql, [status, account_id, apartment_id, comment], (err, results, fields) => {
-        try{
-            res.send("Comment is added");
-        }catch(err){
-            res.send(err);
+    jwt.verify( req.body.token, process.env.JWT_KEY, (err, decoded) => {
+        if(err) console.log(err)
+        else {
+            console.log(decoded);
+            let idDecode = decoded.data.id;
+            const sql = "INSERT INTO comment SET  status=?, account_id=?, apartment_id=?, comment=? ";
+            connection.query(sql, [0, idDecode, apartment_id, comment], (err, results, fields) => {
+                try{
+                    if(err) throw err;
+                    res.send("Comment is added");
+                }catch(err){
+                    res.send(err);
+                }
+            })
         }
     })
 }
