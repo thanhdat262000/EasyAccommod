@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import UserSignin from "../../image/userSignin.svg";
 import Next from "../../image/next.svg";
 import "../../css/dropDownMenu.css";
+import { logout } from "../../service/auth.service";
+import { connect } from "react-redux";
+import { logoutAction } from "../../redux/actions/logout.action";
 
 class DropDownMenu extends Component {
   constructor(props) {
@@ -9,10 +12,10 @@ class DropDownMenu extends Component {
     this.state = {
       isToggle: false,
       listOptionsUser: [
-        "Thông tin cá nhân",
-        "Tin nhắn",
-        "Danh sách yêu thích",
-        "Đăng xuất",
+        { id: "personalInfo", name: "Thông tin cá nhân" },
+        { id: "message", name: "Tin nhắn", link: "/messages" },
+        { id: "favorites", name: "Danh sách yêu thích", link: "/favorite" },
+        { id: "logout", name: "Đăng xuất" },
       ],
       listOptionsOwner: [
         "Quản lí phòng trọ",
@@ -28,6 +31,10 @@ class DropDownMenu extends Component {
       isToggle: !this.state.isToggle,
     });
   }
+  onLogout = (e) => {
+    logout();
+    this.props.logoutAction();
+  };
   render() {
     const { listOptionsUser, isToggle } = this.state;
     const { userName, privilege } = this.props;
@@ -47,13 +54,28 @@ class DropDownMenu extends Component {
         </div>
         {isToggle ? (
           <ul id="list-options">
-            <li>
+            <li id="list-options-resume">
               <img src={UserSignin} alt="user-signin" width={20} height={20} />
               <span>HỒ SƠ</span>
             </li>
-            {listOptionsUser.map((option, index) => (
-              <li key={index}>{option}</li>
-            ))}
+            {listOptionsUser.map((option, index) => {
+              if (option.id === "logout")
+                return (
+                  <li
+                    key={index}
+                    id={`list-options-${option.id}`}
+                    onClick={this.onLogout}
+                  >
+                    {option.name}
+                  </li>
+                );
+              else
+                return (
+                  <li key={index} id={`list-options-${option.id}`}>
+                    <a href={option.link}>{option.name}</a>
+                  </li>
+                );
+            })}
           </ul>
         ) : null}
       </div>
@@ -61,4 +83,4 @@ class DropDownMenu extends Component {
   }
 }
 
-export default DropDownMenu;
+export default connect(null, { logoutAction })(DropDownMenu);

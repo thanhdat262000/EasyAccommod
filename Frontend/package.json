@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.3",
     "formik": "^2.2.6",
     "get-form-data": "^3.0.0",
+    "jsonwebtoken": "^8.5.1",
     "pure-react-carousel": "^1.27.6",
     "react": "^17.0.1",
     "react-awesome-slider": "^4.1.0",
