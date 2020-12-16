@@ -18,3 +18,11 @@ export const getApartment = async (id) => {
   });
   return response.data;
 };
+export const favorite = async (id) => {
+  const response = await axios({
+    url: url2 + id + "/favorite",
+    method: "post",
+    headers: authHeader(),
+  });
+  return response.status;
+};
