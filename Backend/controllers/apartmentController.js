@@ -1,3 +1,4 @@
+const e = require('express');
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config()
@@ -46,20 +47,49 @@ module.exports.renderId = async (req, res) => {
 
 module.exports.favorite = async (req, res) => {
     const apartment_id = req.params.id;
+
+    // Decode token
     jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
         if(err) console.log(err)
         else {
-            console.log(decoded);
+            // console.log(decoded);
             let idDecode = decoded.data.id;
-            const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
+            let doneInsert = true;
 
-            connection.query(sql, [ idDecode, apartment_id, 1], (err, results, fields) => {
-                try{
-                    if(err) throw err
-                    res.sendStatus(200);
-                }catch(err){
-                    res.status(400);
-                    res.send(err)
+            // Check exist like apartment
+            const checkExist = `SELECT * FROM favorite WHERE account_id = ?`
+            connection.query(checkExist, [idDecode], async(err, results, fields) => {
+                console.log(results)
+                if(results.length !== 0) doneInsert = false;
+                // console.log(doneInsert);
+
+                // If dont exist like in database
+                if(doneInsert === true){
+                    const sql = "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
+
+                    connection.query(sql, [ idDecode, apartment_id, 1], (err, results, fields) => {
+                        try{
+                            if(err) throw err
+                            res.sendStatus(200);
+                        }catch(err){
+                            res.status(400);
+                            res.send(err)
+                        }
+                    })
+                }
+
+                // And else ...
+                else{
+                    const changeLike = `UPDATE favorite SET status = ? WHERE apartment_id = ? AND account_id = ?`
+                    connection.query(changeLike, [ !results[0].status, apartment_id, idDecode], (err, results, fields) => {
+                        try{
+                            if(err) throw err
+                            res.sendStatus(200);
+                        }catch(err){
+                            res.status(400);
+                            res.send(err)
+                        }
+                    })
                 }
             })
         }
