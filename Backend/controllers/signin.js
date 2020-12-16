@@ -28,20 +28,20 @@ module.exports.signinPost = async (req, res) => {
           const token = jwt.sign(
             {
               //results[0].email + " " + results[0].privilege,
-              data:{
+              data: {
                 email: results[0].email,
                 privilege: results[0].privilege,
                 userName: results[0].first_name + " " + results[0].last_name,
-                id: results[0].account_id
-              }
+                id: results[0].account_id,
+              },
             },
             process.env.JWT_KEY,
-            { expiresIn: 60 * 30 }
+            { expiresIn: 60 * 300 }
           );
 
           // Send token
           res.json({
-            token: token
+            token: token,
           });
         } else {
           res.json({

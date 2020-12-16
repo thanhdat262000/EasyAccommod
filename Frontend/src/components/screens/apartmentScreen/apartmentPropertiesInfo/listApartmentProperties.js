@@ -4,56 +4,67 @@ import "../../../../css/screens/apartmentScreen/apartmentPropertiesInfo/listApar
 import SendMessageButton from "../sendMessageButton";
 
 class ListApartmentProperties extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listApartmentProperties: [
-        {
-          property: "Thành Phố",
-          property_value: "Hà Nội",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-        {
-          property: "Quận",
-          property_value: "Cầu Giấy",
-        },
-        {
-          property: "Địa chỉ",
-          property_value: "Ngõ 1 Phạm Văn Đồng",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-        {
-          property: "Điều kiện căn hộ",
-          property_value: "Tuyệt vời",
-        },
-        {
-          property: "Giá thuê",
-          property_value: "11.000.000 VND/tháng",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-        { property: "Đặt cọc", property_value: "22.000.000" },
-        {
-          property: "Kích thước",
-          property_value: "36 m2",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-        { property: "Số phòng", property_value: "2" },
-        {
-          property: "Nội thất",
-          property_value: "Có",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-        { property: "Thang máy", property_value: "Có" },
-        {
-          property: "Phòng tắm",
-          property_value: "Có",
-          color: "rgba(0, 0, 0, 0.15)",
-        },
-      ],
-    };
-  }
   render() {
-    const { listApartmentProperties } = this.state;
+    const {
+      city,
+      district,
+      addressDescription,
+      price,
+      square,
+      hasElevator,
+      bathroom_type,
+      hasAirConditioning,
+      detailDescription,
+    } = this.props.info;
+    const listApartmentProperties = [
+      {
+        property: "Thành Phố",
+        property_value: city,
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+      {
+        property: "Quận",
+        property_value: district,
+      },
+      {
+        property: "Địa chỉ",
+        property_value: addressDescription,
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+      {
+        property: "Điều kiện căn hộ",
+        property_value: "Tuyệt vời",
+      },
+      {
+        property: "Giá thuê",
+        property_value: `${price} VNĐ/tháng`,
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+      { property: "Đặt cọc", property_value: price * 3 },
+      {
+        property: "Kích thước",
+        property_value: `${square} m2`,
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+      {
+        property: "Điều hòa",
+        property_value: hasAirConditioning === 1 ? "Có" : "Không",
+      },
+      {
+        property: "Nội thất",
+        property_value: "Có",
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+      {
+        property: "Thang máy",
+        property_value: hasElevator === 1 ? "Có" : "Không",
+      },
+      {
+        property: "Phòng tắm",
+        property_value: bathroom_type,
+        color: "rgba(0, 0, 0, 0.15)",
+      },
+    ];
     return (
       <div className="list-apartment-properties">
         <div className="list-apartment-properties-title">
@@ -67,18 +78,7 @@ class ListApartmentProperties extends Component {
         ))}
         <div className="apartment-property-description">
           <b>Chi tiết</b>
-          <p>
-            - Diện tích 36m3 <br />- Đầy đủ nội thất và rất đẹp, chỉ cần mang đồ
-            cá nhân vào ở <br />- Vị trí thuận tiện cho việc di chuyển, sân bay
-            trong vòng 1km, Trung tâm q1,q3,...di chuyển tầm 10 đến 15 phút
-            <br />- Sát công viên gia định rộng rãi thoáng mát có nhiều không
-            khí trong lành.
-            <br />- Được sử dụng MIỄN PHÍ TẤT CẢ TIỆN ÍCH như hồ bơi, gym, sân
-            vườn bqq,...
-            <br />- Giá thuê yêu thương cho căn hộ mới tinh như thê này 
-            <br />- liên hệ em Phúc 0905728777 để hỗ trợ xem nhà và lựa chọn căn
-            phù hợp
-          </p>
+          <p>{detailDescription}</p>
         </div>
         <form name="contact-form" method="post">
           <div className="contact-owner">
