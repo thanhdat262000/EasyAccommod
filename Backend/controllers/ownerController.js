@@ -1,7 +1,7 @@
 const connection = require("../db");
 
 module.exports.index = async (req, res) => {
-    res.send("Index");
+    res.send("Index" + req.id);
 }
 
 module.exports.apartmentsQueue = async (req, res) => {

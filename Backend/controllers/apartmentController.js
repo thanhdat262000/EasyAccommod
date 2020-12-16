@@ -12,12 +12,35 @@ module.exports.index = async (req, res) => {
 
 module.exports.renderId = async (req, res) => {
     const id = req.params.id;
-    const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, apartment_detail.* 
-            FROM apartment 
-            JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id 
-            JOIN account ON apartment.account_id = account.account_id WHERE apartment.apartment_id = ?`;
-    connection.query(sql,[id] ,(err, results, fields) => {
-        res.json(results);
+    jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
+        try{
+            if(err) throw err;
+            else {
+                let idAccount = decoded.data.id;
+                const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*
+                    FROM apartment 
+                    JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id 
+                    JOIN account ON apartment.account_id = account.account_id 
+                    JOIN city ON apartment.city_id = city.city_id
+                    JOIN district ON district.city_id = city.city_id
+                    WHERE apartment.apartment_id = ?`;
+                let getLike = `SELECT favorite.status AS favorite 
+                    FROM favorite
+                    WHERE favorite.account_id = ? AND apartment_id = ? LIMIT 1`
+                connection.query(sql,[id] , async(err, results, fields) => {
+                    if(err) throw err;
+                    // console.log(results[0])
+                    connection.query(getLike,[idAccount, id], async(err, getLike, fields) => {
+                        if(err) throw err;
+                        // console.log(getLike)
+                        getLike[0].favorite === 1 ? results[0].favorite = 1 : results[0].favorite = 0;
+                        res.json(results[0])
+                    })
+                })
+            }
+        }catch(err){
+            res.sendStatus(400);
+        }
     })
 }
 

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 module.exports.authUser = async(req, res, next) => {
-    if(req.body.token == null){
+    if(req.headers['x-access-token'] == null){
         res.status(403);
         return res.send("You need to sign in");
     }
@@ -23,6 +23,7 @@ module.exports.authRole = (role) => {
                     res.send("Not Allowed");
                 }
                 else{
+                    req.id = decoded.data.id;
                     next();
                 }
             }
