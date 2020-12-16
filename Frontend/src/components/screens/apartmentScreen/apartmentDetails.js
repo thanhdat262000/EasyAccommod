@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../../css/screens/apartmentScreen/mainApartment.css";
-import { getApartment } from "../../../service/user.service";
+import { favorite, getApartment } from "../../../service/user.service";
+import ApartmentFavoriteButton from "./apartmentFavoriteButton";
 import ApartmentMap from "./apartmentMap";
 import ApartmentOwnerInfo from "./apartmentOwnerInfo";
 import ListApartmentProperties from "./apartmentPropertiesInfo/listApartmentProperties";
+import ApartmentRateAndComment from "./apartmentRateAndComment";
 import CarouselApartment from "./Carousel";
 class ApartmentDetails extends Component {
   constructor(props) {
@@ -23,9 +25,17 @@ class ApartmentDetails extends Component {
       });
     });
   }
+  onFavorite = () => {
+    const {
+      match: { params },
+    } = this.props;
+    favorite(params.id).then((status) => {
+      if (status === 200) console.log(status);
+      else console.log(status);
+    });
+  };
   render() {
     const { apartmentInfo } = this.state;
-    console.log(apartmentInfo);
     return (
       <div className="main-apartment">
         <div className="main-layout">
@@ -38,6 +48,11 @@ class ApartmentDetails extends Component {
             <div className="main-layout-body-advancedInfo">
               {" "}
               <ApartmentMap />
+              <ApartmentFavoriteButton
+                onClick={this.onFavorite}
+                isFavorite={apartmentInfo.isFavorite}
+              />
+              <ApartmentRateAndComment />
             </div>
           </div>
         </div>
