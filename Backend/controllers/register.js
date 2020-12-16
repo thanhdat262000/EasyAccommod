@@ -40,7 +40,7 @@ module.exports.register = async (req, res) => {
               },
             },
             process.env.JWT_KEY,
-            { expiresIn: 60 * 30 }
+            { expiresIn: 60 * 300 }
           );
 
           // Send token

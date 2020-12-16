@@ -21,7 +21,7 @@ class ApartmentDetails extends Component {
     } = this.props;
     getApartment(params.id).then((data) => {
       this.setState({
-        apartmentInfo: data[0],
+        apartmentInfo: data,
       });
     });
   }
@@ -36,6 +36,7 @@ class ApartmentDetails extends Component {
   };
   render() {
     const { apartmentInfo } = this.state;
+    console.log(apartmentInfo);
     return (
       <div className="main-apartment">
         <div className="main-layout">
@@ -50,7 +51,7 @@ class ApartmentDetails extends Component {
               <ApartmentMap />
               <ApartmentFavoriteButton
                 onClick={this.onFavorite}
-                isFavorite={apartmentInfo.isFavorite}
+                isFavorite={apartmentInfo.favorite}
               />
               <ApartmentRateAndComment />
             </div>
