@@ -5,6 +5,7 @@ import "../../css/dropDownMenu.css";
 import { logout } from "../../service/auth.service";
 import { connect } from "react-redux";
 import { logoutAction } from "../../redux/actions/logout.action";
+import { getPrivilage, getUsserName } from "../../redux/selector/selectors";
 
 class DropDownMenu extends Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class DropDownMenu extends Component {
         { id: "logout", name: "Đăng xuất" },
       ],
       listOptionsOwner: [
-        "Quản lí phòng trọ",
-        "Đăng tin",
-        "Tin nhắn",
-        "Đăng xuất",
+        { id: "apartment-management", name: "Quản lí phòng trọ" },
+        { id: "apartment-post", name: "Đăng tin" },
+        { id: "message", name: "Tin nhắn" },
+        { id: "logout", name: "Đăng xuất" },
       ],
     };
     this.showMenu = this.showMenu.bind(this);
@@ -36,12 +37,13 @@ class DropDownMenu extends Component {
     this.props.logoutAction();
   };
   render() {
-    const { listOptionsUser, isToggle } = this.state;
+    let listOptions;
+    const { isToggle } = this.state;
     const { userName, privilege } = this.props;
-    // listOpstions =
-    //   privilege === "user"
-    //     ? this.state.listOptionsUser
-    //     : this.state.listOptionsOwner;
+    listOptions =
+      privilege === "user"
+        ? this.state.listOptionsUser
+        : this.state.listOptionsOwner;
     return (
       <div className="drop-down-menu">
         <div className="user-name" onClick={this.showMenu}>
@@ -58,7 +60,7 @@ class DropDownMenu extends Component {
               <img src={UserSignin} alt="user-signin" width={20} height={20} />
               <span>HỒ SƠ</span>
             </li>
-            {listOptionsUser.map((option, index) => {
+            {listOptions.map((option, index) => {
               if (option.id === "logout")
                 return (
                   <li
@@ -83,4 +85,10 @@ class DropDownMenu extends Component {
   }
 }
 
-export default connect(null, { logoutAction })(DropDownMenu);
+export default connect(
+  (state) => ({
+    userName: getUsserName(state),
+    privilege: getPrivilage(state),
+  }),
+  { logoutAction }
+)(DropDownMenu);
