@@ -1,6 +1,9 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import "../../../css/screens/apartmentManagement/apartmentManagementBody.css";
+import { getPrivilege } from "../../../redux/selector/selectors";
 import PostedApartment from "./postedApartment";
+import { Redirect } from "react-router-dom";
 
 class ApartmentManagementBody extends Component {
   constructor(props) {
@@ -203,53 +206,65 @@ class ApartmentManagementBody extends Component {
     };
   }
   render() {
-    var listApartment = [];
-    const { listTitles } = this.state;
-    const [state] = listTitles.filter((title) => title.isChosen === true);
-    switch (state.name) {
-      case "Phòng đã đăng":
-        listApartment = this.state.listPostedApartment;
-        break;
-      case "Phòng chờ phê duyệt":
-        listApartment = this.state.listPendingApartment;
-        break;
-      case "Phòng đã cho thuê":
-        listApartment = this.state.listRentedApartment;
-        break;
-      case "Phòng đã hết hạn":
-        listApartment = this.state.listExpiredApartment;
-        break;
-      default:
-        break;
-    }
-    return (
-      <div className="apartment-management-main-body">
-        <div className="apartment-management-body">
-          <div className="list-posted-apartment">
-            <div className="title-list">
-              {listTitles.map((title, index) => (
-                <div
-                  className="title-list-item"
-                  key={index}
-                  onClick={this.onClick(title)}
-                  style={{
-                    borderBottom: title.isChosen ? "2px solid #4694DC" : "none",
-                  }}
-                >
-                  <span>{title.name}</span>
-                </div>
-              ))}
-            </div>
-            <div className="listed-posted-apartment">
-              {listApartment.map((apartment, index) => (
-                <PostedApartment key={index} apartment={apartment} />
-              ))}
+    const { privilege } = this.props;
+    console.log(privilege);
+    if (privilege === "user") return <Redirect to="/" />;
+    else {
+      var listApartment = [];
+      const { listTitles } = this.state;
+      const [state] = listTitles.filter((title) => title.isChosen === true);
+      switch (state.name) {
+        case "Phòng đã đăng":
+          listApartment = this.state.listPostedApartment;
+          break;
+        case "Phòng chờ phê duyệt":
+          listApartment = this.state.listPendingApartment;
+          break;
+        case "Phòng đã cho thuê":
+          listApartment = this.state.listRentedApartment;
+          break;
+        case "Phòng đã hết hạn":
+          listApartment = this.state.listExpiredApartment;
+          break;
+        default:
+          break;
+      }
+      return (
+        <div className="apartment-management-main-body">
+          <div className="apartment-management-body">
+            <div className="list-posted-apartment">
+              <div className="title-list">
+                {listTitles.map((title, index) => (
+                  <div
+                    className="title-list-item"
+                    key={index}
+                    onClick={this.onClick(title)}
+                    style={{
+                      borderBottom: title.isChosen
+                        ? "2px solid #4694DC"
+                        : "none",
+                    }}
+                  >
+                    <span>{title.name}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="listed-posted-apartment">
+                {listApartment.map((apartment, index) => (
+                  <PostedApartment key={index} apartment={apartment} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
-export default ApartmentManagementBody;
+export default connect(
+  (state) => ({
+    privilege: getPrivilege(state),
+  }),
+  null
+)(ApartmentManagementBody);

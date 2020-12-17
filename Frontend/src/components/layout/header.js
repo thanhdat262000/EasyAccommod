@@ -6,7 +6,6 @@ import Noti from "../../image/bell.svg";
 import DropDownMenu from "./dropDownMenu";
 import { connect } from "react-redux";
 import { getLoginState } from "../../redux/selector/selectors";
-import { rootReducer } from "../../redux/reducer";
 
 class Header extends React.Component {
   onLoginClick(e) {

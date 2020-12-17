@@ -11,7 +11,6 @@ class ApartmentFavoriteButton extends Component {
   handleClick = (e) => {
     const { params } = this.props;
     favorite(params).then((data) => {
-      console.log(data);
       this.setState({
         isFavorite: data.isFavorite,
       });
