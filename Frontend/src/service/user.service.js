@@ -35,3 +35,11 @@ export const comment = async (id, comment) => {
   });
   return response.status;
 };
+export const getAllFavorite = async () => {
+  const response = axios({
+    url: url + "favorite",
+    method: "get",
+    headers: authHeader(),
+  });
+  return (await response).data;
+};

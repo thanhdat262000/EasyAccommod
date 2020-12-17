@@ -1,11 +1,18 @@
 .favorite-apartment {
+  cursor: pointer;
   height: 100px;
   width: 100%;
+  margin: 15px 0px;
+}
+.favorite-apartment > a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 15px 0px;
 }
 .favorite-apartment .favorite-apartment-image {
   height: 100%;

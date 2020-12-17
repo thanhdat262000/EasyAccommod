@@ -5,7 +5,7 @@ import "../../css/dropDownMenu.css";
 import { logout } from "../../service/auth.service";
 import { connect } from "react-redux";
 import { logoutAction } from "../../redux/actions/logout.action";
-import { getPrivilage, getUsserName } from "../../redux/selector/selectors";
+import { getPrivilege, getUsserName } from "../../redux/selector/selectors";
 
 class DropDownMenu extends Component {
   constructor(props) {
@@ -19,8 +19,12 @@ class DropDownMenu extends Component {
         { id: "logout", name: "Đăng xuất" },
       ],
       listOptionsOwner: [
-        { id: "apartment-management", name: "Quản lí phòng trọ" },
-        { id: "apartment-post", name: "Đăng tin" },
+        {
+          id: "apartment-management",
+          name: "Quản lí phòng trọ",
+          link: "/apartment-management",
+        },
+        { id: "apartment-post", name: "Đăng tin", link: "/apartment-post" },
         { id: "message", name: "Tin nhắn" },
         { id: "logout", name: "Đăng xuất" },
       ],
@@ -88,7 +92,7 @@ class DropDownMenu extends Component {
 export default connect(
   (state) => ({
     userName: getUsserName(state),
-    privilege: getPrivilage(state),
+    privilege: getPrivilege(state),
   }),
   { logoutAction }
 )(DropDownMenu);
