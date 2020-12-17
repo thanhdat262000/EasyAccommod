@@ -2,7 +2,7 @@ const e = require("express");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
-const connection = require("../db");
+const connection = require("../../db");
 
 module.exports.index = async (req, res) => {
   const {
@@ -25,6 +25,10 @@ module.exports.renderId = async (req, res) => {
     (err, decoded) => {
       try {
         if (err) throw err;
+        console.log(decoded)
+        if(decoded.data.id.length === 0){
+          res.sendStatus(400);
+        }
         else {
           let idAccount = decoded.data.id;
           const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*
@@ -64,6 +68,7 @@ module.exports.renderId = async (req, res) => {
     }
   );
 };
+
 
 module.exports.favorite = async (req, res) => {
   const apartment_id = req.params.id;

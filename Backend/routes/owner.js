@@ -1,6 +1,6 @@
 const express = require('express');
 
-const ownerController = require('../controllers/ownerController');
+const ownerController = require('../controllers/owner/ownerController');
 const { authUser, authRole } = require('../middlewares/authMiddleWare');
 
 const { ROLE } = require('../role');

@@ -1,4 +1,4 @@
-const connection = require('../db');
+const connection = require('../../db');
 
 // Send all apartments
 module.exports.index = async(req, res) => {

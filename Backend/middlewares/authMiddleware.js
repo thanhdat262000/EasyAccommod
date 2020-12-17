@@ -13,19 +13,24 @@ module.exports.authUser = async(req, res, next) => {
 module.exports.authRole = (role) => {
     return async(req, res, next) => {
         jwt.verify( req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
-            if(err) console.log(err)
-            else {
-                console.log(decoded);
-                let roleDecode = decoded.data.privilege;
-                console.log(roleDecode);
-                if(role !== roleDecode){
-                    res.status(401);
-                    res.send("Not Allowed");
+            try{
+                if(err) throw err;
+                else {
+                    console.log(decoded);
+                    let roleDecode = decoded.data.privilege;
+                    console.log(roleDecode);
+                    if(role !== roleDecode){
+                        res.status(401);
+                        res.send("Not Allowed");
+                    }
+                    else{
+                        req.id = decoded.data.id;
+                        next();
+                    }
                 }
-                else{
-                    req.id = decoded.data.id;
-                    next();
-                }
+            }catch(err){
+                console.log(err);
+                res.sendStatus(401)
             }
         })
     }
