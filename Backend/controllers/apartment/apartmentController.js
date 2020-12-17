@@ -4,18 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const connection = require("../../db");
 
-module.exports.index = async (req, res) => {
-  const {
-    city_id,
-    district_id,
-    apartment_type,
-    rent_min,
-    rent_max,
-    square_min,
-    square_max,
-  } = req.query;
-  res.send("Pending search apartment");
-};
 
 module.exports.renderId = async (req, res) => {
   const id = req.params.id;

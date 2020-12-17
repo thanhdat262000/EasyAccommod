@@ -5,9 +5,6 @@ const { authUser, authRole } = require('../middlewares/authMiddleware');
 
 const apartmentRouter = express.Router();
 
-
-apartmentRouter.get('/', apartmentController.index)
-
 apartmentRouter.get('/:id', apartmentController.renderId)
 
 apartmentRouter.post('/:id/favorite', authUser, authRole(ROLE.USER), apartmentController.favorite)
