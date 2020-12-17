@@ -100,7 +100,7 @@ module.exports.favorite = async (req, res) => {
                 (err, results, fields) => {
                   try {
                     if (err) throw err;
-                    res.sendStatus(200);
+                    res.json({ isFavorite: true });
                   } catch (err) {
                     res.status(400);
                     res.send(err);
@@ -118,7 +118,9 @@ module.exports.favorite = async (req, res) => {
                 (err, results, fields) => {
                   try {
                     if (err) throw err;
-                    res.sendStatus(200);
+                    res.json({
+                      isFavorite: false,
+                    });
                   } catch (err) {
                     res.status(400);
                     res.send(err);
