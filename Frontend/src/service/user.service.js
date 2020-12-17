@@ -24,5 +24,14 @@ export const favorite = async (id) => {
     method: "post",
     headers: authHeader(),
   });
+  return response.data;
+};
+export const comment = async (id, comment) => {
+  const response = await axios({
+    url: url2 + id + "/comment",
+    data: comment,
+    method: "post",
+    headers: authHeader(),
+  });
   return response.status;
 };

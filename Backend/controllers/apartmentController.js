@@ -115,12 +115,11 @@ module.exports.favorite = async (req, res) => {
               connection.query(
                 changeLike,
                 [!results[0].status, apartment_id, idDecode],
-                (err, results, fields) => {
+                (err, result, fields) => {
                   try {
                     if (err) throw err;
-                    res.json({
-                      isFavorite: false,
-                    });
+                    const data = { isFavorite: results[0].status === 1 };
+                    res.json(data);
                   } catch (err) {
                     res.status(400);
                     res.send(err);
