@@ -17,14 +17,14 @@ function App() {
       <div className="App">
         <Header />
         <Switch>
-          <Route path="/apartment-post">
+          <Route path="/apartment-post" exact>
             <ApartmentPostBody />
           </Route>
-          <Route path="/apartment/:id" component={ApartmentDetails} />
+          <Route path="/apartment/:id" exact component={ApartmentDetails} />
           <Route path="/apartment-management">
             <ApartmentManagementBody />
           </Route>
-          <Route path="/favorite">
+          <Route path="/favorite" exact>
             <FavoriteApartmentBody />
           </Route>
           <Route path="/" exact>

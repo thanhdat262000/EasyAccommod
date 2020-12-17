@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import ListApartmentPostProperty from "./listApartmentPostProperty";
 import "../../../css/screens/apartmentPost/apartmentPostBody.css";
 import ApartmentPostImage from "./apartmentPostImage";
 import ListApartmentPostRenter from "./listApartmentPostRenter";
 import ApartmentPostCheckDuplicate from "./apartmentPostCheckDuplicate";
 import ApartmentPostExpiration from "./apartmentPostExpiration";
+import { connect } from "react-redux";
+import { getPrivilege } from "../../../redux/selector/selectors";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -125,6 +127,8 @@ class ApartmentPostBody extends Component {
     }
   };
   render() {
+    const { privilege } = this.props;
+    if (privilege === "user") return <Redirect to="/" />;
     let apartmentPostBody;
     const { listTitles } = this.state;
     const [state] = listTitles.filter((title) => title.isChosen === true);
@@ -198,4 +202,9 @@ class ApartmentPostBody extends Component {
   }
 }
 
-export default withRouter(ApartmentPostBody);
+export default connect(
+  (state) => ({
+    privilege: getPrivilege(state),
+  }),
+  null
+)(withRouter(ApartmentPostBody));
