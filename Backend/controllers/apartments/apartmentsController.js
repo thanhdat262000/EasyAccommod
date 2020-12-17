@@ -26,7 +26,7 @@ module.exports.getAllFavorite = async(req, res) => {
             else {
                 console.log(decoded.data);
                 let userId = decoded.data.id;
-                const sql = `SELECT apartment_detail.price, apartment_detail.roomDescription, apartment_detail.addressDescription
+                const sql = `SELECT apartment_detail.price, apartment_detail.roomDescription, apartment_detail.addressDescription, (SELECT image.url FROM image WHERE image.apartment_id = apartment.apartment_id LIMIT 1) AS image_url
                 FROM favorite
                 JOIN apartment ON  apartment.apartment_id = favorite.apartment_id
                 JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id
