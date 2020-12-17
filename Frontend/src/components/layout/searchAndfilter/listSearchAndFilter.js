@@ -45,13 +45,6 @@ class ListSearchAndFilter extends Component {
           unit: "m2",
           name: "rangeSize",
         },
-        {
-          type: "range",
-          criteria: "Số phòng ngủ",
-          unit: "",
-          name: "rangeBedRoom",
-        },
-        { type: "checkbox", criteria: "Nội thất", property: "facility" },
       ],
     };
   }

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const connection = require("../../db");
 
-
 module.exports.renderId = async (req, res) => {
   const id = req.params.id;
   const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*
@@ -14,16 +13,15 @@ module.exports.renderId = async (req, res) => {
                     JOIN city ON apartment.city_id = city.city_id
                     JOIN district ON district.city_id = city.city_id
                     WHERE apartment.apartment_id = ?`;
-  try{
-    connection.query(sql,[id], async(err, results, fields) => {
-      if(err) throw err;
-      res.json(results);
-    })
-  }catch(err){
+  try {
+    connection.query(sql, [id], async (err, results, fields) => {
+      if (err) throw err;
+      res.json(results[0]);
+    });
+  } catch (err) {
     res.sendStatus(400);
   }
 };
-
 
 module.exports.favorite = async (req, res) => {
   const apartment_id = req.params.id;
