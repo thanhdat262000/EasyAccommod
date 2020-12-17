@@ -25,15 +25,6 @@ class ApartmentDetails extends Component {
       });
     });
   }
-  onFavorite = () => {
-    const {
-      match: { params },
-    } = this.props;
-    favorite(params.id).then((status) => {
-      if (status === 200) console.log(status);
-      else console.log(status);
-    });
-  };
   render() {
     const { apartmentInfo } = this.state;
     console.log(apartmentInfo);
@@ -49,11 +40,8 @@ class ApartmentDetails extends Component {
             <div className="main-layout-body-advancedInfo">
               {" "}
               <ApartmentMap />
-              <ApartmentFavoriteButton
-                onClick={this.onFavorite}
-                isFavorite={apartmentInfo.favorite}
-              />
-              <ApartmentRateAndComment />
+              <ApartmentFavoriteButton params={this.props.match.params.id} />
+              <ApartmentRateAndComment params={this.props.match.params.id} />
             </div>
           </div>
         </div>
