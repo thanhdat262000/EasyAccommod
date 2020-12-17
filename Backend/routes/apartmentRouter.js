@@ -1,7 +1,6 @@
 const express = require('express');
-const { ROLE } = require('../role');
-
 const apartmentController = require('../controllers/apartment/apartmentController');
+const { ROLE } = require('../role');
 const { authUser, authRole } = require('../middlewares/authMiddleware');
 
 const apartmentRouter = express.Router();
