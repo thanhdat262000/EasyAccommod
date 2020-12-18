@@ -208,7 +208,7 @@ class ApartmentManagementBody extends Component {
   render() {
     const { privilege } = this.props;
     console.log(privilege);
-    if (privilege === "user") return <Redirect to="/" />;
+    if (privilege === "user" || !privilege) return <Redirect to="/" />;
     else {
       var listApartment = [];
       const { listTitles } = this.state;

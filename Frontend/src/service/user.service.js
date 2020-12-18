@@ -43,3 +43,11 @@ export const getAllFavorite = async () => {
   });
   return (await response).data;
 };
+export const search = async (query) => {
+  const response = await axios({
+    url: url,
+    method: "get",
+    params: query,
+  });
+  return response.data;
+};

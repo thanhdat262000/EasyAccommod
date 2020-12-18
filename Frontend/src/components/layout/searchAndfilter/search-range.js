@@ -16,15 +16,15 @@ class SearchRange extends Component {
         <div className="range">
           <input
             type="text"
-            name={`min-${name}`}
-            id={`min-${name}`}
+            name={`${name}_min`}
+            id={`${name}_min`}
             placeholder="Min..."
           ></input>
           <span>-</span>
           <input
             type="text"
-            name={`max-${name}`}
-            id={`max-${name}`}
+            name={`${name}_max`}
+            id={`${name}_max`}
             placeholder="Max..."
           ></input>
           <label>{unit}</label>
