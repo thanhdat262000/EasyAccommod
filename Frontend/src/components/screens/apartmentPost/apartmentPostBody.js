@@ -128,7 +128,7 @@ class ApartmentPostBody extends Component {
   };
   render() {
     const { privilege } = this.props;
-    if (privilege === "user") return <Redirect to="/" />;
+    if (privilege === "user" || !privilege) return <Redirect to="/" />;
     let apartmentPostBody;
     const { listTitles } = this.state;
     const [state] = listTitles.filter((title) => title.isChosen === true);
