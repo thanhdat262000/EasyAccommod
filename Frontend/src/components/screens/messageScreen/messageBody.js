@@ -3,6 +3,9 @@ import ListSearchAndFilter from "../../layout/searchAndfilter/listSearchAndFilte
 import ListReceivedMessages from "./listReceivedMessages";
 import "../../../css/screens/messageScreen/messageBody.css";
 import ListSentMessages from "./listSentMessages";
+import { connect } from "react-redux";
+import { getPrivilege } from "../../../redux/selector/selectors";
+import { Redirect } from "react-router-dom";
 
 class MessageBody extends Component {
   constructor(props) {
@@ -30,6 +33,8 @@ class MessageBody extends Component {
     };
   }
   render() {
+    const { privilege } = this.props;
+    if (!privilege) return <Redirect to="/" />;
     const { listTitles } = this.state;
     const [title] = this.state.listTitles.filter(
       (title) => title.isChosen === true
@@ -67,4 +72,6 @@ class MessageBody extends Component {
   }
 }
 
-export default MessageBody;
+export default connect((state) => {
+  privilege: getPrivilege(state);
+}, null)(MessageBody);

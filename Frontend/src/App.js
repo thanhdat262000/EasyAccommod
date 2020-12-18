@@ -5,6 +5,7 @@ import Footer from "./components/layout/footer";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import HomeBody from "./components/screens/home/homeBody";
+import SearchBody from "./components/screens/home/searchBody";
 import ApartmentDetails from "./components/screens/apartmentScreen/apartmentDetails";
 import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteApartmentBody";
 import MessageBody from "./components/screens/messageScreen/messageBody";
@@ -28,8 +29,8 @@ function App() {
           <Route path="/favorite" exact>
             <FavoriteApartmentBody />
           </Route>
-          <Route path="/" exact>
-            <HomeBody />
+          <Route path="/search" exact>
+            <SearchBody />
           </Route>
           <Route path="/messages" exact>
             <MessageBody />

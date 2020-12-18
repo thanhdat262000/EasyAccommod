@@ -13,7 +13,7 @@ class SearchSelection extends Component {
           <label for={name}>{criteria}</label>
         </div>
         <div className="selection">
-          <select name={`selection-${name}`} id={name}>
+          <select name={name} id={name}>
             {selections.map((selection, index) => (
               <option value={selection} key={index}>
                 {selection}

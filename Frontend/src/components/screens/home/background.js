@@ -10,8 +10,13 @@ export default class Background extends Component {
             <h2>Trang web thuê nhà hàng đầu Việt Nam</h2>
           </div>
           <div className="buttons">
-            <button id="post">Đăng tin</button>
-            <button id="search">Tìm kiếm</button>
+            <a href="/apartment-post">
+              <button id="post">Đăng tin</button>
+            </a>
+            <a href="/search">
+              {" "}
+              <button id="search">Tìm kiếm</button>
+            </a>
           </div>
         </div>
       </div>
