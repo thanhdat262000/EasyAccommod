@@ -10,6 +10,7 @@ import FavoriteApartmentBody from "./components/screens/favoriteScreen/favoriteA
 import MessageBody from "./components/screens/messageScreen/messageBody";
 import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
+import AdminBody from "./components/screens/adminScreen/adminbody";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/messages" exact>
             <MessageBody />
+          </Route>
+          <Route path="/admin" exact>
+            <AdminBody />
           </Route>
         </Switch>
 
