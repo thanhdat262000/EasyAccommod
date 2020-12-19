@@ -16,4 +16,8 @@ ownerRouter.post('/post', ownerController.postApartment)
 
 ownerRouter.put('/:id', ownerController.putEditApartment)
 
+ownerRouter.put('/:id/rented', ownerController.putChangeRented);
+
+ownerRouter.put('/:id/cancel', ownerController.putChangeCancel);
+
 module.exports = ownerRouter;
