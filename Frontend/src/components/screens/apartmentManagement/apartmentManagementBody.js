@@ -9,7 +9,7 @@ import {
   getExpiredApartments,
   getPendingApartments,
   getRentedApartments,
-} from "../../../service/user.service";
+} from "../../../service/owner.service";
 
 class ApartmentManagementBody extends Component {
   constructor(props) {

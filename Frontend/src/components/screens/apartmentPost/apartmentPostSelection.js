@@ -9,7 +9,7 @@ class AparmentPostSelection extends Component {
       <div className="post-apartment-selection">
         <label id="post-apartment-selection-label">{criteria}</label>
         <select
-          name={`post-apartment-select-${name}`}
+          name={`${name}`}
           onChange={(e) => {
             console.log(e.target.value);
           }}
