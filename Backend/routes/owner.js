@@ -7,8 +7,12 @@ const { ROLE } = require('../role');
 
 const ownerRouter = express.Router();
 
-ownerRouter.get('/', authUser, authRole(ROLE.OWNER),ownerController.index)
+ownerRouter.get('/apartments/pending', authUser, authRole(ROLE.OWNER), ownerController.getAllPending)
 
-ownerRouter.get('/apartments/queue', authUser, authRole(ROLE.OWNER),ownerController.apartmentsQueue)
+ownerRouter.get('/apartments/approved', authUser, authRole(ROLE.OWNER), ownerController.getAllApproved)
+
+ownerRouter.get('/apartments/rented', authUser, authRole(ROLE.OWNER), ownerController.getAllRented)
+
+ownerRouter.get('/apartments/expired', authUser, authRole(ROLE.OWNER), ownerController.getAllExpired)
 
 module.exports = ownerRouter;
