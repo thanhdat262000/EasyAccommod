@@ -38,6 +38,9 @@ function App() {
           <Route path="/admin" exact>
             <AdminBody />
           </Route>
+          <Route path="/" exact>
+            <HomeBody />
+          </Route>
         </Switch>
 
         <Login />

@@ -3,6 +3,7 @@ import ApartmentPostField from "./apartmentPostField";
 import AparmentPostSelection from "./apartmentPostSelection";
 import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
 import InputCheckbox from "../../loginDetails/inputCheckbox";
+import ApartmentMap from "../apartmentScreen/apartmentMap";
 
 class ListApartmentPostProperty extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class ListApartmentPostProperty extends Component {
       listApartmentPostProperty: [
         {
           criteria: "Loại phòng",
-          selections: ["Căn hộ", "Phòng trọ"],
+          selections: ["Căn hộ mini", "Căn hộ đầy đủ", "Phòng trọ", "Nhà dân"],
           type: "selection",
           name: "roomType",
         },
@@ -47,20 +48,19 @@ class ListApartmentPostProperty extends Component {
           name: "size",
         },
         {
-          criteria: "Số phòng ngủ",
-          selections: [1, 2, 3],
-          type: "selection",
-          name: "bedRoom",
-        },
-        {
           criteria: "Phòng tắm",
-          selections: ["Không", "Riêng + nóng lạnh", "Riêng", "Chung"],
+          selections: [
+            "Có nóng lạnh, khép kín",
+            "Không có nóng lạnh, khép kín",
+            "Có nóng lạnh, không khép kín",
+            "Không có nóng lạnh, không khép kín",
+          ],
           type: "selection",
           name: "bathRoom",
         },
         {
           criteria: "Phòng bếp",
-          selections: ["Có", "Không"],
+          selections: ["Không nấu ăn", "Khu bếp chung", "Khu bếp riêng"],
           type: "selection",
           name: "kitchen",
         },
@@ -75,22 +75,20 @@ class ListApartmentPostProperty extends Component {
           type: "checkbox",
         },
         {
+          criteria: "Hút thuốc",
+          property: "smoke",
+          type: "checkbox",
+        },
+        {
           criteria: "Điện nước",
-          selections: ["Giá dân", "Giá chung"],
+          selections: ["Giá dân", "Giá thuê"],
           type: "selection",
           name: "electric",
         },
         {
-          criteria: "Đơn vị",
-          selections: ["VNĐ", "USD"],
-          type: "selection",
-          name: "unit",
-        },
-
-        {
           criteria: "Tiền thuê",
           field: "10",
-          unit: "triệu/tháng",
+          unit: "VNĐ/tháng",
           type: "field",
           name: "rentPrice",
         },
@@ -128,6 +126,7 @@ class ListApartmentPostProperty extends Component {
             })}
           </div>
           <div className="list-apartment-post-property-form-section-2">
+            <ApartmentMap width="100%" paddingTop="60%" marginTop="1rem" />
             {listApartmentPostProperty.slice(12).map((property, index) => {
               if (property.type === "selection")
                 return (

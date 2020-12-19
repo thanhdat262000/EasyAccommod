@@ -3,7 +3,6 @@ import { Redirect, withRouter } from "react-router-dom";
 import ListApartmentPostProperty from "./listApartmentPostProperty";
 import "../../../css/screens/apartmentPost/apartmentPostBody.css";
 import ApartmentPostImage from "./apartmentPostImage";
-import ListApartmentPostRenter from "./listApartmentPostRenter";
 import ApartmentPostCheckDuplicate from "./apartmentPostCheckDuplicate";
 import ApartmentPostExpiration from "./apartmentPostExpiration";
 import { connect } from "react-redux";
@@ -24,11 +23,7 @@ class ApartmentPostBody extends Component {
           description: "Tải ảnh và quản lý ảnh",
           isChosen: false,
         },
-        {
-          name: "Người thuê",
-          description: "Nhập dữ liệu người thuê",
-          isChosen: false,
-        },
+
         {
           name: "Kiểm tra trùng lặp",
           description: "Kiểm tra đồng thời",
@@ -47,7 +42,7 @@ class ApartmentPostBody extends Component {
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
     console.log(index);
-    if (index === 4) this.props.history.push("/");
+    if (index === 3) this.props.history.push("/");
     this.setState({
       listTitles: [
         ...listTitles.slice(0, index),
@@ -79,7 +74,6 @@ class ApartmentPostBody extends Component {
     switch (state.name) {
       case "Nhập dữ liệu phòng":
       case "Tải lên ảnh":
-      case "Người thuê":
       case "Kiểm tra trùng lặp":
         return (
           <button
@@ -110,7 +104,6 @@ class ApartmentPostBody extends Component {
     );
     switch (state.name) {
       case "Tải lên ảnh":
-      case "Người thuê":
       case "Kiểm tra trùng lặp":
       case "Thời gian đăng bài":
         return (
@@ -138,9 +131,6 @@ class ApartmentPostBody extends Component {
         break;
       case "Tải lên ảnh":
         apartmentPostBody = <ApartmentPostImage />;
-        break;
-      case "Người thuê":
-        apartmentPostBody = <ListApartmentPostRenter />;
         break;
       case "Kiểm tra trùng lặp":
         apartmentPostBody = <ApartmentPostCheckDuplicate />;
@@ -187,7 +177,11 @@ class ApartmentPostBody extends Component {
               </div>
             ))}
           </div>
-          <form name="apartment-post-form">
+          <form
+            name="apartment-post-form"
+            id="apartment-post-form"
+            encType="multipart/form"
+          >
             {" "}
             {apartmentPostBody}
             <div className="apartment-post-form-buttons">
