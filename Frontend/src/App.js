@@ -12,6 +12,7 @@ import MessageBody from "./components/screens/messageScreen/messageBody";
 import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
 import AdminBody from "./components/screens/adminScreen/adminbody";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 function App() {
   return (
@@ -45,7 +46,14 @@ function App() {
 
         <Login />
         <Signup />
+
         <Footer />
+      </div>
+      <div className="messengerBox">
+        <MessengerCustomerChat
+          pageId="100489201969961"
+          appId="300698198025899"
+        />
       </div>
     </Router>
   );
