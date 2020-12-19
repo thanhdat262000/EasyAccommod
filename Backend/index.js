@@ -10,6 +10,8 @@ const signinRouter = require("./routes/signin");
 const ownerRouter = require("./routes/owner");
 const registerRouter = require("./routes/register");
 const adminRouter = require("./routes/admin");
+const { authUser, authRole } = require("./middlewares/authMiddleWare");
+const { ROLE } = require("./role");
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
 
@@ -28,7 +30,7 @@ app.use("/apartment", apartmentRouter);
 app.use("/apartments", apartmentsRouter);
 
 // Owner Router
-app.use("/owner", ownerRouter);
+app.use("/owner/apartments",authUser, authRole(ROLE.OWNER), ownerRouter);
 
 // Admin Router
 app.use('/admin', adminRouter);
