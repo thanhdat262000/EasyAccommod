@@ -12,4 +12,6 @@ ownerRouter.get('/rented', ownerController.getAllRented)
 
 ownerRouter.get('/expired', ownerController.getAllExpired)
 
+ownerRouter.post('/post', ownerController.postApartment)
+
 module.exports = ownerRouter;
