@@ -7,7 +7,7 @@ class PostedApartment extends Component {
     const { apartment } = this.props;
     let buttons;
     switch (apartment.status) {
-      case "approved":
+      case "Đã được duyệt":
         buttons = (
           <div className="posted-apartment-action">
             <button id="rented">Đã cho thuê</button>
@@ -15,7 +15,7 @@ class PostedApartment extends Component {
           </div>
         );
         break;
-      case "pending":
+      case "Chưa được duyệt":
         buttons = (
           <div className="posted-apartment-action">
             <button id="edit">Chỉnh sửa</button>
@@ -23,14 +23,14 @@ class PostedApartment extends Component {
           </div>
         );
         break;
-      case "rented":
+      case "Đã thuê":
         buttons = (
           <div className="posted-apartment-action">
             <button id="delete">Xóa</button>
           </div>
         );
         break;
-      case "expired":
+      case "Đã hết hạn":
         buttons = (
           <div className="posted-apartment-action">
             <button id="delay-expiration">Gia hạn thêm</button>
@@ -51,7 +51,7 @@ class PostedApartment extends Component {
             />
             <div className="posted-apartment-main-info posted-apartment-section">
               <span className="posted-apartment-main-info-address">
-                {apartment.address}
+                {apartment.city}, {apartment.district}
               </span>
               <span className="posted-apartment-main-info-price">
                 {apartment.price} VNĐ/Tháng
@@ -67,7 +67,7 @@ class PostedApartment extends Component {
           <div className="posted-apartment-more-detail posted-apartment-section">
             <div className="posted-apartment-more-detail-size">
               <span>Kích thước: </span>
-              <span id="statistic">{apartment.size}m2</span>
+              <span id="statistic">{apartment.square}m2</span>
             </div>
           </div>
           <div className="posted-apartment-expiration">

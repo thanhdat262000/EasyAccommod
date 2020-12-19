@@ -2,6 +2,7 @@ import axios from "axios";
 import { authHeader } from "./auth.header";
 const url = "http://localhost:8000/apartments/";
 const url2 = "http://localhost:8000/apartment/";
+const ownerUrl = "http://localhost:8000/owner/apartments/";
 export const getAllApartments = async () => {
   const response = await axios({
     url: url,
@@ -48,6 +49,38 @@ export const search = async (query) => {
     url: url,
     method: "get",
     params: query,
+  });
+  return response.data;
+};
+export const getApprovedApartments = async () => {
+  const response = await axios({
+    url: ownerUrl + "approved",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};
+export const getPendingApartments = async () => {
+  const response = await axios({
+    url: ownerUrl + "pending",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};
+export const getRentedApartments = async () => {
+  const response = await axios({
+    url: ownerUrl + "rented",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};
+export const getExpiredApartments = async () => {
+  const response = await axios({
+    url: ownerUrl + "expired",
+    method: "get",
+    headers: authHeader(),
   });
   return response.data;
 };

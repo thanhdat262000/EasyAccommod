@@ -4,6 +4,7 @@ import AparmentPostSelection from "./apartmentPostSelection";
 import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
 import InputCheckbox from "../../loginDetails/inputCheckbox";
 import ApartmentMap from "../apartmentScreen/apartmentMap";
+import ApartmentPostCheckbox from "./apartmentPostCheckbox";
 
 class ListApartmentPostProperty extends Component {
   constructor(props) {
@@ -74,16 +75,22 @@ class ListApartmentPostProperty extends Component {
           property: "terrace",
           type: "checkbox",
         },
+
+        {
+          criteria: "Điện nước",
+          selections: ["Giá dân", "Giá thuê"],
+          type: "selection",
+          name: "electric",
+        },
         {
           criteria: "Hút thuốc",
           property: "smoke",
           type: "checkbox",
         },
         {
-          criteria: "Điện nước",
-          selections: ["Giá dân", "Giá thuê"],
-          type: "selection",
-          name: "electric",
+          criteria: "Thang máy",
+          property: "elevator",
+          type: "checkbox",
         },
         {
           criteria: "Tiền thuê",
@@ -107,7 +114,7 @@ class ListApartmentPostProperty extends Component {
       <div className="list-apartment-post-property">
         <div className="list-apartment-post-property-form-section">
           <div className="list-apartment-post-property-form-section-1">
-            {listApartmentPostProperty.slice(0, 12).map((property, index) => {
+            {listApartmentPostProperty.slice(0, 11).map((property, index) => {
               if (property.type === "selection")
                 return (
                   <AparmentPostSelection
@@ -122,12 +129,18 @@ class ListApartmentPostProperty extends Component {
                     key={index}
                   />
                 );
-              else return <InputCheckbox input={property} key={index} />;
+              else
+                return (
+                  <ApartmentPostCheckbox
+                    post_apartment_checkbox={property}
+                    key={index}
+                  />
+                );
             })}
           </div>
           <div className="list-apartment-post-property-form-section-2">
             <ApartmentMap width="100%" paddingTop="60%" marginTop="1rem" />
-            {listApartmentPostProperty.slice(12).map((property, index) => {
+            {listApartmentPostProperty.slice(11).map((property, index) => {
               if (property.type === "selection")
                 return (
                   <AparmentPostSelection
@@ -135,10 +148,17 @@ class ListApartmentPostProperty extends Component {
                     key={index}
                   />
                 );
-              else
+              else if (property.type === "field")
                 return (
                   <ApartmentPostField
                     post_apartment_field={property}
+                    key={index}
+                  />
+                );
+              else
+                return (
+                  <ApartmentPostCheckbox
+                    post_apartment_checkbox={property}
                     key={index}
                   />
                 );

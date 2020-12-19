@@ -4,6 +4,12 @@ import "../../../css/screens/apartmentManagement/apartmentManagementBody.css";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import PostedApartment from "./postedApartment";
 import { Redirect } from "react-router-dom";
+import {
+  getApprovedApartments,
+  getExpiredApartments,
+  getPendingApartments,
+  getRentedApartments,
+} from "../../../service/user.service";
 
 class ApartmentManagementBody extends Component {
   constructor(props) {
@@ -150,6 +156,28 @@ class ApartmentManagementBody extends Component {
       ],
     };
     this.onClick = this.onClick.bind(this);
+  }
+  componentDidMount() {
+    getApprovedApartments().then((data) => {
+      this.setState({
+        listPostedApartment: data,
+      });
+    });
+    getPendingApartments().then((data) => {
+      this.setState({
+        listPendingApartment: data,
+      });
+    });
+    getRentedApartments().then((data) => {
+      this.setState({
+        listRentedApartment: data,
+      });
+    });
+    getExpiredApartments().then((data) => {
+      this.setState({
+        listExpiredApartment: data,
+      });
+    });
   }
   onClick(item) {
     return () => {

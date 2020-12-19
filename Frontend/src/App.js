@@ -19,7 +19,7 @@ function App() {
       <div className="App">
         <Header />
         <Switch>
-          <Route path="/apartment-post" exact>
+          <Route path="/apartment-post/" exact>
             <ApartmentPostBody />
           </Route>
           <Route path="/apartment/:id" exact component={ApartmentDetails} />
