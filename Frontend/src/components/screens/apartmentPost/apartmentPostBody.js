@@ -8,6 +8,7 @@ import ApartmentPostCheckDuplicate from "./apartmentPostCheckDuplicate";
 import ApartmentPostExpiration from "./apartmentPostExpiration";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
+import { postApartment } from "../../../service/owner.service";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -36,23 +37,39 @@ class ApartmentPostBody extends Component {
           isChosen: false,
         },
       ],
+      postData: {},
     };
   }
   OnNext = () => {
     let form = document.querySelector("#apartment-post-form");
     let data = getFormData(form);
-    const { listTitles } = this.state;
+    const { listTitles, postData } = this.state;
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
-    if (index === 3) this.props.history.push("/");
-    this.setState({
-      listTitles: [
-        ...listTitles.slice(0, index),
-        { ...title, isChosen: false },
-        { ...listTitles[index + 1], isChosen: true },
-        ...listTitles.slice(index + 2),
-      ],
-    });
+
+    this.setState(
+      {
+        listTitles: [
+          ...listTitles.slice(0, index),
+          { ...title, isChosen: false },
+          { ...listTitles[index + 1], isChosen: true },
+          ...listTitles.slice(index + 2),
+        ],
+        postData: { ...postData, ...data },
+      },
+      () => {
+        console.log(index);
+        if (index === 3) {
+          postApartment(this.state.postData).then((status) => {
+            if (status === 200) {
+              console.log(this.state.postData);
+              console.log(status);
+              this.props.history.push("/");
+            }
+          });
+        }
+      }
+    );
   };
   OnBack = () => {
     const { listTitles } = this.state;

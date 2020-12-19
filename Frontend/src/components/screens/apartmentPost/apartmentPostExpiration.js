@@ -11,7 +11,7 @@ class ApartmentPostExpiration extends Component {
       <div className="apartment-post-expiration">
         <div>
           <label>Thời hạn đăng</label>
-          <select name="apartment-post-expiration-duration">
+          <select name="numberDate">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -25,7 +25,7 @@ class ApartmentPostExpiration extends Component {
             <option>11</option>
             <option>12</option>
           </select>
-          <select name="apartment-post-expiration-term">
+          <select name="typeDate">
             <option>Tuần</option>
             <option>Tháng </option>
             <option>Năm</option>

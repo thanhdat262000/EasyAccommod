@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ApartmentPostField from "./apartmentPostField";
 import AparmentPostSelection from "./apartmentPostSelection";
 import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
-import InputCheckbox from "../../loginDetails/inputCheckbox";
 import ApartmentMap from "../apartmentScreen/apartmentMap";
 import ApartmentPostCheckbox from "./apartmentPostCheckbox";
 
@@ -15,7 +14,7 @@ class ListApartmentPostProperty extends Component {
           criteria: "Loại phòng",
           selections: ["Căn hộ mini", "Căn hộ đầy đủ", "Phòng trọ", "Nhà dân"],
           type: "selection",
-          name: "roomType",
+          name: "apartment_type",
         },
         {
           criteria: "Thành phố",
@@ -39,14 +38,14 @@ class ListApartmentPostProperty extends Component {
           criteria: "Địa chỉ chi tiết",
           field: "Địa chỉ",
           type: "field",
-          name: "detailAddress",
+          name: "addressDescription",
         },
         {
           criteria: "Kích thước",
           field: "20",
           unit: "m2",
           type: "field",
-          name: "size",
+          name: "square",
         },
         {
           criteria: "Phòng tắm",
@@ -57,22 +56,22 @@ class ListApartmentPostProperty extends Component {
             "Không có nóng lạnh, không khép kín",
           ],
           type: "selection",
-          name: "bathRoom",
+          name: "bathroom_type",
         },
         {
           criteria: "Phòng bếp",
           selections: ["Không nấu ăn", "Khu bếp chung", "Khu bếp riêng"],
           type: "selection",
-          name: "kitchen",
+          name: "kitchen_type",
         },
         {
           criteria: "Điều hòa",
-          property: "air-conditioning",
+          property: "hasAirConditioning",
           type: "checkbox",
         },
         {
           criteria: "Ban công",
-          property: "terrace",
+          property: "hasTerrace",
           type: "checkbox",
         },
 
@@ -80,16 +79,16 @@ class ListApartmentPostProperty extends Component {
           criteria: "Điện nước",
           selections: ["Giá dân", "Giá thuê"],
           type: "selection",
-          name: "electric",
+          name: "waterAndElecticity_bill_type",
         },
         {
           criteria: "Hút thuốc",
-          property: "smoke",
+          property: "smoker",
           type: "checkbox",
         },
         {
           criteria: "Thang máy",
-          property: "elevator",
+          property: "hasElevator",
           type: "checkbox",
         },
         {
@@ -97,7 +96,7 @@ class ListApartmentPostProperty extends Component {
           field: "10",
           unit: "VNĐ/tháng",
           type: "field",
-          name: "rentPrice",
+          name: "price",
         },
         {
           criteria: "Mô tả phòng",
