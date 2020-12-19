@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import getFormData from "get-form-data";
 import { Redirect, withRouter } from "react-router-dom";
 import ListApartmentPostProperty from "./listApartmentPostProperty";
 import "../../../css/screens/apartmentPost/apartmentPostBody.css";
@@ -38,10 +39,11 @@ class ApartmentPostBody extends Component {
     };
   }
   OnNext = () => {
+    let form = document.querySelector("#apartment-post-form");
+    let data = getFormData(form);
     const { listTitles } = this.state;
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
-    console.log(index);
     if (index === 3) this.props.history.push("/");
     this.setState({
       listTitles: [

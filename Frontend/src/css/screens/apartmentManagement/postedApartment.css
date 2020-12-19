@@ -21,6 +21,9 @@
   justify-content: space-around;
   flex-basis: 35%;
 }
+.posted-apartment .posted-apartment-main-info-address {
+  text-transform: uppercase;
+}
 .posted-apartment .posted-apartment-expiration {
   display: flex;
   flex-direction: row;

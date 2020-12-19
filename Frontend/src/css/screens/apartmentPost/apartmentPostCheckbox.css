@@ -1,0 +1,12 @@
+.post-apartment-checkbox {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 23%;
+}
+.post-apartment-checkbox label {
+  text-align: left;
+  flex-basis: 80%;
+}
