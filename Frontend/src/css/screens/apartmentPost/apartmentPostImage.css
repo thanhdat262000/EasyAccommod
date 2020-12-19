@@ -26,7 +26,25 @@ h4 {
   text-align: left;
 }
 .apartment-post-image .apartment-post-image-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
   width: 100%;
   height: 12rem;
   background-color: rgba(0, 0, 0, 0.25);
+}
+.apartment-post-image .apartment-post-image-review .image-review {
+  flex-basis: 19%;
+  height: 90%;
+  margin-left: 0.5rem;
+}
+.apartment-post-image .apartment-post-image-review .image-review-delete {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
 }

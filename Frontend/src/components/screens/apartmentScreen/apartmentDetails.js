@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../../css/screens/apartmentScreen/mainApartment.css";
-import { favorite, getApartment } from "../../../service/user.service";
+import { getApartment } from "../../../service/user.service";
 import ApartmentFavoriteButton from "./apartmentFavoriteButton";
 import ApartmentMap from "./apartmentMap";
 import ApartmentOwnerInfo from "./apartmentOwnerInfo";
@@ -39,7 +39,7 @@ class ApartmentDetails extends Component {
             </div>
             <div className="main-layout-body-advancedInfo">
               {" "}
-              <ApartmentMap />
+              <ApartmentMap width="100%" marginTop="20px" paddingTop="100%" />
               <ApartmentFavoriteButton params={this.props.match.params.id} />
               <ApartmentRateAndComment params={this.props.match.params.id} />
             </div>

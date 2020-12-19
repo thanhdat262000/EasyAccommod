@@ -72,6 +72,9 @@ class MessageBody extends Component {
   }
 }
 
-export default connect((state) => {
-  privilege: getPrivilege(state);
-}, null)(MessageBody);
+export default connect(
+  (state) => ({
+    privilege: getPrivilege(state),
+  }),
+  null
+)(MessageBody);
