@@ -14,4 +14,6 @@ ownerRouter.get('/expired', ownerController.getAllExpired)
 
 ownerRouter.post('/post', ownerController.postApartment)
 
+ownerRouter.put('/:id', ownerController.putEditApartment)
+
 module.exports = ownerRouter;
