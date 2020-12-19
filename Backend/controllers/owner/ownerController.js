@@ -57,6 +57,35 @@ module.exports.getAllExpired = async (req, res) => {
     })
 }
 
+module.exports.putChangeRented = async(req, res) => {
+    const sql = `UPDATE apartment 
+        SET apartment.status = "Đã thuê" 
+        WHERE apartment.apartment_id = ? AND apartment.account_id = ?`
+    try{
+        connection.query(sql, [req.params.id, req.id], async(err, results, fields) => {
+            if(err) throw err;
+            res.sendStatus(200);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+module.exports.putChangeCancel = async(req, res) => {
+    const sql = `UPDATE apartment 
+        SET apartment.status = "Đã hết hạn" 
+        WHERE apartment.apartment_id = ? AND apartment.account_id = ?`
+    try{
+        connection.query(sql, [req.params.id, req.id], async(err, results, fields) => {
+            if(err) throw err;
+            res.sendStatus(200);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+
 module.exports.postApartment = async(req, res) => {
     const { 
         apartment_type,
