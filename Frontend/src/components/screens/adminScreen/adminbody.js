@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import "../../../css/screens/adminScreen/adminBody.css";
+import MessengerCustomerChat from "react-messenger-customer-chat";
+import ListNotiMange from "./listNotiManage";
+import ListAccManage from "./listAccManage";
+import ListPostManage from "./listPostManage";
+import ChatComponent from "./chatComponent";
+import AnalysisComponent from "./analysisComponent";
+import chatComponent from "./chatComponent";
 
 class AdminBody extends Component {
   constructor(props) {
@@ -38,22 +45,40 @@ class AdminBody extends Component {
       <div className="admin-main-body">
         <div className="admin-body">
           <div className="title-list">
-              {listTitles.map((title, index) => (
-                <div
-                  className="title-list-item"
-                  key={index}
-                  onClick={this.onClick(title)}
-                  style={{
-                    borderBottom: title.isChosen ? "2px solid #4694DC" : "none",
-                  }}
-                >
-                  <span>{title.name}</span>
-                </div>
-              ))}
-            </div>
+            {listTitles.map((title, index) => (
+              <div
+                className="title-list-item"
+                key={index}
+                onClick={this.onClick(title)}
+                style={{
+                  borderBottom: title.isChosen ? "2px solid #4694DC" : "none",
+                }}
+              >
+                <span>{title.name}</span>
+              </div>
+            ))}
+          </div>
+          <div className="admin-content">
+            {title.name === "Thông báo" ? (
+              <ListNotiMange />
+            ) : title.name === "Quản lý tài khoản" ? (
+              <ListAccManage />
+            ) : title.name === "Quản lý bài đăng" ? (
+              <ListPostManage /> ? (
+                title.name === "Chat"
+              ) : (
+                <ChatComponent />
+              )
+            ) : (
+              <AnalysisComponent />
+            )}
+          </div>
         </div>
-    </div>
-      
+        <MessengerCustomerChat
+          pageId="100489201969961"
+          appId="300698198025899"
+        />
+      </div>
     );
   }
 }

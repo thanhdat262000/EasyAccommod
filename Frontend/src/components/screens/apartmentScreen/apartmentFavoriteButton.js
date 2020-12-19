@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../../../css/screens/apartmentScreen/apartmentFavoriteButton.css";
 import { ReactComponent as Favorite } from "../../../image/passion.svg";
 import { favorite } from "../../../service/user.service";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 class ApartmentFavoriteButton extends Component {
   constructor(props) {
