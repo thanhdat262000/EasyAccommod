@@ -9,4 +9,8 @@ const adminRouter = express.Router();
 
 adminRouter.get('/', authUser, authRole(ROLE.ADMIN),adminController.index)
 
+adminRouter.get('/allOwners', authUser, authRole(ROLE.ADMIN), adminController.getAllOwners);
+
+adminRouter.get('/apartments-posts', adminController.getAllApartmentPost);
+
 module.exports = adminRouter;
