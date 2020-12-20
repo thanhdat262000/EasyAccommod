@@ -37,4 +37,11 @@
   flex-basis: 20%;
   height: 100%;
   cursor: pointer;
+  padding: 5px;
+  vertical-align: bottom;
+}
+
+.admin-body .title-list .title-list-item .icon-title {
+  margin-right: 10px;
+  vertical-align: text-top;
 }

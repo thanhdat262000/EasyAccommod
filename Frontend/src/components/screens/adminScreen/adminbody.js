@@ -6,18 +6,22 @@ import ListAccManage from "./listAccManage";
 import ListPostManage from "./listPostManage";
 import ChatComponent from "./chatComponent";
 import AnalysisComponent from "./analysisComponent";
-import chatComponent from "./chatComponent";
+import FaceIcon from "@material-ui/icons/Face";
+import AllInboxIcon from "@material-ui/icons/AllInbox";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import ShowChartIcon from "@material-ui/icons/ShowChart";
 
 class AdminBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
       listTitles: [
-        { name: "Quản lý tài khoản", isChosen: true },
-        { name: "Quản lý bài đăng", isChosen: false },
-        { name: "Thông báo", isChosen: false },
-        { name: "Chat", isChosen: false },
-        { name: "Thống kê", isChosen: false },
+        { name: "Quản lý tài khoản", isChosen: true, icon: FaceIcon },
+        { name: "Quản lý bài đăng", isChosen: false, icon: AllInboxIcon },
+        { name: "Thông báo", isChosen: false, icon: NotificationsIcon },
+        { name: "Chat", isChosen: false, icon: ChatBubbleOutlineIcon },
+        { name: "Thống kê", isChosen: false, icon: ShowChartIcon },
       ],
     };
     this.onClick = this.onClick.bind(this);
@@ -51,10 +55,12 @@ class AdminBody extends Component {
                 key={index}
                 onClick={this.onClick(title)}
                 style={{
-                  borderBottom: title.isChosen ? "2px solid #4694DC" : "none",
+                  border: "10px 10px",
+                  borderBottom: title.isChosen ? "3px solid #4694DC" : "none",
                 }}
               >
-                <span>{title.name}</span>
+                <title.icon className="icon-title" />
+                <span className="name-title">{title.name}</span>
               </div>
             ))}
           </div>

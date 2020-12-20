@@ -20,7 +20,7 @@ class Header extends React.Component {
         <div id="logo">
           <a href="/" className="link">
             <img src={Building} width={90} height={90} alt="logo" />
-            <div>EasyAccommod</div>
+            <div>EasyAccommod </div>
           </a>
         </div>
         {this.props.isLogin ? (
