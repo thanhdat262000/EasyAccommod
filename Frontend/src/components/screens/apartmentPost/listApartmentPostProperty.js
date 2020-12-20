@@ -50,6 +50,13 @@ class ListApartmentPostProperty extends Component {
           name: "square",
         },
         {
+          criteria: "Tiền thuê",
+          field: "10",
+          unit: "VNĐ/tháng",
+          type: "field",
+          name: "price",
+        },
+        {
           criteria: "Phòng tắm",
           selections: [
             "Có nóng lạnh, khép kín",
@@ -93,13 +100,7 @@ class ListApartmentPostProperty extends Component {
           property: "hasElevator",
           type: "checkbox",
         },
-        {
-          criteria: "Tiền thuê",
-          field: "10",
-          unit: "VNĐ/tháng",
-          type: "field",
-          name: "price",
-        },
+
         {
           criteria: "Mô tả phòng",
           field: "Mô tả",
@@ -111,6 +112,7 @@ class ListApartmentPostProperty extends Component {
   }
   render() {
     const { listApartmentPostProperty } = this.state;
+    const { values, handleChange, errors, handleBlur, touched } = this.props;
     return (
       <div className="list-apartment-post-property">
         <div className="list-apartment-post-property-form-section">
@@ -128,6 +130,11 @@ class ListApartmentPostProperty extends Component {
                   <ApartmentPostField
                     post_apartment_field={property}
                     key={index}
+                    value={values[property.name]}
+                    handleChange={handleChange}
+                    error={errors[property.name]}
+                    handleBlur={handleBlur}
+                    touched={touched[property.name]}
                   />
                 );
               else

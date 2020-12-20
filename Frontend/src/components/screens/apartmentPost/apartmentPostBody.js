@@ -48,9 +48,8 @@ class ApartmentPostBody extends Component {
     const { listTitles, postData } = this.state;
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
-
-    this.setState(
-      {
+    if (index < 3)
+      this.setState({
         listTitles: [
           ...listTitles.slice(0, index),
           { ...title, isChosen: false },
@@ -58,20 +57,25 @@ class ApartmentPostBody extends Component {
           ...listTitles.slice(index + 2),
         ],
         postData: { ...postData, ...data },
-      },
-      () => {
-        console.log(index);
-        if (index === 3) {
-          postApartment(this.state.postData).then((status) => {
-            if (status === 200) {
-              console.log(this.state.postData);
-              console.log(status);
-              this.props.history.push("/");
-            }
-          });
+      });
+    else
+      this.setState(
+        {
+          postData: { ...postData, ...data },
+        },
+        () => {
+          console.log(index);
+          if (index === 3) {
+            postApartment(this.state.postData).then((status) => {
+              if (status === 200) {
+                console.log(this.state.postData);
+                console.log(status);
+                this.props.history.push("/");
+              }
+            });
+          }
         }
-      }
-    );
+      );
   };
   OnBack = () => {
     const { listTitles } = this.state;
@@ -149,7 +153,15 @@ class ApartmentPostBody extends Component {
     const [state] = listTitles.filter((title) => title.isChosen === true);
     switch (state.name) {
       case "Nhập dữ liệu phòng":
-        apartmentPostBody = <ListApartmentPostProperty />;
+        apartmentPostBody = (
+          <ListApartmentPostProperty
+            values={values}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            errors={errors}
+            touched={touched}
+          />
+        );
         break;
       case "Tải lên ảnh":
         apartmentPostBody = <ApartmentPostImage />;
@@ -208,8 +220,8 @@ class ApartmentPostBody extends Component {
             {apartmentPostBody}
             <div className="apartment-post-form-buttons">
               {" "}
-              {this.previousButton()}
               {this.nextButton()}
+              {this.previousButton()}
             </div>
           </form>
         </div>
