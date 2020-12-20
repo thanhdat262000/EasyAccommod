@@ -9,6 +9,8 @@ import ApartmentPostExpiration from "./apartmentPostExpiration";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import { postApartment } from "../../../service/owner.service";
+import { withFormik } from "formik";
+import * as Yup from "yup";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -141,6 +143,7 @@ class ApartmentPostBody extends Component {
   render() {
     const { privilege } = this.props;
     if (privilege === "user" || !privilege) return <Redirect to="/" />;
+    const { values, handleChange, errors, handleBlur, touched } = this.props;
     let apartmentPostBody;
     const { listTitles } = this.state;
     const [state] = listTitles.filter((title) => title.isChosen === true);
@@ -220,4 +223,25 @@ export default connect(
     privilege: getPrivilege(state),
   }),
   null
-)(withRouter(ApartmentPostBody));
+)(
+  withRouter(
+    withFormik({
+      mapPropsToValues() {
+        return {
+          addressDescription: "",
+          square: "",
+          price: "",
+        };
+      },
+      validationSchema: Yup.object().shape({
+        addressDescription: Yup.string().required("Hãy nhập địa chỉ"),
+        square: Yup.number()
+          .typeError("Nhập chưa đúng")
+          .required("Hãy nhập diện tích"),
+        price: Yup.number()
+          .typeError("Nhập chưa đúng")
+          .required("Hãy nhập giá"),
+      }),
+    })(ApartmentPostBody)
+  )
+);

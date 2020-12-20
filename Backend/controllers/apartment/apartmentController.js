@@ -6,7 +6,7 @@ const connection = require("../../db");
 
 module.exports.renderId = async (req, res) => {
   const id = req.params.id;
-  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*
+  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*, apartment.apartment_type, apartment.apartment_id
                     FROM apartment 
                     JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id 
                     JOIN account ON apartment.account_id = account.account_id 

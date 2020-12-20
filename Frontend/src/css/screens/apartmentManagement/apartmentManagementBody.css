@@ -21,3 +21,20 @@
 .apartment-management-body {
   width: 75%;
 }
+.apartment-management-body .list-posted-apartment .list-posted-apartment-empty {
+  width: 100%;
+  border-radius: 5px;
+  background-color: darkorange;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.apartment-management-body
+  .list-posted-apartment
+  .list-posted-apartment-empty
+  p {
+  text-align: center;
+  color: white;
+  margin-left: 1rem;
+}

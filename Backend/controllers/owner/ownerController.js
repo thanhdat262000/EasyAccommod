@@ -2,7 +2,7 @@ const connection = require("../../db");
 const { TIME } = require("../../time");
 
 module.exports.getAllPending = async (req, res) => {
-  const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
     JOIN city ON city.city_id = apartment.city_id
@@ -16,7 +16,7 @@ module.exports.getAllPending = async (req, res) => {
 };
 
 module.exports.getAllApproved = async (req, res) => {
-  const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
     JOIN city ON city.city_id = apartment.city_id
@@ -30,7 +30,7 @@ module.exports.getAllApproved = async (req, res) => {
 };
 
 module.exports.getAllRented = async (req, res) => {
-  const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
     JOIN city ON city.city_id = apartment.city_id
@@ -44,7 +44,7 @@ module.exports.getAllRented = async (req, res) => {
 };
 
 module.exports.getAllExpired = async (req, res) => {
-  const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
     JOIN city ON city.city_id = apartment.city_id

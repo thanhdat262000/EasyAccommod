@@ -26,14 +26,14 @@ export const favorite = async (id) => {
   });
   return response.data;
 };
-export const comment = async (id, comment) => {
+export const comment = async (id, rateAndComment) => {
   const response = await axios({
     url: url2 + id + "/comment",
-    data: comment,
+    data: rateAndComment,
     method: "post",
     headers: authHeader(),
   });
-  return response.status;
+  return response;
 };
 export const getAllFavorite = async () => {
   const response = axios({

@@ -11,21 +11,13 @@
 .list-apartment-post-property-form-section-2 {
   flex-basis: 49%;
 }
-.list-apartment-post-property
-  textarea[name="post-apartment-field-detailAddress"],
-textarea[name="post-apartment-field-roomDescription"] {
+.list-apartment-post-property textarea[name="addressDescription"],
+textarea[name="roomDescription"] {
   flex: 1;
   height: 4rem;
 }
-.list-apartment-post-property textarea[name="post-apartment-field-size"],
-textarea[name="post-apartment-field-rentPrice"] {
+.list-apartment-post-property textarea[name="square"],
+textarea[name="price"] {
   flex-basis: 15%;
   height: 1.5rem;
-}
-.list-apartment-post-property select[name="post-apartment-select-bathRoom"],
-select[name="post-apartment-select-bedRoom"],
-select[name="post-apartment-select-kitchen"],
-select[name="post-apartment-select-electric"],
-select[name="post-apartment-select-unit"] {
-  flex-basis: 30%;
 }

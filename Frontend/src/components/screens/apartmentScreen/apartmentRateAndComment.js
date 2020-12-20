@@ -11,26 +11,32 @@ class ApartmentRateAndComment extends Component {
     };
     this.onClick = this.onClick.bind(this);
   }
-  onClick(e) {
-    e.target.style.fillOpacity = "1";
-    let previousStar = e.target.currentNode.previousElementSibling;
-    console.log(previousStar);
-    previousStar.style.fillOpacity = "1";
-    while (previousStar) {
-      previousStar.style.fillOpacity = "1";
-      previousStar = previousStar.previousElementSibling;
-    }
+  onClick(index) {
+    this.setState({
+      listStars: this.state.listStars.map((star, i) => {
+        if (i <= index) return 1;
+        else return 0.3;
+      }),
+    });
   }
   onSubmit = () => {
     let form = document.querySelector("#apartment-rate-and-comment-form");
     let data = getFormData(form);
+    data.rate = this.state.listStars.filter((star) => {
+      return star === 1;
+    }).length;
     console.log(data);
     const { params } = this.props;
-    comment(params, data).then((status) => {
-      if (status === 200)
+    comment(params, data)
+      .then((response) => {
+        if (response.status === 200)
+          document.getElementById("comment-sent").innerHTML =
+            "Gửi bình luận thành công.";
+      })
+      .catch((error) => {
         document.getElementById("comment-sent").innerHTML =
-          "Gửi bình luận thành công.";
-    });
+          "Bạn không thể gửi bình luận";
+      });
   };
   onFocus = () => {
     document.getElementById("comment-sent").innerHTML = "";
@@ -50,7 +56,7 @@ class ApartmentRateAndComment extends Component {
                     height="25px"
                     fillOpacity={star}
                     key={index}
-                    onClick={this.onClick}
+                    onClick={() => this.onClick(index)}
                   />
                 );
               })}
