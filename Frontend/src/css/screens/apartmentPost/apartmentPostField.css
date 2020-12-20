@@ -5,6 +5,18 @@
   justify-content: flex-start;
   align-items: center;
 }
+.post-apartment-field > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.post-apartment-field > div > div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
 .post-apartment-field textarea {
   border-radius: 5px;
   border: 2px solid rgba(0, 0, 0, 0.5);

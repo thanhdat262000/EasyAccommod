@@ -4,6 +4,8 @@ import AparmentPostSelection from "./apartmentPostSelection";
 import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
 import ApartmentMap from "../apartmentScreen/apartmentMap";
 import ApartmentPostCheckbox from "./apartmentPostCheckbox";
+import * as Yup from "yup";
+import { withFormik } from "formik";
 
 class ListApartmentPostProperty extends Component {
   constructor(props) {

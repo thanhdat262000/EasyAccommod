@@ -27,7 +27,6 @@ class ApartmentDetails extends Component {
   }
   render() {
     const { apartmentInfo } = this.state;
-    console.log(apartmentInfo);
     return (
       <div className="main-apartment">
         <div className="main-layout">

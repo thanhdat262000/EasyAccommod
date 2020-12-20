@@ -8,8 +8,15 @@ class ApartmentPostField extends Component {
     return (
       <div className="post-apartment-field">
         <label id="post-apartment-field-label">{criteria}</label>
-        <textarea placeholder={field} name={`${name}`}></textarea>
-        <span id="unit">{unit}</span>
+        <div>
+          {" "}
+          <div>
+            {" "}
+            <textarea placeholder={field} name={`${name}`}></textarea>
+            <span id="unit">{unit}</span>
+          </div>
+          <span id={`${name}-alert`}></span>
+        </div>
       </div>
     );
   }
