@@ -33,7 +33,7 @@ app.use("/apartments", apartmentsRouter);
 app.use("/owner/apartments",authUser, authRole(ROLE.OWNER), ownerRouter);
 
 // Admin Router
-app.use('/admin', adminRouter);
+app.use('/admin', authUser, authRole(ROLE.ADMIN), adminRouter);
 
 app.use("/signin", signinRouter);
 app.use("/register", registerRouter);
