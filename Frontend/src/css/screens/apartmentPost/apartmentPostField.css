@@ -26,3 +26,6 @@
   flex-basis: 30%;
   text-align: left;
 }
+.post-apartment-field > div > span {
+  color: red;
+}

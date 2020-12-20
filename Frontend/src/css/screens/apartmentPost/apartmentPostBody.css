@@ -48,16 +48,16 @@ span#name {
 .apartment-post-body .apartment-post-form-buttons {
   margin-top: 5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
 }
 .apartment-post-body button.apartment-post-continue,
 button.apartment-post-previous {
-  align-self: flex-end;
   height: 2rem;
   border-radius: 5px;
   border: 2px solid rgba(0, 0, 0, 0.25);
   background-color: white;
+  cursor: pointer;
 }
 .apartment-post-body button.apartment-post-end {
   align-self: flex-end;
