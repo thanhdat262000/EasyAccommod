@@ -6,6 +6,14 @@ const connection = require("../../db");
 
 module.exports.renderId = async (req, res) => {
   const id = req.params.id;
+  const sqlView = `UPDATE apartment_detail SET view = view + 1 WHERE apartment_detail.apartment_id = ?`;
+  try{
+    connection.query(sqlView, [id], async(err, results, fields) => {
+      if(err) throw err;
+    })
+  }catch(err){
+    res.sendStatus(400)
+  }
   const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS name, city.name AS city, district.name AS district,account.phone, apartment_detail.*
                     FROM apartment 
                     JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id 
@@ -47,18 +55,21 @@ module.exports.favorite = async (req, res) => {
             if (results.length !== 0) doneInsert = false;
             // console.log(doneInsert);
 
-            // If dont exist like in database
+            // If dont exist favorite in database
             if (doneInsert === true) {
               const sql =
                 "INSERT INTO favorite SET account_id=?, apartment_id=?, status=?";
-
+              const sqlFavorite = `UPDATE apartment_detail SET favorite = favorite + 1 WHERE apartment_detail.apartment_id = ?`
               connection.query(
                 sql,
                 [idDecode, apartment_id, 1],
                 (err, results, fields) => {
                   try {
                     if (err) throw err;
-                    res.json({ isFavorite: true });
+                    connection.query(sqlFavorite, [apartment_id], async(err, results, fields) => {
+                      if(err) throw err;
+                      res.json({ isFavorite: true });
+                    })
                   } catch (err) {
                     res.status(400);
                     res.send(err);
@@ -70,6 +81,8 @@ module.exports.favorite = async (req, res) => {
             // And else ...
             else {
               const changeLike = `UPDATE favorite SET status = ? WHERE apartment_id = ? AND account_id = ?`;
+              const increasingFavorite = `UPDATE apartment_detail SET favorite = favorite + 1 WHERE apartment_detail.apartment_id = ? `;
+              const decreasingFavorite = `UPDATE apartment_detail SET favorite = favorite - 1 WHERE apartment_detail.apartment_id = ? `;
               connection.query(
                 changeLike,
                 [!results[0].status, apartment_id, idDecode],
@@ -77,7 +90,12 @@ module.exports.favorite = async (req, res) => {
                   try {
                     if (err) throw err;
                     const data = { isFavorite: results[0].status === 1 };
-                    res.json(data);
+                    if(data){
+                      connection.query(increasingFavorite, [apartment_id], async(err, results, fields) => {
+                        if(err) throw err;
+                        res.json(data);
+                      })
+                    }
                   } catch (err) {
                     res.status(400);
                     res.send(err);
