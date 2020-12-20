@@ -238,3 +238,13 @@ module.exports.putEditApartment = async(req, res) => {
         res.send(400);
     }
 }
+
+
+module.exports.getAllNotification = async(req, res) => {
+    const sql = `SELECT * FROM notification WHERE apartment_id = ?`;
+    connection.query(sql, [req.params.id], async(err, results, fields) => {
+        if(err) res.sendStatus(400);
+        else res.json(results);
+    })
+}
+
