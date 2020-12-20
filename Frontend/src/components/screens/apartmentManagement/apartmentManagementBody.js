@@ -4,6 +4,14 @@ import "../../../css/screens/apartmentManagement/apartmentManagementBody.css";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import PostedApartment from "./postedApartment";
 import { Redirect } from "react-router-dom";
+import {
+  changeDeleted,
+  changeRented,
+  getApprovedApartments,
+  getExpiredApartments,
+  getPendingApartments,
+  getRentedApartments,
+} from "../../../service/owner.service";
 
 class ApartmentManagementBody extends Component {
   constructor(props) {
@@ -15,142 +23,63 @@ class ApartmentManagementBody extends Component {
         { name: "Phòng đã cho thuê", isChosen: false },
         { name: "Phòng đã hết hạn", isChosen: false },
       ],
-      listPostedApartment: [
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "approved",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "approved",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "approved",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "approved",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "approved",
-        },
-      ],
-      listPendingApartment: [
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "pending",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "pending",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "pending",
-        },
-      ],
-      listRentedApartment: [
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "rented",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "rented",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "rented",
-        },
-      ],
-      listExpiredApartment: [
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "expired",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "expired",
-        },
-        {
-          image: "https://picsum.photos/id/1/200/300",
-          address: "Quận Cầu Giấy, Hà Nội",
-          price: "10000000",
-          type: "căn hộ",
-          size: 15,
-          expiration: "20 thg 11 2020",
-          status: "expired",
-        },
-      ],
+      listPostedApartment: [],
+      listPendingApartment: [],
+      listRentedApartment: [],
+      listExpiredApartment: [],
     };
     this.onClick = this.onClick.bind(this);
   }
+  getAllApprovedApartments = () => {
+    getApprovedApartments().then((data) => {
+      this.setState({
+        listPostedApartment: data,
+      });
+    });
+  };
+  getAllPendingApartments = () => {
+    getPendingApartments().then((data) => {
+      this.setState({
+        listPendingApartment: data,
+      });
+    });
+  };
+  getAllRentedApartments = () => {
+    getRentedApartments().then((data) => {
+      this.setState({
+        listRentedApartment: data,
+      });
+    });
+  };
+  getAllExpiredApartments = () => {
+    getExpiredApartments().then((data) => {
+      this.setState({
+        listExpiredApartment: data,
+      });
+    });
+  };
+  componentDidMount() {
+    this.getAllApprovedApartments();
+    this.getAllPendingApartments();
+    this.getAllRentedApartments();
+    this.getAllExpiredApartments();
+  }
+  onChangeRented = (id) => {
+    changeRented(id).then((response) => {
+      if (response.status === 200) {
+        this.getAllApprovedApartments();
+        this.getAllRentedApartments();
+      }
+    });
+  };
+  onChangeDeleted = (id) => {
+    changeDeleted(id).then((response) => {
+      if (response.status === 200) {
+        this.getAllApprovedApartments();
+        this.getAllExpiredApartments();
+      }
+    });
+  };
   onClick(item) {
     return () => {
       const { listTitles } = this.state;
@@ -209,10 +138,21 @@ class ApartmentManagementBody extends Component {
                   </div>
                 ))}
               </div>
-              <div className="listed-posted-apartment">
-                {listApartment.map((apartment, index) => (
-                  <PostedApartment key={index} apartment={apartment} />
-                ))}
+              <div className="list-posted-apartment">
+                {listApartment.length !== 0 ? (
+                  listApartment.map((apartment, index) => (
+                    <PostedApartment
+                      key={index}
+                      apartment={apartment}
+                      onChangeRented={this.onChangeRented}
+                      onChangeDeleted={this.onChangeDeleted}
+                    />
+                  ))
+                ) : (
+                  <div className="list-posted-apartment-empty">
+                    <p>Không có phòng nào trong mục này</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

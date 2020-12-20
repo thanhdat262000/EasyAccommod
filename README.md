@@ -1,17 +1,21 @@
 # EasyAccommod
 
-
 ## You can start project with guide here.
 
 ### Step 1: Open folder contained project and run:
+
 ```git
 git clone https://github.com/thanhdat262000/EasyAccommod.git
 ```
 
-### Step 2: Open project and run 
+### Step 2: Open project and run
 
 ```javascript
 npm install (or npm i)
+```
+
+```javascript
+npm install @material-ui/core
 ```
 
 ### Step 3: Create .env file into project

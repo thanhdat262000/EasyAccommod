@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "../../../css/apartment.css";
-import apartment from "../../../image/apartment.jpg";
 class Apartment extends Component {
   render() {
     const apartmentProps = this.props.apartmentInfo;
     const { apartment_id } = this.props.apartmentInfo;
-    console.log(apartment);
     return (
       // <Link to="/apartment" >
       <div

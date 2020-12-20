@@ -5,10 +5,9 @@
   color: black;
 }
 .apartment {
-  flex-basis: 30%;
+  /* flex-basis: 30%; */
   height: 240px;
   border-radius: 5px;
-  margin: 15px;
 }
 
 .apartment .apartment-info {
@@ -25,9 +24,13 @@
     rgba(0, 0, 0, 0.38) 100%
   );
   color: white;
+  overflow: hidden;
+  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.733);
+  transition: transform 100ms ease-in;
+  cursor: pointer;
 }
 .apartment .apartment-info:hover {
-  border: 1px solid blue;
+  transform: scale(1.03);
 }
 .apartment-info label {
   font-size: 2rem;

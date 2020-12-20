@@ -8,7 +8,12 @@ class AparmentPostSelection extends Component {
     return (
       <div className="post-apartment-selection">
         <label id="post-apartment-selection-label">{criteria}</label>
-        <select name={`post-apartment-select-${name}`}>
+        <select
+          name={`${name}`}
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
+        >
           {selections.map((selection, index) => (
             <option value={selection.name} key={index}>
               {selection}

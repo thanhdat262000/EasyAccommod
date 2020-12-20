@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import getFormData from "get-form-data";
 import { Redirect, withRouter } from "react-router-dom";
 import ListApartmentPostProperty from "./listApartmentPostProperty";
 import "../../../css/screens/apartmentPost/apartmentPostBody.css";
@@ -7,6 +8,9 @@ import ApartmentPostCheckDuplicate from "./apartmentPostCheckDuplicate";
 import ApartmentPostExpiration from "./apartmentPostExpiration";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
+import { postApartment } from "../../../service/owner.service";
+import { withFormik } from "formik";
+import * as Yup from "yup";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -35,22 +39,39 @@ class ApartmentPostBody extends Component {
           isChosen: false,
         },
       ],
+      postData: {},
     };
   }
   OnNext = () => {
-    const { listTitles } = this.state;
+    let form = document.querySelector("#apartment-post-form");
+    let data = getFormData(form);
+    const { listTitles, postData } = this.state;
     const [title] = listTitles.filter((title) => title.isChosen === true);
     const index = listTitles.indexOf(title);
-    console.log(index);
-    if (index === 3) this.props.history.push("/");
-    this.setState({
-      listTitles: [
-        ...listTitles.slice(0, index),
-        { ...title, isChosen: false },
-        { ...listTitles[index + 1], isChosen: true },
-        ...listTitles.slice(index + 2),
-      ],
-    });
+
+    this.setState(
+      {
+        listTitles: [
+          ...listTitles.slice(0, index),
+          { ...title, isChosen: false },
+          { ...listTitles[index + 1], isChosen: true },
+          ...listTitles.slice(index + 2),
+        ],
+        postData: { ...postData, ...data },
+      },
+      () => {
+        console.log(index);
+        if (index === 3) {
+          postApartment(this.state.postData).then((status) => {
+            if (status === 200) {
+              console.log(this.state.postData);
+              console.log(status);
+              this.props.history.push("/");
+            }
+          });
+        }
+      }
+    );
   };
   OnBack = () => {
     const { listTitles } = this.state;
@@ -122,6 +143,7 @@ class ApartmentPostBody extends Component {
   render() {
     const { privilege } = this.props;
     if (privilege === "user" || !privilege) return <Redirect to="/" />;
+    const { values, handleChange, errors, handleBlur, touched } = this.props;
     let apartmentPostBody;
     const { listTitles } = this.state;
     const [state] = listTitles.filter((title) => title.isChosen === true);
@@ -201,4 +223,25 @@ export default connect(
     privilege: getPrivilege(state),
   }),
   null
-)(withRouter(ApartmentPostBody));
+)(
+  withRouter(
+    withFormik({
+      mapPropsToValues() {
+        return {
+          addressDescription: "",
+          square: "",
+          price: "",
+        };
+      },
+      validationSchema: Yup.object().shape({
+        addressDescription: Yup.string().required("Hãy nhập địa chỉ"),
+        square: Yup.number()
+          .typeError("Nhập chưa đúng")
+          .required("Hãy nhập diện tích"),
+        price: Yup.number()
+          .typeError("Nhập chưa đúng")
+          .required("Hãy nhập giá"),
+      }),
+    })(ApartmentPostBody)
+  )
+);

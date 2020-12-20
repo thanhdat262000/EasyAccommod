@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ApartmentPostField from "./apartmentPostField";
 import AparmentPostSelection from "./apartmentPostSelection";
 import "../../../css/screens/apartmentPost/listApartmentPostProperty.css";
-import InputCheckbox from "../../loginDetails/inputCheckbox";
 import ApartmentMap from "../apartmentScreen/apartmentMap";
+import ApartmentPostCheckbox from "./apartmentPostCheckbox";
+import * as Yup from "yup";
+import { withFormik } from "formik";
 
 class ListApartmentPostProperty extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class ListApartmentPostProperty extends Component {
           criteria: "Loại phòng",
           selections: ["Căn hộ mini", "Căn hộ đầy đủ", "Phòng trọ", "Nhà dân"],
           type: "selection",
-          name: "roomType",
+          name: "apartment_type",
         },
         {
           criteria: "Thành phố",
@@ -38,14 +40,14 @@ class ListApartmentPostProperty extends Component {
           criteria: "Địa chỉ chi tiết",
           field: "Địa chỉ",
           type: "field",
-          name: "detailAddress",
+          name: "addressDescription",
         },
         {
           criteria: "Kích thước",
           field: "20",
           unit: "m2",
           type: "field",
-          name: "size",
+          name: "square",
         },
         {
           criteria: "Phòng tắm",
@@ -56,41 +58,47 @@ class ListApartmentPostProperty extends Component {
             "Không có nóng lạnh, không khép kín",
           ],
           type: "selection",
-          name: "bathRoom",
+          name: "bathroom_type",
         },
         {
           criteria: "Phòng bếp",
           selections: ["Không nấu ăn", "Khu bếp chung", "Khu bếp riêng"],
           type: "selection",
-          name: "kitchen",
+          name: "kitchen_type",
         },
         {
           criteria: "Điều hòa",
-          property: "air-conditioning",
+          property: "hasAirConditioning",
           type: "checkbox",
         },
         {
           criteria: "Ban công",
-          property: "terrace",
+          property: "hasTerrace",
           type: "checkbox",
         },
-        {
-          criteria: "Hút thuốc",
-          property: "smoke",
-          type: "checkbox",
-        },
+
         {
           criteria: "Điện nước",
           selections: ["Giá dân", "Giá thuê"],
           type: "selection",
-          name: "electric",
+          name: "waterAndElecticity_bill_type",
+        },
+        {
+          criteria: "Hút thuốc",
+          property: "smoker",
+          type: "checkbox",
+        },
+        {
+          criteria: "Thang máy",
+          property: "hasElevator",
+          type: "checkbox",
         },
         {
           criteria: "Tiền thuê",
           field: "10",
           unit: "VNĐ/tháng",
           type: "field",
-          name: "rentPrice",
+          name: "price",
         },
         {
           criteria: "Mô tả phòng",
@@ -107,7 +115,7 @@ class ListApartmentPostProperty extends Component {
       <div className="list-apartment-post-property">
         <div className="list-apartment-post-property-form-section">
           <div className="list-apartment-post-property-form-section-1">
-            {listApartmentPostProperty.slice(0, 12).map((property, index) => {
+            {listApartmentPostProperty.slice(0, 11).map((property, index) => {
               if (property.type === "selection")
                 return (
                   <AparmentPostSelection
@@ -122,12 +130,18 @@ class ListApartmentPostProperty extends Component {
                     key={index}
                   />
                 );
-              else return <InputCheckbox input={property} key={index} />;
+              else
+                return (
+                  <ApartmentPostCheckbox
+                    post_apartment_checkbox={property}
+                    key={index}
+                  />
+                );
             })}
           </div>
           <div className="list-apartment-post-property-form-section-2">
             <ApartmentMap width="100%" paddingTop="60%" marginTop="1rem" />
-            {listApartmentPostProperty.slice(12).map((property, index) => {
+            {listApartmentPostProperty.slice(11).map((property, index) => {
               if (property.type === "selection")
                 return (
                   <AparmentPostSelection
@@ -135,10 +149,17 @@ class ListApartmentPostProperty extends Component {
                     key={index}
                   />
                 );
-              else
+              else if (property.type === "field")
                 return (
                   <ApartmentPostField
                     post_apartment_field={property}
+                    key={index}
+                  />
+                );
+              else
+                return (
+                  <ApartmentPostCheckbox
+                    post_apartment_checkbox={property}
                     key={index}
                   />
                 );

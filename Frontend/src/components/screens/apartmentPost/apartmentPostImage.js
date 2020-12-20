@@ -13,7 +13,6 @@ class ApartmentPostImage extends Component {
 
   disPlay(event) {
     const listImages = [...this.state.listImages];
-    console.log(event.target);
     listImages.push(URL.createObjectURL(event.target.files[0]));
     this.setState({
       listImages: listImages,

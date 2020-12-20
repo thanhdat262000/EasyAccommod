@@ -11,6 +11,7 @@ class ApartmentFavoriteButton extends Component {
   handleClick = (e) => {
     const { params } = this.props;
     favorite(params).then((data) => {
+      console.log(data);
       this.setState({
         isFavorite: data.isFavorite,
       });
@@ -34,7 +35,7 @@ class ApartmentFavoriteButton extends Component {
             fill="red"
             width="15px"
             height="15px"
-            fill-opacity={isFavorite ? "1" : "0"}
+            fillOpacity={isFavorite ? "1" : "0"}
             stroke="black"
             strokeOpacity="1"
             strokeWidth="30px"
