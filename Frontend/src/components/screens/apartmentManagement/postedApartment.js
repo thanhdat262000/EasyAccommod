@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "../../../css/screens/apartmentManagement/postedApartment.css";
 
 class PostedApartment extends Component {
@@ -28,7 +29,14 @@ class PostedApartment extends Component {
       case "Chưa được duyệt":
         buttons = (
           <div className="posted-apartment-action">
-            <button id="edit">Chỉnh sửa</button>
+            <button
+              id="edit"
+              onClick={() => {
+                this.props.history.push("/apartment-post");
+              }}
+            >
+              Chỉnh sửa
+            </button>
           </div>
         );
         break;
@@ -95,4 +103,4 @@ class PostedApartment extends Component {
   }
 }
 
-export default PostedApartment;
+export default withRouter(PostedApartment);

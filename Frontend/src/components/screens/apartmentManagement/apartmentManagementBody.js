@@ -66,6 +66,7 @@ class ApartmentManagementBody extends Component {
   }
   onChangeRented = (id) => {
     changeRented(id).then((response) => {
+      console.log(response);
       if (response.status === 200) {
         this.getAllApprovedApartments();
         this.getAllRentedApartments();
@@ -96,7 +97,6 @@ class ApartmentManagementBody extends Component {
   }
   render() {
     const { privilege } = this.props;
-    console.log(privilege);
     if (privilege === "user" || !privilege) return <Redirect to="/" />;
     else {
       var listApartment = [];

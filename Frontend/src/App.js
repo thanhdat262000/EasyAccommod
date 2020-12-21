@@ -53,6 +53,7 @@ function App() {
         <MessengerCustomerChat
           pageId="100489201969961"
           appId="300698198025899"
+          shouldShowDialog={true}
         />
       </div>
     </Router>

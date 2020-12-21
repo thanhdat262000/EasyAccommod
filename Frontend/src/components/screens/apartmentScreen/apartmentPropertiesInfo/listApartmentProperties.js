@@ -15,7 +15,7 @@ class ListApartmentProperties extends Component {
       bathroom_type,
       hasAirConditioning,
       detailDescription,
-      like,
+      favorite,
       view,
     } = this.props.info;
     const listApartmentProperties = [
@@ -68,7 +68,7 @@ class ListApartmentProperties extends Component {
       },
       {
         property: "Lượt thích",
-        property_value: like,
+        property_value: favorite,
       },
       {
         property: "Lượt xem",
