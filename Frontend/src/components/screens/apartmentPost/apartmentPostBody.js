@@ -11,6 +11,7 @@ import { getPrivilege } from "../../../redux/selector/selectors";
 import { postApartment } from "../../../service/owner.service";
 import { withFormik } from "formik";
 import * as Yup from "yup";
+import ApartmentPostSuccess from "./apartmentPostSuccess";
 
 class ApartmentPostBody extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class ApartmentPostBody extends Component {
         },
       ],
       postData: {},
+      isPosted: false,
     };
   }
   OnNext = () => {
@@ -62,6 +64,7 @@ class ApartmentPostBody extends Component {
       this.setState(
         {
           postData: { ...postData, ...data },
+          isPosted: true,
         },
         () => {
           console.log(index);
@@ -70,7 +73,7 @@ class ApartmentPostBody extends Component {
               if (status === 200) {
                 console.log(this.state.postData);
                 console.log(status);
-                this.props.history.push("/");
+                // this.props.history.push("/apartment-management");
               }
             });
           }
@@ -225,6 +228,13 @@ class ApartmentPostBody extends Component {
             </div>
           </form>
         </div>
+        {this.state.isPosted ? (
+          <ApartmentPostSuccess
+            onClick={() => {
+              this.props.history.push("/apartment-management");
+            }}
+          />
+        ) : null}
       </div>
     );
   }
