@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import "../../../css/screens/adminScreen/adminBody.css";
 import MessengerCustomerChat from "react-messenger-customer-chat";
-import ListNotiMange from "./listNotiManage";
-import ListAccManage from "./listAccManage";
-import ListPostManage from "./listPostManage";
-import ChatComponent from "./chatComponent";
-import AnalysisComponent from "./analysisComponent";
 import FaceIcon from "@material-ui/icons/Face";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
+import ListOwnerAccounts from "./ownerAccount/listOwnerAccounts";
 
 class AdminBody extends Component {
   constructor(props) {
@@ -20,7 +15,6 @@ class AdminBody extends Component {
         { name: "Quản lý tài khoản", isChosen: true, icon: FaceIcon },
         { name: "Quản lý bài đăng", isChosen: false, icon: AllInboxIcon },
         { name: "Thông báo", isChosen: false, icon: NotificationsIcon },
-        { name: "Chat", isChosen: false, icon: ChatBubbleOutlineIcon },
         { name: "Thống kê", isChosen: false, icon: ShowChartIcon },
       ],
     };
@@ -65,25 +59,9 @@ class AdminBody extends Component {
             ))}
           </div>
           <div className="admin-content">
-            {title.name === "Thông báo" ? (
-              <ListNotiMange />
-            ) : title.name === "Quản lý tài khoản" ? (
-              <ListAccManage />
-            ) : title.name === "Quản lý bài đăng" ? (
-              <ListPostManage /> ? (
-                title.name === "Chat"
-              ) : (
-                <ChatComponent />
-              )
-            ) : (
-              <AnalysisComponent />
-            )}
+            {title.name === "Quản lý tài khoản" ? <ListOwnerAccounts /> : null}
           </div>
         </div>
-        <MessengerCustomerChat
-          pageId="100489201969961"
-          appId="300698198025899"
-        />
       </div>
     );
   }

@@ -1,0 +1,21 @@
+.list-owner-accounts {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.list-owner-accounts .owner-accounts-title-list {
+  height: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+.list-owner-accounts .owner-accounts-title-list > div {
+  flex-basis: 50%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.list-owner-accounts .list-owner-accounts-body {
+  width: 100%;
+}
