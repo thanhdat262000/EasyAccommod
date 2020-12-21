@@ -1,0 +1,27 @@
+.owner-account {
+  margin-top: 1rem;
+  border-radius: 5px;
+  background-color: lightgray;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.owner-account .owner-account-property {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.owner-account .owner-account-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+.owner-account-buttons .view,
+.approved {
+  border-radius: 5px;
+}
