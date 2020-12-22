@@ -299,3 +299,42 @@ module.exports.getStatistics = async(req, res) => {
         res.sendStatus(400);
     }
 }
+
+module.exports.putChangeApproved = async(req, res) => {
+    const {
+        account_id
+    } = req.body;
+    const sql = `UPDATE account SET status = "Đã duyệt" WHERE account_id = ?`;
+    try{
+        connection.query(sql, [account_id], (err, results, fields) => {
+            if(err) throw err;
+            res.sendStatus(200);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+module.exports.getOwnersPending = async(req, res) => {
+    const sql = `SELECT * FROM account WHERE privilege = "owner" AND status = "Chưa duyệt"`;
+    try{
+        connection.query(sql, (err, results, fields) => {
+            if(err) throw err;
+            res.json(results);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+module.exports.getOwnersApproved = async(req, res) => {
+    const sql = `SELECT * FROM account WHERE privilege = "owner" AND status = "Đã duyệt"`;
+    try{
+        connection.query(sql, (err, results, fields) => {
+            if(err) throw err;
+            res.json(results);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    } 
+}

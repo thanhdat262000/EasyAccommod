@@ -11,6 +11,7 @@ const ownerRouter = require("./routes/owner");
 const registerRouter = require("./routes/register");
 const adminRouter = require("./routes/admin");
 const { authUser, authRole } = require("./middlewares/authMiddleWare");
+const {authSignin} = require('./middlewares/authSignin');
 const { ROLE } = require("./role");
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger.json');
@@ -35,7 +36,7 @@ app.use("/owner/apartments",authUser, authRole(ROLE.OWNER), ownerRouter);
 // Admin Router
 app.use('/admin', authUser, authRole(ROLE.ADMIN), adminRouter);
 
-app.use("/signin", signinRouter);
+app.use("/signin", authSignin, signinRouter);
 app.use("/register", registerRouter);
 
 app.listen(process.env.PORT, () => {
