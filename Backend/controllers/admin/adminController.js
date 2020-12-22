@@ -194,6 +194,20 @@ module.exports.getAllApproved = async (req, res) => {
     })
 }
 
+module.exports.getAllDisapproved = async (req, res) => {
+    const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+    FROM apartment
+    JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
+    JOIN city ON city.city_id = apartment.city_id
+    JOIN district ON district.city_id = city.city_id
+    WHERE apartment.status = 'Không được duyệt' AND apartment.account_id = ?`;
+
+    connection.query(sql,[req.id], (err, results, fields) => {
+        if(err) return res.sendStatus(404);
+        res.json(results);
+    })
+}
+
 module.exports.getAllRented = async (req, res) => {
     const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
@@ -230,6 +244,60 @@ module.exports.putChangeRented = async(req, res) => {
         connection.query(sql, [req.params.id, req.id], async(err, results, fields) => {
             if(err) throw err;
             res.sendStatus(200);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+module.exports.putChangeDisapproved = async(req, res) => {
+    const apartment_id = req.params.id;
+    const message = `Your apartment ${apartment_id} is disapproved by admin`
+    const sql = `UPDATE apartment 
+        SET apartment.status = "Không được duyệt" 
+        WHERE apartment.apartment_id = ? `;
+    const getAccountId = `SELECT apartment.account_id FROM apartment WHERE apartment_id = ?`
+    const autoPushNotification = `INSERT INTO notification 
+        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
+    try{
+        connection.query(sql, [req.params.id], async(err, results, fields) => {
+            if(err) throw err;
+            connection.query(getAccountId, [apartment_id], (err, results, fields) => {
+                if(err) throw err;
+                else{
+                    connection.query(autoPushNotification, [results[0]['account_id'], apartment_id, message], (err, results, fields) => {
+                        if(err) throw err;
+                        res.sendStatus(200);
+                    })
+                }
+            })
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
+module.exports.putChangeApproved = async(req, res) => {
+    const apartment_id = req.params.id;
+    const message = `Congratulation!! Your apartment ${apartment_id} is approved by admin`
+    const sql = `UPDATE apartment 
+        SET apartment.status = "Đã được duyệt" 
+        WHERE apartment.apartment_id = ? `;
+    const getAccountId = `SELECT apartment.account_id FROM apartment WHERE apartment_id = ?`
+    const autoPushNotification = `INSERT INTO notification 
+        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
+    try{
+        connection.query(sql, [req.params.id], async(err, results, fields) => {
+            if(err) throw err;
+            connection.query(getAccountId, [apartment_id], (err, results, fields) => {
+                if(err) throw err;
+                else{
+                    connection.query(autoPushNotification, [results[0]['account_id'], apartment_id, message], (err, results, fields) => {
+                        if(err) throw err;
+                        res.sendStatus(200);
+                    })
+                }
+            })
         })
     }catch(err){
         res.sendStatus(400);
@@ -300,20 +368,6 @@ module.exports.getStatistics = async(req, res) => {
     }
 }
 
-module.exports.putChangeApproved = async(req, res) => {
-    const {
-        account_id
-    } = req.body;
-    const sql = `UPDATE account SET status = "Đã duyệt" WHERE account_id = ?`;
-    try{
-        connection.query(sql, [account_id], (err, results, fields) => {
-            if(err) throw err;
-            res.sendStatus(200);
-        })
-    }catch(err){
-        res.sendStatus(400);
-    }
-}
 
 module.exports.getOwnersPending = async(req, res) => {
     const sql = `SELECT account.account_id, account.email, CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, account.idCard 

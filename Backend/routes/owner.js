@@ -12,6 +12,8 @@ ownerRouter.get('/rented', ownerController.getAllRented)
 
 ownerRouter.get('/expired', ownerController.getAllExpired)
 
+ownerRouter.get('/disapproved', ownerController.getAllDisapproved);
+
 ownerRouter.post('/post', ownerController.postApartment)
 
 ownerRouter.put('/:id', ownerController.putEditApartment)
