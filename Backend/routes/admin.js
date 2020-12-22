@@ -24,7 +24,9 @@ adminRouter.get('/apartments/expired', adminController.getAllExpired);
 
 adminRouter.get('/apartments/statistics', adminController.getStatistics);
 
-adminRouter.put('/owner/approved', adminController.putChangeApproved);
+adminRouter.put('/apartments/:id/disapproved', adminController.putChangeDisapproved);
+
+adminRouter.put('/apartments/:id/approved', adminController.putChangeApproved);
 
 adminRouter.get('/owner/pending', adminController.getOwnersPending);
 
