@@ -250,6 +250,20 @@ module.exports.putChangeRented = async(req, res) => {
     }
 }
 
+module.exports.putChangeDisapproved = async(req, res) => {
+    const sql = `UPDATE apartment 
+        SET apartment.status = "Không được duyệt" 
+        WHERE apartment.apartment_id = ? `
+    try{
+        connection.query(sql, [req.params.id], async(err, results, fields) => {
+            if(err) throw err;
+            res.sendStatus(200);
+        })
+    }catch(err){
+        res.sendStatus(400);
+    }
+}
+
 module.exports.putChangeCancel = async(req, res) => {
     const sql = `UPDATE apartment 
         SET apartment.status = "Đã hết hạn" 
