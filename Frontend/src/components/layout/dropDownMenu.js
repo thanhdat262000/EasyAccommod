@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserSignin from "../../image/userSignin.svg";
 import Next from "../../image/next.svg";
 import "../../css/dropDownMenu.css";
+import { withRouter } from "react-router-dom";
 import { logout } from "../../service/auth.service";
 import { connect } from "react-redux";
 import { logoutAction } from "../../redux/actions/logout.action";
@@ -39,6 +40,7 @@ class DropDownMenu extends Component {
   onLogout = (e) => {
     logout();
     this.props.logoutAction();
+    this.props.history.push("/");
   };
   render() {
     let listOptions;
@@ -95,4 +97,4 @@ export default connect(
     privilege: getPrivilege(state),
   }),
   { logoutAction }
-)(DropDownMenu);
+)(withRouter(DropDownMenu));

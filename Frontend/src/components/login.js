@@ -6,6 +6,7 @@ import Cancel from "../image/cancel.svg";
 import { connect } from "react-redux";
 import { loginAction } from "../redux/actions/login.action";
 import { decodeToken, login, saveToken } from "../service/auth.service";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Login extends Component {
         this.props.loginAction(decoded);
         document.getElementsByClassName("login-bg")[0].style.display = "none";
         saveToken(response.token);
+        this.props.history.push("/");
       }
     }
   };
@@ -117,4 +119,4 @@ const LoginForm = withFormik({
       .trim("Mật khẩu không chứa dấu cách"),
   }),
 })(Login);
-export default connect(null, { loginAction })(LoginForm);
+export default connect(null, { loginAction })(withRouter(LoginForm));
