@@ -6,6 +6,7 @@ import AllInboxIcon from "@material-ui/icons/AllInbox";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import ListOwnerAccounts from "./ownerAccount/listOwnerAccounts";
+import OwnerPost from "./ownerPost/ownerPost";
 
 class AdminBody extends Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class AdminBody extends Component {
           </div>
           <div className="admin-content">
             {title.name === "Quản lý tài khoản" ? <ListOwnerAccounts /> : null}
+            {title.name === "Quản lý bài đăng" ? <OwnerPost /> : null}
           </div>
         </div>
       </div>
