@@ -1,0 +1,117 @@
+.owner-post {
+  height: 130px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+.owner-post-link {
+  height: 70%;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+  transition: 0.7;
+}
+.owner-post-link:hover {
+  background-color: cornsilk;
+}
+.owner-post-property {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.owner-post .owner-post-main-details {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-basis: 40%;
+}
+.owner-post .owner-post-main-info span:last-child {
+  font-weight: bold;
+}
+.owner-post .owner-post-main-info {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.owner-post .owner-post-main-info-address {
+  text-transform: uppercase;
+}
+.owner-post .owner-post-expiration {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  justify-self: stretch;
+}
+.owner-post .owner-post-main-details img {
+  height: 100%;
+  flex-basis: 35%;
+}
+.owner-post .owner-post-statistics-status {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.owner-post-section {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.owner-post span {
+  text-align: left;
+}
+.owner-post-main-details,
+.owner-post-statistics,
+.owner-post-more-detail {
+  height: 100%;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+}
+#statistic {
+  font-weight: bold;
+}
+.owner-post-statistics,
+.owner-post-more-detail {
+  flex-basis: 20%;
+}
+.owner-post-action {
+  align-self: flex-end;
+}
+.owner-post-action button {
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+  height: 2rem;
+  width: 6rem;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.owner-post-action button:hover {
+  opacity: 0.7;
+}
+.owner-post-action #rented {
+  background-color: #1ccf18;
+}
+.owner-post-action #delete,
+#cancel,
+#delay-expiration,
+#edit {
+  background-color: #4694dc;
+}
+#rented,
+#delay-expiration {
+  margin-right: 2rem;
+}

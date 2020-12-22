@@ -1,0 +1,21 @@
+.list-owner-posts {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.list-owner-posts .owner-posts-title-list {
+  height: 30px;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+}
+.list-owner-posts .owner-posts-title-list > div {
+  flex-basis: 33%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.list-owner-posts .list-owner-posts-body {
+  width: 100%;
+}
