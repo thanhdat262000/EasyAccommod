@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Widget } from "react-chat-widget";
 import "../../../css/screens/adminScreen/adminBody.css";
 import FaceIcon from "@material-ui/icons/Face";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
@@ -6,6 +7,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import ListOwnerAccounts from "./ownerAccount/listOwnerAccounts";
 import ListOwnerPost from "./ownerPost/listOwnerPosts";
+import { connect } from "react-redux";
+import { getPrivilege } from "../../../redux/selector/selectors";
+import { Redirect } from "react-router-dom";
 
 class AdminBody extends Component {
   constructor(props) {
@@ -35,6 +39,8 @@ class AdminBody extends Component {
     };
   }
   render() {
+    const { privilege } = this.props;
+    if (!privilege || privilege !== "admin") return <Redirect to="/" />;
     const { listTitles } = this.state;
     const [title] = this.state.listTitles.filter(
       (title) => title.isChosen === true
@@ -71,4 +77,9 @@ class AdminBody extends Component {
   }
 }
 
-export default AdminBody;
+export default connect(
+  (state) => ({
+    privilege: getPrivilege(state),
+  }),
+  null
+)(AdminBody);
