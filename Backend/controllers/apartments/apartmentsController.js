@@ -15,10 +15,11 @@ function isEmpty(obj) {
 module.exports.index = async (req, res) => {
   if (isEmpty(req.query)) {
     const sql = `SELECT apartment.apartment_id, apartment_detail.price, city.name AS city, district.name AS district
-            FROM apartment 
-            JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id 
-            JOIN city ON apartment.city_id = city.city_id 
-            JOIN district ON district.city_id = city.city_id`;
+    FROM apartment 
+    JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id 
+    JOIN city ON apartment.city_id = city.city_id 
+    JOIN district ON district.city_id = city.city_id
+    WHERE apartment.status = "Đã được duyệt"`;
     connection.query(sql, (err, results, fields) => {
       try {
         if (err) throw err;
@@ -46,7 +47,8 @@ module.exports.index = async (req, res) => {
           JOIN district ON district.city_id = city.city_id
           WHERE city.name = ?
             AND district.name = ?
-            AND apartment.apartment_type = ?`;
+            AND apartment.apartment_type = ?
+            AND apartment.status = "Đã được duyệt"`;
     console.log(city_name, district_name, apartment_type);
     console.log(typeof rent_min);
     connection.query(
@@ -109,7 +111,7 @@ module.exports.getAllFavorite = async (req, res) => {
                 FROM favorite
                 JOIN apartment ON  apartment.apartment_id = favorite.apartment_id
                 JOIN apartment_detail ON apartment_detail.apartment_id = apartment.apartment_id
-                WHERE favorite.account_id = ? AND favorite.status = 1`;
+                WHERE favorite.account_id = ? AND favorite.status = 1 AND apartment.status = "Đã được duyệt"`;
 
           connection.query(sql, [userId], (err, results, fields) => {
             if (err) throw err;

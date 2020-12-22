@@ -316,7 +316,9 @@ module.exports.putChangeApproved = async(req, res) => {
 }
 
 module.exports.getOwnersPending = async(req, res) => {
-    const sql = `SELECT * FROM account WHERE privilege = "owner" AND status = "Chưa duyệt"`;
+    const sql = `SELECT account.account_id, account.email, CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, account.idCard 
+    FROM account 
+    WHERE privilege = "owner" AND status = "Chưa duyệt"`;
     try{
         connection.query(sql, (err, results, fields) => {
             if(err) throw err;
@@ -328,7 +330,9 @@ module.exports.getOwnersPending = async(req, res) => {
 }
 
 module.exports.getOwnersApproved = async(req, res) => {
-    const sql = `SELECT * FROM account WHERE privilege = "owner" AND status = "Đã duyệt"`;
+    const sql = `SELECT account.account_id, account.email, CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, account.idCard 
+    FROM account 
+    WHERE privilege = "owner" AND status = "Đã duyệt"`;
     try{
         connection.query(sql, (err, results, fields) => {
             if(err) throw err;
