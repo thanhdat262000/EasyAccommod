@@ -36,6 +36,7 @@ class Login extends Component {
         document.getElementsByClassName("login-bg")[0].style.display = "none";
         saveToken(response.token);
         this.props.history.push("/");
+        window.location.reload(false);
       }
     }
   };

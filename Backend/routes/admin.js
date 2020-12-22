@@ -24,4 +24,12 @@ adminRouter.get('/apartments/expired', adminController.getAllExpired);
 
 adminRouter.get('/apartments/statistics', adminController.getStatistics);
 
+adminRouter.put('/apartments/:id/disapproved', adminController.putChangeDisapproved);
+
+adminRouter.put('/apartments/:id/approved', adminController.putChangeApproved);
+
+adminRouter.get('/owner/pending', adminController.getOwnersPending);
+
+adminRouter.get('/owner/approved', adminController.getOwnersApproved);
+
 module.exports = adminRouter;

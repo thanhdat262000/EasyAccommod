@@ -61,11 +61,24 @@ module.exports.putChangeRented = async (req, res) => {
   const sql = `UPDATE apartment 
         SET apartment.status = "Đã thuê" 
         WHERE apartment.apartment_id = ? AND apartment.account_id = ?`;
-
+  const listAdmin = `SELECT account_id FROM account WHERE privilege = "admin"`;
+  const autoPushNotification = `INSERT INTO notification 
+        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
+  const message = `Apartment ${req.params.id} is rented`
   try {
     connection.query(sql, [req.params.id, req.id], (err, results, fields) => {
       if (err) throw err;
-      res.sendStatus(200);
+      else{
+        connection.query(listAdmin, (err, results, fields ) => {
+          if(err) throw err;
+          for(let i=0; i<results.length; i++){
+            connection.query(autoPushNotification, [results[i]['account_id'], req.params.id, message], (err, results, fields) => {
+              if(err) throw err;
+            })
+          }
+          res.sendStatus(200);
+        })
+      }
     });
   } catch (err) {
     res.sendStatus(400);
@@ -304,3 +317,18 @@ module.exports.getAllNotification = async (req, res) => {
     else res.json(results);
   });
 };
+
+
+module.exports.getAllDisapproved = async(req, res) => {
+  const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+    FROM apartment
+    JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
+    JOIN city ON city.city_id = apartment.city_id
+    JOIN district ON district.city_id = city.city_id
+    WHERE apartment.status = 'Không được duyệt' AND apartment.account_id = ?`;
+
+  connection.query(sql, [req.id], (err, results, fields) => {
+    if (err) return res.sendStatus(404);
+    res.json(results);
+  });
+}
