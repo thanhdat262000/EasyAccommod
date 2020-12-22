@@ -20,6 +20,7 @@ class ListOwnerPost extends Component {
           price: "1000000",
           time: "1 thg 12",
           status: "Đã duyệt",
+          apartment_id: 1,
         },
         {
           ownerName: "thanh Dat",

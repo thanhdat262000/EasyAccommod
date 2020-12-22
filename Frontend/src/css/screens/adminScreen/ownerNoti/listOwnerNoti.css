@@ -1,0 +1,4 @@
+.list-noti {
+  display: grid;
+  flex-direction: column;
+}
