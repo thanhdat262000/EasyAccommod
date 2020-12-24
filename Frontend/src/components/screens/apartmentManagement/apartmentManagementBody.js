@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../../css/screens/apartmentManagement/apartmentManagementBody.css";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import PostedApartment from "./postedApartment";
@@ -70,6 +72,13 @@ class ApartmentManagementBody extends Component {
       if (response.status === 200) {
         this.getAllApprovedApartments();
         this.getAllRentedApartments();
+        toast.success("Cho thuê thành công", {
+          draggable: true,
+          position: toast.POSITION.BOTTOM_LEFT,
+          closeOnClick: true,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     });
   };
@@ -78,6 +87,13 @@ class ApartmentManagementBody extends Component {
       if (response.status === 200) {
         this.getAllApprovedApartments();
         this.getAllExpiredApartments();
+        toast.success("Xóa thành công", {
+          draggable: true,
+          position: toast.POSITION.BOTTOM_LEFT,
+          closeOnClick: true,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     });
   };
@@ -137,6 +153,7 @@ class ApartmentManagementBody extends Component {
                     <span>{title.name}</span>
                   </div>
                 ))}
+                <ToastContainer />
               </div>
               <div className="list-posted-apartment">
                 {listApartment.length !== 0 ? (
