@@ -29,6 +29,11 @@ class DropDownMenu extends Component {
         { id: "message", name: "Tin nhắn" },
         { id: "logout", name: "Đăng xuất" },
       ],
+      listOptionsAdmin: [
+        { id: "management", name: "Quản lí", link: "/management" },
+        { id: "apartment-post", name: "Đăng tin", link: "/apartment-post" },
+        { id: "logout", name: "Đăng xuất" },
+      ],
     };
     this.showMenu = this.showMenu.bind(this);
   }
@@ -46,10 +51,19 @@ class DropDownMenu extends Component {
     let listOptions;
     const { isToggle } = this.state;
     const { userName, privilege } = this.props;
-    listOptions =
-      privilege === "user"
-        ? this.state.listOptionsUser
-        : this.state.listOptionsOwner;
+    switch (privilege) {
+      case "user":
+        listOptions = this.state.listOptionsUser;
+        break;
+      case "owner":
+        listOptions = this.state.listOptionsOwner;
+        break;
+      case "admin":
+        listOptions = this.state.listOptionsAdmin;
+        break;
+      default:
+        break;
+    }
     return (
       <div className="drop-down-menu">
         <div className="user-name" onClick={this.showMenu}>

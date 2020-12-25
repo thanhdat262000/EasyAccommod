@@ -27,6 +27,16 @@
 .App-link {
   color: #61dafb;
 }
+.rcw-widget-container .rcw-conversation-container > .rcw-header {
+  padding: 0px;
+  align-items: flex-start;
+}
+.rcw-widget-container .rcw-conversation-container .rcw-header h4,
+span {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  padding: 0;
+}
 
 @keyframes App-logo-spin {
   from {
