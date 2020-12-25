@@ -7,7 +7,6 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import ListOwnerAccounts from "./ownerAccount/listOwnerAccounts";
 import ListOwnerPost from "./ownerPost/listOwnerPosts";
-import OwnerNoti from "./ownerNoti/ownerNoti";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import { Redirect } from "react-router-dom";
@@ -69,8 +68,6 @@ class AdminBody extends Component {
               <ListOwnerAccounts />
             ) : title.name === "Quản lý bài đăng" ? (
               <ListOwnerPost />
-            ) : title.name === "Thông báo" ? (
-              <OwnerNoti />
             ) : null}
           </div>
         </div>

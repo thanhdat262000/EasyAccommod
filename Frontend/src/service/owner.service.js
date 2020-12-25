@@ -42,6 +42,14 @@ export const getExpiredApartments = async () => {
   });
   return response.data;
 };
+export const getDisapprovedApartments = async () => {
+  const response = await axios({
+    url: ownerUrl + "disapproved",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response;
+};
 export const changeRented = async (id) => {
   const response = await axios({
     url: ownerUrl + id + "/rented",
