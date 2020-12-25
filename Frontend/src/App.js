@@ -13,6 +13,7 @@ import ApartmentManagementBody from "./components/screens/apartmentManagement/ap
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
 import AdminBody from "./components/screens/adminScreen/adminbody";
 import MessengerCustomerChat from "react-messenger-customer-chat";
+import AccountInfo from "./components/accountInfo";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path="/admin" exact>
             <AdminBody />
+          </Route>
+          <Route path="/accountinfo" exact>
+            <AccountInfo />
           </Route>
           <Route path="/" exact>
             <HomeBody />

@@ -7,7 +7,7 @@ import { logout } from "../../service/auth.service";
 import { connect } from "react-redux";
 import { logoutAction } from "../../redux/actions/logout.action";
 import { getPrivilege, getUsserName } from "../../redux/selector/selectors";
-
+import { Link } from "react-router-dom";
 class DropDownMenu extends Component {
   constructor(props) {
     super(props);
@@ -63,8 +63,15 @@ class DropDownMenu extends Component {
         {isToggle ? (
           <ul id="list-options">
             <li id="list-options-resume">
-              <img src={UserSignin} alt="user-signin" width={20} height={20} />
-              <span>HỒ SƠ</span>
+              <Link to="/accountinfo">
+                <img
+                  src={UserSignin}
+                  alt="user-signin"
+                  width={20}
+                  height={20}
+                />
+                <span>HỒ SƠ</span>
+              </Link>
             </li>
             {listOptions.map((option, index) => {
               if (option.id === "logout")

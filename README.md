@@ -27,3 +27,7 @@ npm install @material-ui/core
 ```javascript
 npm start
 ```
+
+## Link tài liệu của nhóm
+
+https://docs.google.com/document/d/1LCh5fKXyrK9jFzwl3yaSZqal8SMy2oA4pB4C2Uf8qpY/edit?usp=sharing
