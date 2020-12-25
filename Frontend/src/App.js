@@ -13,6 +13,7 @@ import MessageBody from "./components/screens/messageScreen/messageBody";
 import ApartmentManagementBody from "./components/screens/apartmentManagement/apartmentManagementBody";
 import ApartmentPostBody from "./components/screens/apartmentPost/apartmentPostBody";
 import AdminBody from "./components/screens/adminScreen/adminbody";
+import AccountInfo from "./components/accountInfo";
 import "react-chat-widget/lib/styles.css";
 import { Widget, addResponseMessage } from "react-chat-widget";
 import { connect } from "react-redux";
