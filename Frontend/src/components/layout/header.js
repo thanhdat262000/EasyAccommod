@@ -14,6 +14,7 @@ class Header extends React.Component {
   onSignupClick(e) {
     document.getElementsByClassName("signup-bg")[0].style.display = "flex";
   }
+
   render() {
     return (
       <div className="header">

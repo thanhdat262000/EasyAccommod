@@ -57,3 +57,9 @@
 .drop-down-menu ul li:first-child > span {
   margin-left: 0.5rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .drop-down-menu {
+    background-image: "../../image/userSignin.svg";
+  }
+}

@@ -5,6 +5,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  top: 0;
+  position: sticky;
+  z-index: 100;
 }
 .header a {
   text-decoration: none;
@@ -13,7 +16,7 @@
 #logo div {
   display: inline;
   align-content: center;
-  margin-left: 50px;
+  margin-left: 10%;
   /* background: -webkit-linear-gradient(#bb0045, #a76700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
@@ -42,7 +45,7 @@
   margin-left: 40px;
 }
 #logo {
-  margin-left: 5rem;
+  margin-left: 5%;
 }
 .noti {
   margin-right: 5rem;

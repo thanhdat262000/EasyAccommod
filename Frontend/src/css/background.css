@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.35);
@@ -43,4 +44,29 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .background {
+    position: relative;
+    height: 50vh;
+    background: url("http://wedo.com.vn/wp-content/uploads/2016/11/mau-thiet-ke-phong-ngu-giuong-ngu-dep-doc-dao-1.jpg")
+      center center;
+  }
+  .background .buttons {
+    justify-content: center;
+  }
+  .background .buttons a {
+    padding: 20px;
+  }
+  .background h1 {
+    margin: 0;
+    color: white;
+    font-size: 2rem;
+  }
+  .background h2 {
+    color: white;
+    font-size: 1rem;
+    font-weight: normal;
+  }
 }
