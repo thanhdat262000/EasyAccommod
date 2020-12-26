@@ -3,11 +3,9 @@ import { Widget } from "react-chat-widget";
 import "../../../css/screens/adminScreen/adminBody.css";
 import FaceIcon from "@material-ui/icons/Face";
 import AllInboxIcon from "@material-ui/icons/AllInbox";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import ShowChartIcon from "@material-ui/icons/ShowChart";
 import ListOwnerAccounts from "./ownerAccount/listOwnerAccounts";
 import ListOwnerPost from "./ownerPost/listOwnerPosts";
-import OwnerNoti from "./ownerNoti/ownerNoti";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import { Redirect } from "react-router-dom";
@@ -18,7 +16,6 @@ class AdminBody extends Component {
       listTitles: [
         { name: "Quản lý tài khoản", isChosen: true, icon: FaceIcon },
         { name: "Quản lý bài đăng", isChosen: false, icon: AllInboxIcon },
-        { name: "Thông báo", isChosen: false, icon: NotificationsIcon },
         { name: "Thống kê", isChosen: false, icon: ShowChartIcon },
       ],
     };
@@ -69,8 +66,6 @@ class AdminBody extends Component {
               <ListOwnerAccounts />
             ) : title.name === "Quản lý bài đăng" ? (
               <ListOwnerPost />
-            ) : title.name === "Thông báo" ? (
-              <OwnerNoti />
             ) : null}
           </div>
         </div>

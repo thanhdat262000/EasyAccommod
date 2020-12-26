@@ -21,9 +21,8 @@ module.exports.register = async (req, res) => {
 
   bcrypt.hash(password, saltRounds, (err, hashPassword) => {
     // Now we can store the password hash in db.
-    if(privilege === 'user'){
-      let sqlUser =
-        `INSERT INTO account set email = ?, password = ?, privilege = ?, first_name = ?, last_name =?, phone = ?, idCard = ?, status = 'Đã duyệt'`;
+    if (privilege === "user") {
+      let sqlUser = `INSERT INTO account set email = ?, password = ?, privilege = ?, first_name = ?, last_name =?, phone = ?, idCard = ?, status = 'Đã duyệt'`;
       connection.query(
         sqlUser,
         [email, hashPassword, privilege, firstName, lastName, phone, idCard],
@@ -51,8 +50,7 @@ module.exports.register = async (req, res) => {
           }
         }
       );
-    }
-    else if(privilege === 'owner'){
+    } else {
       let sqlOwner =
         "INSERT INTO account set email = ?, password = ?, privilege = ?, first_name = ?, last_name =?, phone = ?, idCard = ?";
       connection.query(

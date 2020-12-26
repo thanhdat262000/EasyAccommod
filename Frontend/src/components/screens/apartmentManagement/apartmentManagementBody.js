@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../../css/screens/apartmentManagement/apartmentManagementBody.css";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import PostedApartment from "./postedApartment";
@@ -8,6 +10,7 @@ import {
   changeDeleted,
   changeRented,
   getApprovedApartments,
+  getDisapprovedApartments,
   getExpiredApartments,
   getPendingApartments,
   getRentedApartments,
@@ -22,11 +25,13 @@ class ApartmentManagementBody extends Component {
         { name: "Phòng chờ phê duyệt", isChosen: false },
         { name: "Phòng đã cho thuê", isChosen: false },
         { name: "Phòng đã hết hạn", isChosen: false },
+        { name: "Phòng không được duyệt", isChosen: false },
       ],
       listPostedApartment: [],
       listPendingApartment: [],
       listRentedApartment: [],
       listExpiredApartment: [],
+      listDisapprovedApartment: [],
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -58,11 +63,19 @@ class ApartmentManagementBody extends Component {
       });
     });
   };
+  getAllDisapprovedApartments = () => {
+    getDisapprovedApartments().then((data) => {
+      this.setState({
+        listDisapprovedApartment: data,
+      });
+    });
+  };
   componentDidMount() {
     this.getAllApprovedApartments();
     this.getAllPendingApartments();
     this.getAllRentedApartments();
     this.getAllExpiredApartments();
+    this.getAllDisapprovedApartments();
   }
   onChangeRented = (id) => {
     changeRented(id).then((response) => {
@@ -70,6 +83,13 @@ class ApartmentManagementBody extends Component {
       if (response.status === 200) {
         this.getAllApprovedApartments();
         this.getAllRentedApartments();
+        toast.success("Cho thuê thành công", {
+          draggable: true,
+          position: toast.POSITION.BOTTOM_LEFT,
+          closeOnClick: true,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     });
   };
@@ -78,6 +98,13 @@ class ApartmentManagementBody extends Component {
       if (response.status === 200) {
         this.getAllApprovedApartments();
         this.getAllExpiredApartments();
+        toast.success("Xóa thành công", {
+          draggable: true,
+          position: toast.POSITION.BOTTOM_LEFT,
+          closeOnClick: true,
+          autoClose: 3000,
+          hideProgressBar: true,
+        });
       }
     });
   };
@@ -115,6 +142,9 @@ class ApartmentManagementBody extends Component {
         case "Phòng đã hết hạn":
           listApartment = this.state.listExpiredApartment;
           break;
+        case "Phòng không được duyệt":
+          listApartment = this.state.listDisapprovedApartment;
+          break;
         default:
           break;
       }
@@ -137,6 +167,7 @@ class ApartmentManagementBody extends Component {
                     <span>{title.name}</span>
                   </div>
                 ))}
+                <ToastContainer />
               </div>
               <div className="list-posted-apartment">
                 {listApartment.length !== 0 ? (
