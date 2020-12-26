@@ -1,6 +1,11 @@
 import React, { Component } from "react";
-import OwnerAccount from "./ownerAcoount";
+import OwnerAccount from "./ownerAccount";
 import "../../../../css/screens/adminScreen/ownerAccount/listOwnerAccounts.css";
+import {
+  approveOwner,
+  getApprovedAllOwners,
+  getPendingAllOwners,
+} from "../../../../service/admin.service";
 
 class ListOwnerAccounts extends Component {
   constructor(props) {
@@ -10,18 +15,37 @@ class ListOwnerAccounts extends Component {
         { name: "Tài khoản đã duyệt", isChosen: true },
         { name: "Tài khoản chưa duyệt", isChosen: false },
       ],
-      listApprovedOwnerAccounts: [
-        { name: "Thanh Dat", phone: "0966998657", status: "Đã duyệt" },
-        { name: "Thanh Dat", phone: "0966998657", status: "Đã duyệt" },
-        { name: "Thanh Dat", phone: "0966998657", status: "Đã duyệt" },
-      ],
-      listPendingOwnerAccounts: [
-        { name: "Thanh Nguyen", phone: "0966998657", status: "Chưa duyệt" },
-        { name: "Thanh Nguyen", phone: "0966998657", status: "Chưa duyệt" },
-        { name: "Thanh Nguyen", phone: "0966998657", status: "Chưa duyệt" },
-      ],
+      listApprovedOwnerAccounts: [],
+      listPendingOwnerAccounts: [],
     };
   }
+  componentDidMount() {
+    this.getApprovedOwners();
+    this.getPendingOwners();
+  }
+
+  getApprovedOwners = () => {
+    getApprovedAllOwners().then((data) => {
+      this.setState({
+        listApprovedOwnerAccounts: data,
+      });
+    });
+  };
+  getPendingOwners = () => {
+    getPendingAllOwners().then((data) => {
+      this.setState({
+        listPendingOwnerAccounts: data,
+      });
+    });
+  };
+  approve = (id) => {
+    approveOwner(id).then((status) => {
+      if (status === 200) {
+        this.getPendingOwners();
+        this.getApprovedOwners();
+      }
+    });
+  };
   onClick = (item) => {
     const { listTitles } = this.state;
     const i = listTitles.indexOf(item);
@@ -64,7 +88,11 @@ class ListOwnerAccounts extends Component {
         </div>
         <div className="list-owner-accounts-body">
           {listOwnerAccounts.map((account, index) => (
-            <OwnerAccount account={account} key={index} />
+            <OwnerAccount
+              account={account}
+              key={index}
+              onClick={this.approve}
+            />
           ))}
         </div>
       </div>

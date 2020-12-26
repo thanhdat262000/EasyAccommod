@@ -13,6 +13,7 @@ import {
   register,
   saveToken,
 } from "../service/auth.service";
+import { toast, ToastContainer } from "react-toastify";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -72,11 +73,16 @@ class Signup extends Component {
     let form = document.querySelector("#signup-form");
     let data = getFormData(form);
     const response = await register(data);
-    if (response.token) {
-      const decoded = decodeToken(response.token);
-      this.props.loginAction(decoded);
+    if (data.privilege === "owner") {
       document.getElementsByClassName("signup-bg")[0].style.display = "none";
-      saveToken(response.token);
+      toast.success("Thành công, tài khoản đang đợi duyệt");
+    } else {
+      if (response.token) {
+        const decoded = decodeToken(response.token);
+        this.props.loginAction(decoded);
+        document.getElementsByClassName("signup-bg")[0].style.display = "none";
+        saveToken(response.token);
+      }
     }
   }
   validateRepassword = (password, repassword) => {
@@ -173,6 +179,7 @@ class Signup extends Component {
                 onSubmit={this.onSubmit}
               />
             </div>
+            <ToastContainer />
           </form>
         </div>
       </div>
