@@ -15,7 +15,6 @@ class DropDownMenu extends Component {
       isToggle: false,
       listOptionsUser: [
         { id: "personalInfo", name: "Thông tin cá nhân" },
-        { id: "message", name: "Tin nhắn", link: "/messages" },
         { id: "favorites", name: "Danh sách yêu thích", link: "/favorite" },
         { id: "logout", name: "Đăng xuất" },
       ],
@@ -26,7 +25,6 @@ class DropDownMenu extends Component {
           link: "/apartment-management",
         },
         { id: "apartment-post", name: "Đăng tin", link: "/apartment-post" },
-        { id: "message", name: "Tin nhắn" },
         { id: "logout", name: "Đăng xuất" },
       ],
       listOptionsAdmin: [

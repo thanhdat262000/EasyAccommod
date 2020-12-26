@@ -10,6 +10,7 @@ import {
   changeDeleted,
   changeRented,
   getApprovedApartments,
+  getDisapprovedApartments,
   getExpiredApartments,
   getPendingApartments,
   getRentedApartments,
@@ -24,11 +25,13 @@ class ApartmentManagementBody extends Component {
         { name: "Phòng chờ phê duyệt", isChosen: false },
         { name: "Phòng đã cho thuê", isChosen: false },
         { name: "Phòng đã hết hạn", isChosen: false },
+        { name: "Phòng không được duyệt", isChosen: false },
       ],
       listPostedApartment: [],
       listPendingApartment: [],
       listRentedApartment: [],
       listExpiredApartment: [],
+      listDisapprovedApartment: [],
     };
     this.onClick = this.onClick.bind(this);
   }
@@ -60,11 +63,19 @@ class ApartmentManagementBody extends Component {
       });
     });
   };
+  getAllDisapprovedApartments = () => {
+    getDisapprovedApartments().then((data) => {
+      this.setState({
+        listDisapprovedApartment: data,
+      });
+    });
+  };
   componentDidMount() {
     this.getAllApprovedApartments();
     this.getAllPendingApartments();
     this.getAllRentedApartments();
     this.getAllExpiredApartments();
+    this.getAllDisapprovedApartments();
   }
   onChangeRented = (id) => {
     changeRented(id).then((response) => {
@@ -130,6 +141,9 @@ class ApartmentManagementBody extends Component {
           break;
         case "Phòng đã hết hạn":
           listApartment = this.state.listExpiredApartment;
+          break;
+        case "Phòng không được duyệt":
+          listApartment = this.state.listDisapprovedApartment;
           break;
         default:
           break;
