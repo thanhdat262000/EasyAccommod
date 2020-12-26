@@ -79,6 +79,9 @@ class App extends Component {
             <Route path="/management" exact>
               <AdminBody />
             </Route>
+            <Route path="/accountinfo" exact>
+              <AccountInfo />
+            </Route>
             <Route path="/" exact>
               <HomeBody />
             </Route>

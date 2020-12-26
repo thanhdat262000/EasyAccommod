@@ -1,0 +1,47 @@
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #ebedf0;
+}
+.ahaha {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 4px solid #ced3da;
+}
+
+.ct {
+  border-bottom: 2px solid #ebedf0;
+  justify-content: center;
+  display: flex;
+  width: 1000px;
+}
+
+.ct h5 {
+  color: #1c1e21;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  padding-left: 50px;
+  width: 220px;
+  text-align: left;
+}
+
+p {
+  color: #65676b;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: auto;
+  width: 190px;
+  text-align: left;
+}
+
+h2 {
+  color: #1c1e21;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 20px;
+  padding-left: 50px;
+  padding-top: 1%;
+  text-align: left;
+}
