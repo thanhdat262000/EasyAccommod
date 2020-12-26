@@ -36,7 +36,7 @@ class Header extends React.Component {
             <div>EasyAccommod </div>
           </a>
         </div>
-        {privilege === "owner" ? (
+        {privilege === "owner" || privilege === "admin" ? (
           <div className="notification-view">
             <div className="noti" onClick={this.onShowNoti}>
               <img src={Noti} alt="noti" width={20} height={20} />

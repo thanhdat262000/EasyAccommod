@@ -48,7 +48,7 @@ export const getDisapprovedApartments = async () => {
     method: "get",
     headers: authHeader(),
   });
-  return response;
+  return response.data;
 };
 export const changeRented = async (id) => {
   const response = await axios({
