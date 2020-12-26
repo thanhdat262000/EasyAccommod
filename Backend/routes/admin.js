@@ -1,35 +1,40 @@
-const express = require('express');
+const express = require("express");
 
-const adminController = require('../controllers/admin/adminController.js');
+const adminController = require("../controllers/admin/adminController.js");
 
 const adminRouter = express.Router();
 
-adminRouter.get('/allOwners', adminController.getAllOwners);
+adminRouter.get("/allApprovedOwners", adminController.getAllApprovedOwners);
+adminRouter.get("/allPendingOwners", adminController.getAllPendingOwners);
 
-adminRouter.get('/apartments-posts', adminController.getAllApartmentPost);
+adminRouter.get("/apartments/approved", adminController.getApprovedPost);
+adminRouter.get("/apartments/pending", adminController.getPendingPost);
 
-adminRouter.post('/apartment-post', adminController.postApartment);
+adminRouter.get("/apartments/disapproved", adminController.getDisapprovedPost);
 
-adminRouter.put('/apartments/:id', adminController.putEditApartment);
+adminRouter.post("/apartment-post", adminController.postApartment);
 
-adminRouter.put('/apartments/:id/rented', adminController.putChangeRented);
+adminRouter.put("/apartments/:id", adminController.putEditApartment);
 
-adminRouter.put('/apartments/:id/cancel', adminController.putChangeCancel);
+adminRouter.put("/apartments/:id/rented", adminController.putChangeRented);
 
-adminRouter.get('/apartments/approved', adminController.getAllApproved);
+adminRouter.put("/apartments/:id/cancel", adminController.putChangeCancel);
 
-adminRouter.get('/apartments/rented', adminController.getAllRented);
+adminRouter.get("/apartments/approved", adminController.getAllApproved);
 
-adminRouter.get('/apartments/expired', adminController.getAllExpired);
+adminRouter.get("/apartments/rented", adminController.getAllRented);
 
-adminRouter.get('/apartments/statistics', adminController.getStatistics);
+adminRouter.get("/apartments/expired", adminController.getAllExpired);
 
-adminRouter.put('/apartments/:id/disapproved', adminController.putChangeDisapproved);
+adminRouter.get("/apartments/statistics", adminController.getStatistics);
 
-adminRouter.put('/apartments/:id/approved', adminController.putChangeApproved);
+adminRouter.put(
+  "/apartments/:id/disapproved",
+  adminController.putChangeDisapproved
+);
 
-adminRouter.get('/owner/pending', adminController.getOwnersPending);
+adminRouter.put("/apartments/:id/approved", adminController.putChangeApproved);
 
-adminRouter.get('/owner/approved', adminController.getOwnersApproved);
+adminRouter.put("/owner/:id/approved", adminController.putChangeApprovedOwner);
 
 module.exports = adminRouter;
