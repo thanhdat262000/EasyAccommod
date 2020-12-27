@@ -14,13 +14,11 @@ adminRouter.get("/apartments/disapproved", adminController.getDisapprovedPost);
 
 adminRouter.post("/apartment-post", adminController.postApartment);
 
-adminRouter.put("/apartments/:id", adminController.putEditApartment);
+// adminRouter.put("/apartments/:id", adminController.putEditApartment);
 
 adminRouter.put("/apartments/:id/rented", adminController.putChangeRented);
 
 adminRouter.put("/apartments/:id/cancel", adminController.putChangeCancel);
-
-adminRouter.get("/apartments/approved", adminController.getAllApproved);
 
 adminRouter.get("/apartments/rented", adminController.getAllRented);
 

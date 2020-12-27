@@ -5,20 +5,31 @@ import "../../../../css/screens/adminScreen/ownerPost/ownerPost.css";
 class OwnerPost extends Component {
   state = {};
   render() {
-    const { ownerPost } = this.props;
+    const { ownerPost, onApprove, onDisapprove } = this.props;
     let buttons;
     switch (ownerPost.status) {
-      case "Đã duyệt":
+      case "Đã được duyệt":
         buttons = null;
         break;
-      case "Chưa duyệt":
+      case "Chưa được duyệt":
         buttons = (
           <div className="owner-post-action">
-            <button id="approve">Duyệt</button>
+            <button
+              id="approve"
+              onClick={() => onApprove(ownerPost.apartment_id)}
+            >
+              Duyệt
+            </button>
+            <button
+              id="disapprove"
+              onClick={() => onDisapprove(ownerPost.apartment_id)}
+            >
+              Không duyệt
+            </button>
           </div>
         );
         break;
-      case "Không duyệt":
+      case "Không được duyệt":
         buttons = (
           <div className="owner-post-action">
             <button id="re-approve">Khôi phục</button>
@@ -45,7 +56,7 @@ class OwnerPost extends Component {
                   {ownerPost.price} VNĐ/Tháng
                 </span>
                 <span className="owner-post-main-info-name">
-                  {ownerPost.ownerName}
+                  {ownerPost.owner}
                 </span>
               </div>
             </div>
@@ -58,12 +69,12 @@ class OwnerPost extends Component {
             <div className="owner-post-more-detail owner-post-section">
               <div className="owner-post-more-detail-time">
                 <span>Ngày tạo: </span>
-                <span id="statistic">{ownerPost.time}</span>
+                <span id="statistic">{ownerPost.postTime.split(":")[0]}</span>
               </div>
             </div>
             <div className="owner-post-expiration">
               <span>Quá hạn: </span>
-              <span id="statistic">{ownerPost.time}</span>
+              <span id="statistic">{ownerPost.expiration.split(":")[0]}</span>
             </div>
           </div>
         </a>

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../../../../css/screens/adminScreen/ownerAccount/ownerAccount.css";
-import { approveOwner } from "../../../../service/admin.service";
 class OwnerAccount extends Component {
   button = () => {
     const { status, account_id } = this.props.account;

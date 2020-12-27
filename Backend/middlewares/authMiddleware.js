@@ -19,9 +19,7 @@ module.exports.authRole = (role) => {
         try {
           if (err) throw err;
           else {
-            console.log(decoded);
             let roleDecode = decoded.data.privilege;
-            console.log(roleDecode);
             if (role !== roleDecode) {
               res.status(401);
               res.send("Not Allowed");
