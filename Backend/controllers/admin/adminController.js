@@ -347,6 +347,14 @@ module.exports.putChangeRented = async (req, res) => {
   }
 };
 
+module.exports.getAllNotification = async (req, res) => {
+  const sql = `SELECT * FROM notification WHERE account_id = ?`;
+  connection.query(sql, [req.id], async (err, results, fields) => {
+    if (err) res.sendStatus(400);
+    else res.json(results);
+  });
+};
+
 module.exports.putChangeDisapproved = async (req, res) => {
   const apartment_id = req.params.id;
   const message = `Một phong trọ không được duyệt`;
@@ -386,7 +394,7 @@ module.exports.putChangeApproved = async (req, res) => {
         WHERE apartment.apartment_id = ? `;
   const getAccountId = `SELECT apartment.account_id FROM apartment WHERE apartment_id = ?`;
   const autoPushNotification = `INSERT INTO notification 
-        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
+        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?, time = ?`;
   try {
     connection.query(sql, [req.params.id], async (err, results, fields) => {
       if (err) throw err;
@@ -395,7 +403,12 @@ module.exports.putChangeApproved = async (req, res) => {
         else {
           connection.query(
             autoPushNotification,
-            [results[0]["account_id"], apartment_id, message],
+            [
+              results[0]["account_id"],
+              apartment_id,
+              message,
+              new Date(Date.now()),
+            ],
             (err, results, fields) => {
               if (err) throw err;
               res.sendStatus(200);
@@ -475,6 +488,19 @@ module.exports.getStatistics = async (req, res) => {
           res.json(data);
         });
       });
+    });
+  } catch (err) {
+    res.sendStatus(400);
+  }
+};
+
+module.exports.getAllOwner = async (req, res) => {
+  const sql = `SELECT account.email, CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, account.idCard 
+  FROM account WHERE account_id = ?`;
+  try {
+    connection.query(sql, [req.params.id], (err, results, fields) => {
+      if (err) throw err;
+      else res.json(results[0]);
     });
   } catch (err) {
     res.sendStatus(400);

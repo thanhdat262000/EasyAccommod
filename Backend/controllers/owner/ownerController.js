@@ -64,8 +64,8 @@ module.exports.putChangeRented = async (req, res) => {
         WHERE apartment.apartment_id = ? AND apartment.account_id = ?`;
   const listAdmin = `SELECT account_id FROM account WHERE privilege = "admin"`;
   const autoPushNotification = `INSERT INTO notification 
-        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
-  const message = `Apartment ${req.params.id} is rented`;
+        SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?, time = ?`;
+  const message = `Một phòng trọ đã cho thuê`;
   try {
     connection.query(sql, [req.params.id, req.id], (err, results, fields) => {
       if (err) throw err;
@@ -75,7 +75,12 @@ module.exports.putChangeRented = async (req, res) => {
           for (let i = 0; i < results.length; i++) {
             connection.query(
               autoPushNotification,
-              [results[i]["account_id"], req.params.id, message],
+              [
+                results[i]["account_id"],
+                req.params.id,
+                message,
+                new Date(Date.now()),
+              ],
               (err, results, fields) => {
                 if (err) throw err;
               }
@@ -316,8 +321,8 @@ module.exports.putEditApartment = async (req, res) => {
 };
 
 module.exports.getAllNotification = async (req, res) => {
-  const sql = `SELECT * FROM notification WHERE apartment_id = ?`;
-  connection.query(sql, [req.params.id], async (err, results, fields) => {
+  const sql = `SELECT * FROM notification WHERE account_id = ?`;
+  connection.query(sql, [req.id], async (err, results, fields) => {
     if (err) res.sendStatus(400);
     else res.json(results);
   });

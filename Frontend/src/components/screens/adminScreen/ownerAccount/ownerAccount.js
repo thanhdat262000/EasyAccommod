@@ -6,7 +6,9 @@ class OwnerAccount extends Component {
     if (status === "Đã duyệt")
       return (
         <div className="owner-account-buttons">
-          <button className="view">Xem</button>
+          <a href={`accountInfo/${account_id}`}>
+            <button className="view">Xem</button>
+          </a>
         </div>
       );
     else

@@ -73,3 +73,19 @@ export const getStatistic = async () => {
   });
   return response.data;
 };
+export const getOwnerNoti = async () => {
+  const response = await axios({
+    url: adminUrl + "notification",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};
+export const getOwnerInfo = async (id) => {
+  const response = await axios({
+    url: adminUrl + "owner/" + id,
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};

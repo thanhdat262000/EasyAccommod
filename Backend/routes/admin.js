@@ -10,6 +10,7 @@ adminRouter.get("/allPendingOwners", adminController.getAllPendingOwners);
 adminRouter.get("/apartments/approved", adminController.getApprovedPost);
 adminRouter.get("/apartments/pending", adminController.getPendingPost);
 
+adminRouter.get("/notification", adminController.getAllNotification);
 adminRouter.get("/apartments/disapproved", adminController.getDisapprovedPost);
 
 adminRouter.post("/apartment-post", adminController.postApartment);
@@ -25,6 +26,8 @@ adminRouter.get("/apartments/rented", adminController.getAllRented);
 adminRouter.get("/apartments/expired", adminController.getAllExpired);
 
 adminRouter.get("/apartments/statistics", adminController.getStatistics);
+
+adminRouter.get("/owner/:id", adminController.getAllOwner);
 
 adminRouter.put(
   "/apartments/:id/disapproved",

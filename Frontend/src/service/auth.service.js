@@ -22,7 +22,6 @@ export const login = async (data) => {
 };
 export const logout = () => {
   localStorage.removeItem("token");
-  window.location.reload(false);
 };
 export const saveToken = (token) => {
   localStorage.setItem("token", token);

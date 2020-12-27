@@ -20,7 +20,6 @@ class ListStatisticsPost extends Component {
   }
   getMostView = () => {
     getStatistic().then((data) => {
-      console.log(data);
       this.setState({
         listMostViewPost: data.mostView,
       });
@@ -28,7 +27,6 @@ class ListStatisticsPost extends Component {
   };
   getMostLike = () => {
     getStatistic().then((data) => {
-      console.log(data);
       this.setState({
         listMostLikePost: data.mostFavorite,
       });
