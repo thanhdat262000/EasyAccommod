@@ -59,7 +59,23 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .name {
+    display: none;
+    visibility: hidden;
+    clear: both;
+  }
+  .drop-down-menu ul {
+    width: 210px;
+    height: 170px;
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+  }
   .drop-down-menu {
-    background-image: "../../image/userSignin.svg";
+    display: inline;
+    width: 100%;
+  }
+  #logo {
+    margin-right: 50px;
   }
 }
