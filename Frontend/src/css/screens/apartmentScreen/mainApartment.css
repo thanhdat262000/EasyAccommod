@@ -22,3 +22,17 @@
   flex-direction: column;
   align-items: flex-start;
 }
+@media only screen and (max-width: 600px) {
+  .main-apartment .main-layout-body .main-layout-body-advancedInfo {
+    display: none;
+    visibility: hidden;
+    clear: both;
+  }
+  .main-apartment .main-layout {
+    width: 90%;
+    z-index: auto;
+  }
+  .main-apartment .main-layout-body .main-layout-body-info {
+    flex-basis: 100%;
+  }
+}

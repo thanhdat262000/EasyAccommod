@@ -21,3 +21,14 @@ textarea[name="price"] {
   flex-basis: 15%;
   height: 1.5rem;
 }
+@media screen and (max-width: 600px) {
+  .list-apartment-post-property-form-section-2 {
+    display: none;
+    visibility: hidden;
+    clear: both;
+  }
+  .post-apartment-selection select {
+    outline: none;
+    flex-basis: 50%;
+  }
+}

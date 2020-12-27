@@ -45,7 +45,7 @@
   margin-left: 40px;
 }
 #logo {
-  margin-left: 5%;
+  margin-left: 10%;
 }
 .noti {
   cursor: pointer;
@@ -76,4 +76,16 @@
   top: 2rem;
   right: 0;
   height: 400px;
+}
+@media only screen and (max-width: 600px) {
+  .noti {
+    display: none;
+    visibility: hidden;
+    clear: both;
+  }
+  #logo a {
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+  }
 }

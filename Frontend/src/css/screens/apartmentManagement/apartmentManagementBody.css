@@ -38,3 +38,11 @@
   color: white;
   margin-left: 1rem;
 }
+@media screen and (max-width: 600px) {
+  .apartment-management-body .title-list .title-list-item {
+    font-size: 0.7rem;
+  }
+  .apartment-management-body {
+    width: 95%;
+  }
+}
