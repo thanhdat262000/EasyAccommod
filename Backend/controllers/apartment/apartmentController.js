@@ -111,7 +111,8 @@ module.exports.favorite = async (req, res) => {
 };
 
 module.exports.comment = async (req, res) => {
-  const { comment } = req.body;
+  const { comment, rate } = req.body;
+  console.log(rate, typeof(rate));
   const apartment_id = req.params.id;
   jwt.verify(
     req.headers["x-access-token"],
@@ -122,10 +123,10 @@ module.exports.comment = async (req, res) => {
         console.log(decoded);
         let idDecode = decoded.data.id;
         const sql =
-          "INSERT INTO comment SET  status=?, account_id=?, apartment_id=?, comment=? ";
+          "INSERT INTO comment SET  status=?, account_id=?, apartment_id=?, comment=?, rate = ?";
         connection.query(
           sql,
-          [0, idDecode, apartment_id, comment],
+          [0, idDecode, apartment_id, comment, rate],
           (err, results, fields) => {
             try {
               if (err) throw err;
