@@ -442,32 +442,36 @@ module.exports.getStatistics = async (req, res) => {
   // JOIN city ON city.city_id = apartment.city_id
   // JOIN district ON district.city_id = city.city_id
   // ORDER BY apartment_detail.favorite DESC LIMIT 1`;
-  const mostView = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, apartment_detail.view, apartment_detail.favorite, apartment.postTime
+  const mostView = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,city.name as city, district.name as district,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, apartment_detail.view, apartment_detail.favorite, apartment.postTime, "mostView" as type
     FROM apartment
+    JOIN city ON city.city_id = apartment.city_id
+    JOIN district ON district.district_id = apartment.district_id
     JOIN account ON account.account_id = apartment.account_id
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
-   	ORDER BY apartment_detail.view DESC LIMIT 1`;
-  const mostFavorite = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, apartment_detail.view, apartment_detail.favorite, apartment.postTime
+   	ORDER BY apartment_detail.view DESC LIMIT 3`;
+  const mostFavorite = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, city.name as city, district.name as district ,apartment_detail.price, apartment_detail.square, apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, apartment_detail.view, apartment_detail.favorite, apartment.postTime, "mostLike" as type
     FROM apartment
+    JOIN city ON city.city_id = apartment.city_id
+    JOIN district ON district.district_id = apartment.district_id
     JOIN account ON account.account_id = apartment.account_id
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
-   	ORDER BY apartment_detail.favorite DESC LIMIT 1`;
+   	ORDER BY apartment_detail.favorite DESC LIMIT 3`;
   const mostPostime = `SELECT COUNT(*) AS post, postTime, YEAR(postTime) AS year, MONTH(postTime) AS month
     FROM apartment
    	GROUP BY YEAR(postTime) AND MONTH(postTime)
-    ORDER BY COUNT(*) DESC LIMIT 1`;
+    ORDER BY COUNT(*) DESC LIMIT 3`;
   let data = {};
   try {
     connection.query(mostView, async (err, results, fields) => {
       if (err) throw err;
-      data.mostView = results[0];
+      data.mostView = results;
 
       connection.query(mostFavorite, async (err, results, fields) => {
         if (err) throw err;
-        data.mostFavorite = results[0];
+        data.mostFavorite = results;
 
         connection.query(mostPostime, async (err, results, fields) => {
-          data.mostPostime = results[0];
+          data.mostPostime = results;
           res.json(data);
         });
       });
