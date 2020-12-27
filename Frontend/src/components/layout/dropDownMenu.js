@@ -41,8 +41,8 @@ class DropDownMenu extends Component {
     });
   }
   onLogout = (e) => {
-    logout();
     this.props.logoutAction();
+    logout();
     this.props.history.push("/");
   };
   render() {

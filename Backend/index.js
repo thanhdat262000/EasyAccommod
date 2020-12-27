@@ -5,6 +5,7 @@ const socketio = require("socket.io");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+const connection = require("./db");
 const apartmentsRouter = require("./routes/apartmentsRouter");
 const apartmentRouter = require("./routes/apartmentRouter");
 const signinRouter = require("./routes/signin");
@@ -12,7 +13,7 @@ const ownerRouter = require("./routes/owner");
 const registerRouter = require("./routes/register");
 const adminRouter = require("./routes/admin");
 const { authUser, authRole } = require("./middlewares/authMiddleWare");
-const {authSignin} = require('./middlewares/authSignin');
+const { authSignin } = require("./middlewares/authSignin");
 const { ROLE } = require("./role");
 const chat = require("./routes/chat");
 // const swaggerUi = require('swagger-ui-express');
@@ -42,6 +43,20 @@ app.use("/admin", authUser, authRole(ROLE.ADMIN), adminRouter);
 app.use("/signin", authSignin, signinRouter);
 app.use("/register", registerRouter);
 app.use("/", chat);
+
+app.get("/showInfo", authUser, (req, res) => {
+  const sql = `SELECT account.email, CONCAT(account.first_name, " ", account.last_name) AS name, account.phone, account.idCard 
+  FROM account WHERE account_id = ?`;
+  try {
+    connection.query(sql, [req.id], (err, results, fields) => {
+      if (err) throw err;
+      else res.json(results[0]);
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
 
 io.on("connect", (socket) => {
   socket.on("join", ({ privilege, name }, callback) => {

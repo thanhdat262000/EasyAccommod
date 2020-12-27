@@ -7,15 +7,15 @@ class Notification extends Component {
     this.state = {};
   }
   render() {
-    const { image, message, time, apartment_id } = this.props.noti;
+    const { detailDescription, apartment_id, time } = this.props.noti;
     return (
       <a href={`/apartment/${apartment_id}`} className="notification-link">
         <div className="notification">
           <div className="notification-image">
-            <img src={image} alt="noti" />
+            <img src="https://picsum.photos/200/300" alt="noti" />
           </div>
           <div className="notification-message">
-            <span id="message">{message}</span>
+            <span id="message">{detailDescription}</span>
             <span id="time">{time}</span>
           </div>
           <img src={Cancel} alt="cancel" width={13} height={13} />

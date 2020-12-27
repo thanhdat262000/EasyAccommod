@@ -85,6 +85,9 @@ class App extends Component {
             <Route path="/" exact>
               <HomeBody />
             </Route>
+            <Route path="/accountInfo/:id" exact>
+              <AccountInfo />
+            </Route>
           </Switch>
 
           <Login />

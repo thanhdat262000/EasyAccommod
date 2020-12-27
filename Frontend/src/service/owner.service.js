@@ -66,3 +66,11 @@ export const changeDeleted = async (id) => {
   });
   return response;
 };
+export const getNoti = async () => {
+  const response = await axios({
+    url: ownerUrl + "notification",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};

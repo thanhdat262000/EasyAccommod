@@ -7,9 +7,34 @@ import {
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../css/accountinfo.css";
+import { getOwnerInfo } from "../service/admin.service";
+import { getInfo } from "../service/user.service";
 class AccountInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accountInfo: {},
+    };
+  }
+  componentDidMount() {
+    const { match } = this.props;
+    if (!match.params.id) {
+      getInfo().then((data) => {
+        console.log(data);
+        this.setState({
+          accountInfo: data,
+        });
+      });
+    } else
+      getOwnerInfo(match.params.id).then((data) => {
+        console.log(data);
+        this.setState({
+          accountInfo: data,
+        });
+      });
+  }
   render() {
-    const { userName, privilege, email } = this.props;
+    const { name, email, phone, idCard } = this.state.accountInfo;
 
     return (
       <div>
@@ -19,7 +44,7 @@ class AccountInfo extends Component {
         <div className="contentArea">
           <div className="ct">
             <h5>Tên</h5>
-            <p>{userName}</p>
+            <p>{name}</p>
           </div>
           <div className="ct">
             <h5>Email</h5>
@@ -27,15 +52,11 @@ class AccountInfo extends Component {
           </div>
           <div className="ct">
             <h5>Số điện thoại</h5>
-            <p>0969008527</p>
-          </div>
-          <div className="ct">
-            <h5>Ngày sinh</h5>
-            <p>27/12/2000</p>
+            <p>{phone}</p>
           </div>
           <div className="ct">
             <h5>Số CMTND</h5>
-            <p>10255257</p>
+            <p>{idCard}</p>
           </div>
         </div>
       </div>

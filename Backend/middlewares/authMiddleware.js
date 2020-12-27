@@ -7,7 +7,22 @@ module.exports.authUser = async (req, res, next) => {
     res.status(403);
     return res.send("You need to sign in");
   }
-  next();
+  jwt.verify(
+    req.headers["x-access-token"],
+    process.env.JWT_KEY,
+    (err, decoded) => {
+      try {
+        if (err) throw err;
+        else {
+          req.id = decoded.data.id;
+          next();
+        }
+      } catch (err) {
+        console.log(err);
+        res.sendStatus(401);
+      }
+    }
+  );
 };
 
 module.exports.authRole = (role) => {

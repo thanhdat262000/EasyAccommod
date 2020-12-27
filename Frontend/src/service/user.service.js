@@ -52,3 +52,9 @@ export const search = async (query) => {
   );
   return response.data;
 };
+export const getInfo = async () => {
+  const response = await axios.get("http://localhost:8000/showInfo", {
+    headers: authHeader(),
+  });
+  return response.data;
+};
