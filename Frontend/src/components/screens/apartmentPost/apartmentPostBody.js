@@ -67,11 +67,14 @@ class ApartmentPostBody extends Component {
           isPosted: true,
         },
         () => {
-          console.log(index);
+          const formdata = new FormData();
+          for (let key in this.state.postData) {
+            formdata.append(key, this.state.postData[key]);
+          }
           if (index === 3) {
-            postApartment(this.state.postData).then((status) => {
+            postApartment(formdata).then((status) => {
               if (status === 200) {
-                console.log(this.state.postData);
+                console.log(formdata);
                 console.log(status);
                 // this.props.history.push("/apartment-management");
               }
@@ -167,7 +170,13 @@ class ApartmentPostBody extends Component {
         );
         break;
       case "Tải lên ảnh":
-        apartmentPostBody = <ApartmentPostImage />;
+        apartmentPostBody = (
+          <ApartmentPostImage
+            disPlay={this.disPlay}
+            onDeleteImage={this.onDeleteImage}
+            listImages={this.state.postData.images}
+          />
+        );
         break;
       case "Kiểm tra trùng lặp":
         apartmentPostBody = <ApartmentPostCheckDuplicate />;

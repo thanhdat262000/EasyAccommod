@@ -8,16 +8,14 @@ class ApartmentPostImage extends Component {
     this.state = {
       listImages: [],
     };
-    this.disPlay = this.disPlay.bind(this);
   }
-
-  disPlay(event) {
-    const listImages = [...this.state.listImages];
-    listImages.push(URL.createObjectURL(event.target.files[0]));
+  display = (e) => {
+    console.log(e.target.files);
+    const images = [...e.target.files].map((file) => URL.createObjectURL(file));
     this.setState({
-      listImages: listImages,
+      listImages: [...this.state.listImages, ...images],
     });
-  }
+  };
   onDeleteImage = (index) => {
     const { listImages } = this.state;
     this.setState({
@@ -38,7 +36,7 @@ class ApartmentPostImage extends Component {
             <img src={Upload} alt="upload" width={20} height={20} />
           </label>
           <input
-            onChange={this.disPlay}
+            onChange={this.display}
             type="file"
             accept="image/*"
             id="apartment-post-image-button"
@@ -55,7 +53,7 @@ class ApartmentPostImage extends Component {
         </div>
         <div className="apartment-post-image-review">
           {listImages.map((image, index) => (
-            <div className="image-review" key="index">
+            <div className="image-review" key={index}>
               {" "}
               <img
                 src={image}

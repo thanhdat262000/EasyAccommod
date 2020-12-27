@@ -1,5 +1,6 @@
 const connection = require("../../db");
 const { TIME } = require("../../time");
+const multer = require("multer");
 
 module.exports.getAllPending = async (req, res) => {
   const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
@@ -64,20 +65,24 @@ module.exports.putChangeRented = async (req, res) => {
   const listAdmin = `SELECT account_id FROM account WHERE privilege = "admin"`;
   const autoPushNotification = `INSERT INTO notification 
         SET notification.account_id = ?, notification.apartment_id = ?, notification.detailDescription = ?`;
-  const message = `Apartment ${req.params.id} is rented`
+  const message = `Apartment ${req.params.id} is rented`;
   try {
     connection.query(sql, [req.params.id, req.id], (err, results, fields) => {
       if (err) throw err;
-      else{
-        connection.query(listAdmin, (err, results, fields ) => {
-          if(err) throw err;
-          for(let i=0; i<results.length; i++){
-            connection.query(autoPushNotification, [results[i]['account_id'], req.params.id, message], (err, results, fields) => {
-              if(err) throw err;
-            })
+      else {
+        connection.query(listAdmin, (err, results, fields) => {
+          if (err) throw err;
+          for (let i = 0; i < results.length; i++) {
+            connection.query(
+              autoPushNotification,
+              [results[i]["account_id"], req.params.id, message],
+              (err, results, fields) => {
+                if (err) throw err;
+              }
+            );
           }
           res.sendStatus(200);
-        })
+        });
       }
     });
   } catch (err) {
@@ -100,7 +105,7 @@ module.exports.putChangeCancel = async (req, res) => {
   }
 };
 
-module.exports.postApartment = async (req, res) => {
+module.exports.postApartment = (req, res) => {
   const {
     apartment_type,
     city,
@@ -120,6 +125,7 @@ module.exports.postApartment = async (req, res) => {
     numberDate,
     typeDate,
   } = req.body;
+  console.log(req.files);
   const postTime = Date.now();
   const status = "Chưa được duyệt";
   let expiration;
@@ -131,7 +137,6 @@ module.exports.postApartment = async (req, res) => {
     expiration = postTime + numberDate * TIME.YEAR;
   }
   expiration = new Date(expiration);
-  console.log(expiration, typeof expiration);
 
   let city_id, district_id;
 
@@ -318,8 +323,7 @@ module.exports.getAllNotification = async (req, res) => {
   });
 };
 
-
-module.exports.getAllDisapproved = async(req, res) => {
+module.exports.getAllDisapproved = async (req, res) => {
   const sql = `SELECT apartment.apartment_id, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
     FROM apartment
     JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
@@ -331,4 +335,4 @@ module.exports.getAllDisapproved = async(req, res) => {
     if (err) return res.sendStatus(404);
     res.json(results);
   });
-}
+};

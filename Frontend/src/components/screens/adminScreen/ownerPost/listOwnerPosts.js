@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import "../../../../css/screens/adminScreen/ownerPost/listOwnerPost.css";
+import {
+  approvePost,
+  disapprovePost,
+  getApprovedPosts,
+  getDisapprovedPosts,
+  getPendingPosts,
+} from "../../../../service/admin.service";
 import OwnerPost from "./ownerPost";
-
+import { toast, ToastContainer } from "react-toastify";
 class ListOwnerPost extends Component {
   constructor(props) {
     super(props);
@@ -11,68 +18,37 @@ class ListOwnerPost extends Component {
         { name: "Bài chưa duyệt", isChosen: false },
         { name: "Bài không duyệt", isChosen: false },
       ],
-      listApprovedPost: [
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Đã duyệt",
-          apartment_id: 1,
-        },
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Đã duyệt",
-        },
-      ],
-      listPendingPost: [
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Chưa duyệt",
-        },
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Chưa duyệt",
-        },
-      ],
-      listDisappovedPost: [
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Không duyệt",
-        },
-        {
-          ownerName: "thanh Dat",
-          ownerPhone: "0966998657",
-          city: "Hà Nội",
-          district: "Quận Cầu Giấy",
-          price: "1000000",
-          time: "1 thg 12",
-          status: "Không duyệt",
-        },
-      ],
+      listApprovedPost: [],
+      listPendingPost: [],
+      listDisappovedPost: [],
     };
+  }
+
+  getAllApprovedPost = () => {
+    getApprovedPosts().then((data) => {
+      this.setState({
+        listApprovedPost: data,
+      });
+    });
+  };
+  getAllPendingPost = () => {
+    getPendingPosts().then((data) => {
+      this.setState({
+        listPendingPost: data,
+      });
+    });
+  };
+  getAllDisapprovedPost = () => {
+    getDisapprovedPosts().then((data) => {
+      this.setState({
+        listDisappovedPost: data,
+      });
+    });
+  };
+  componentDidMount() {
+    this.getAllApprovedPost();
+    this.getAllPendingPost();
+    this.getAllDisapprovedPost();
   }
   onClick = (item) => {
     const { listTitles } = this.state;
@@ -85,6 +61,36 @@ class ListOwnerPost extends Component {
         }),
       });
     }
+  };
+  onApprove = (id) => {
+    approvePost(id)
+      .then((status) => {
+        if (status === 200) {
+          toast.success("Duyệt thành công!", {
+            position: toast.POSITION.BOTTOM_LEFT,
+          });
+        }
+        this.getAllApprovedPost();
+        this.getAllPendingPost();
+      })
+      .catch((error) => {
+        toast.error("Đã xảy ra lỗi", { position: toast.POSITION.BOTTOM_LEFT });
+      });
+  };
+  onDisapprove = (id) => {
+    disapprovePost(id)
+      .then((status) => {
+        if (status === 200) {
+          toast.info("Bỏ qua phòng trọ!", {
+            position: toast.POSITION.BOTTOM_LEFT,
+          });
+        }
+        this.getAllDisapprovedPost();
+        this.getAllPendingPost();
+      })
+      .catch((error) => {
+        toast.error("Đã xảy ra lỗi", { position: toast.POSITION.BOTTOM_LEFT });
+      });
   };
   render() {
     let listOwnerPosts;
@@ -127,9 +133,15 @@ class ListOwnerPost extends Component {
 
         <div className="list-owner-posts-body">
           {listOwnerPosts.map((post, index) => (
-            <OwnerPost ownerPost={post} key={index} />
+            <OwnerPost
+              ownerPost={post}
+              key={index}
+              onApprove={this.onApprove}
+              onDisapprove={this.onDisapprove}
+            />
           ))}
         </div>
+        <ToastContainer />
       </div>
     );
   }

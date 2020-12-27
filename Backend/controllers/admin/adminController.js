@@ -22,56 +22,43 @@ module.exports.getAllPendingOwners = async (req, res) => {
     res.json(results);
   });
 };
-
-module.exports.getApprovedPost = async (req, res) => {
-  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
-    FROM apartment
-    JOIN account ON account.account_id = apartment.account_id
-    JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
-    JOIN city ON city.city_id = apartment.city_id
-    JOIN district ON district.city_id = city.city_id
-    WHERE status= "Đã được duyệt"`;
-  connection.query(sql, async (err, results, fields) => {
-    if (err) res.sendStatus(400);
-    res.json(results);
-  });
-};
 module.exports.getPendingPost = async (req, res) => {
-  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment.apartment_id,apartment.postTime,apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
       FROM apartment
       JOIN account ON account.account_id = apartment.account_id
       JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
       JOIN city ON city.city_id = apartment.city_id
       JOIN district ON district.city_id = city.city_id
-      WHERE status= "Chưa được duyệt"`;
+      WHERE apartment.status= "Chưa được duyệt"`;
   connection.query(sql, async (err, results, fields) => {
     if (err) res.sendStatus(400);
     res.json(results);
   });
 };
 module.exports.getApprovedPost = async (req, res) => {
-  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.apartment_id,apartment.postTime,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
       FROM apartment
       JOIN account ON account.account_id = apartment.account_id
       JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
       JOIN city ON city.city_id = apartment.city_id
       JOIN district ON district.city_id = city.city_id
-      WHERE status= "Đã được duyệt"`;
+      WHERE apartment.status= "Đã được duyệt"`;
   connection.query(sql, async (err, results, fields) => {
     if (err) res.sendStatus(400);
     res.json(results);
   });
 };
 module.exports.getDisapprovedPost = async (req, res) => {
-  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
+  const sql = `SELECT CONCAT(account.first_name, " ", account.last_name) AS owner,apartment.account_id, apartment.apartment_id,apartment.postTime,apartment_detail.price, apartment_detail.square, apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
       FROM apartment
       JOIN account ON account.account_id = apartment.account_id
       JOIN apartment_detail ON apartment.apartment_id = apartment_detail.apartment_id
       JOIN city ON city.city_id = apartment.city_id
       JOIN district ON district.city_id = city.city_id
-      WHERE status= "Không được duyệt"`;
+      WHERE apartment.status= "Không được duyệt"`;
   connection.query(sql, async (err, results, fields) => {
     if (err) res.sendStatus(400);
+    console.log(results);
     res.json(results);
   });
 };
@@ -182,109 +169,109 @@ module.exports.postApartment = async (req, res) => {
   }
 };
 
-module.exports.putEditApartment = async (req, res) => {
-  const {
-    apartment_type,
-    city,
-    district,
-    town,
-    addressDescription,
-    price,
-    square,
-    roomDescription,
-    bathroom_type,
-    kitchen_type,
-    hasElevator,
-    withOwner,
-    hasAirConditioning,
-    smoker,
-    waterAndElecticity_bill_type,
-    numberDate,
-    typeDate,
-  } = req.body;
-  const postTime = Date.now();
-  const status = "Đã được duyệt";
-  let expiration;
-  if (typeDate === "Tuần") {
-    expiration = postTime + numberDate * TIME.WEEK;
-  } else if (typeDate === "Tháng") {
-    expiration = postTime + numberDate * TIME.MONTH;
-  } else if (typeDate === "Năm") {
-    expiration = postTime + numberDate * TIME.YEAR;
-  }
-  let city_id, district_id;
+// module.exports.putEditApartment = async (req, res) => {
+//   const {
+//     apartment_type,
+//     city,
+//     district,
+//     town,
+//     addressDescription,
+//     price,
+//     square,
+//     roomDescription,
+//     bathroom_type,
+//     kitchen_type,
+//     hasElevator,
+//     withOwner,
+//     hasAirConditioning,
+//     smoker,
+//     waterAndElecticity_bill_type,
+//     numberDate,
+//     typeDate,
+//   } = req.body;
+//   const postTime = Date.now();
+//   const status = "Đã được duyệt";
+//   let expiration;
+//   if (typeDate === "Tuần") {
+//     expiration = postTime + numberDate * TIME.WEEK;
+//   } else if (typeDate === "Tháng") {
+//     expiration = postTime + numberDate * TIME.MONTH;
+//   } else if (typeDate === "Năm") {
+//     expiration = postTime + numberDate * TIME.YEAR;
+//   }
+//   let city_id, district_id;
 
-  const sqlApartment = `UPDATE apartment 
-        SET account_id = ?, city_id = ?, district_id = ?, expiration = ?, status = ?, apartment_type = ?, postTime = ?
-        WHERE apartment.apartment_id = ?`;
-  const sqlCity = "SELECT city.city_id FROM city WHERE city.name = ?";
-  const sqlDistrict =
-    "SELECT district.district_id FROM district WHERE district.name = ?";
-  const sqlApartmentDetail = `UPDATE apartment_detail 
-        SET price = ?, square = ?, roomDescription = ?, addressDescription = ?, hasElevator = ?, withOwner = ?, 
-        hasAirConditioning = ?, kitchen_type = ?, bathroom_type = ?, smoker = ?, waterAndElecticity_bill_type = ?
-        WHERE apartment_id = ?`;
+//   const sqlApartment = `UPDATE apartment
+//         SET account_id = ?, city_id = ?, district_id = ?, expiration = ?, status = ?, apartment_type = ?, postTime = ?
+//         WHERE apartment.apartment_id = ?`;
+//   const sqlCity = "SELECT city.city_id FROM city WHERE city.name = ?";
+//   const sqlDistrict =
+//     "SELECT district.district_id FROM district WHERE district.name = ?";
+//   const sqlApartmentDetail = `UPDATE apartment_detail
+//         SET price = ?, square = ?, roomDescription = ?, addressDescription = ?, hasElevator = ?, withOwner = ?,
+//         hasAirConditioning = ?, kitchen_type = ?, bathroom_type = ?, smoker = ?, waterAndElecticity_bill_type = ?
+//         WHERE apartment_id = ?`;
 
-  try {
-    connection.query(sqlCity, [city], async (err, results, fields) => {
-      // console.log(results[0].city_id)
-      if (err) throw err;
-      city_id = results[0].city_id;
+//   try {
+//     connection.query(sqlCity, [city], async (err, results, fields) => {
+//       // console.log(results[0].city_id)
+//       if (err) throw err;
+//       city_id = results[0].city_id;
 
-      connection.query(
-        sqlDistrict,
-        [district],
-        async (err, results, fields) => {
-          if (err) throw err;
+//       connection.query(
+//         sqlDistrict,
+//         [district],
+//         async (err, results, fields) => {
+//           if (err) throw err;
 
-          district_id = results[0].district_id;
+//           district_id = results[0].district_id;
 
-          connection.query(
-            sqlApartment,
-            [
-              req.id,
-              city_id,
-              district_id,
-              expiration,
-              status,
-              apartment_type,
-              new Date(Date.now()),
-              req.params.id,
-            ],
-            async (err, results, fields) => {
-              if (err) throw err;
+//           connection.query(
+//             sqlApartment,
+//             [
+//               req.id,
+//               city_id,
+//               district_id,
+//               expiration,
+//               status,
+//               apartment_type,
+//               new Date(Date.now()),
+//               req.params.id,
+//             ],
+//             async (err, results, fields) => {
+//               if (err) throw err;
 
-              connection.query(
-                sqlApartmentDetail,
-                [
-                  price,
-                  square,
-                  roomDescription,
-                  addressDescription,
-                  hasElevator,
-                  withOwner,
-                  hasAirConditioning,
-                  kitchen_type,
-                  bathroom_type,
-                  smoker,
-                  waterAndElecticity_bill_type,
-                  req.params.id,
-                ],
-                async (err, results, fields) => {
-                  if (err) throw err;
+//               connection.query(
+//                 sqlApartmentDetail,
+//                 [
+//                   price,
+//                   square,
+//                   roomDescription,
+//                   addressDescription,
+//                   hasElevator,
+//                   withOwner,
+//                   hasAirConditioning,
+//                   kitchen_type,
+//                   bathroom_type,
+//                   smoker,
+//                   waterAndElecticity_bill_type,
+//                   req.params.id,
+//                 ],
+//                 async (err, results, fields) => {
+//                   if (err) throw err;
 
-                  res.sendStatus(200);
-                }
-              );
-            }
-          );
-        }
-      );
-    });
-  } catch (err) {
-    res.send(400);
-  }
-};
+//                   res.sendStatus(200);
+//                 }
+//               );
+//             }
+//           );
+//         }
+//       );
+//     });
+//   } catch (err) {
+//     res.send(400);
+//   }
+// };
 
 module.exports.getAllApproved = async (req, res) => {
   const sql = `SELECT apartment.apartment_type, apartment.status, apartment.expiration, apartment_detail.square, apartment_detail.price, city.name AS city, district.name AS district
@@ -362,7 +349,7 @@ module.exports.putChangeRented = async (req, res) => {
 
 module.exports.putChangeDisapproved = async (req, res) => {
   const apartment_id = req.params.id;
-  const message = `Your apartment ${apartment_id} is disapproved by admin`;
+  const message = `Một phong trọ không được duyệt`;
   const sql = `UPDATE apartment 
         SET apartment.status = "Không được duyệt" 
         WHERE apartment.apartment_id = ? `;
@@ -393,7 +380,7 @@ module.exports.putChangeDisapproved = async (req, res) => {
 
 module.exports.putChangeApproved = async (req, res) => {
   const apartment_id = req.params.id;
-  const message = `Congratulation!! Your apartment ${apartment_id} is approved by admin`;
+  const message = "Một phòng trọ đã được duyệt";
   const sql = `UPDATE apartment 
         SET apartment.status = "Đã được duyệt" 
         WHERE apartment.apartment_id = ? `;
