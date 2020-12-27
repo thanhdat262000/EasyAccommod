@@ -33,6 +33,8 @@ ownerRouter.get("/rented", ownerController.getAllRented);
 
 ownerRouter.get("/expired", ownerController.getAllExpired);
 
+ownerRouter.get("/notification", ownerController.getAllNotification);
+
 ownerRouter.get("/disapproved", ownerController.getAllDisapproved);
 
 ownerRouter.post(
