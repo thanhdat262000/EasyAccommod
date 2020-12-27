@@ -44,10 +44,11 @@ export const getAllFavorite = async () => {
   return (await response).data;
 };
 export const search = async (query) => {
-  const response = await axios({
-    url: url,
-    method: "get",
-    params: query,
-  });
+  const response = await axios.get(
+    `${url}?apartment_type=${query.apartment_type}&city_name=${query.city_name}&district_name=${query.district_name}&rent_max=${query.rent_max}&rent_min=${query.rent_min}&square_min=${query.square_min}&square_max=${query.square_max}`,
+    {
+      headers: authHeader(),
+    }
+  );
   return response.data;
 };

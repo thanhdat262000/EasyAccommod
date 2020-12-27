@@ -26,12 +26,7 @@ class ListSearchAndFilter extends Component {
         {
           type: "selection",
           criteria: "quận/huyện",
-          selections: [
-            "Quận Cầu Giấy",
-            "Quận Hai Bà Trưng",
-            "Quận Thanh Xuân",
-            "Quận Long Biên",
-          ],
+          selections: ["Cầu Giấy", "Hai Bà Trưng", "Thanh Xuân", "Long Biên"],
           name: "district_name",
         },
         {

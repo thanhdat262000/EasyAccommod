@@ -65,3 +65,11 @@ export const disapprovePost = async (id) => {
   });
   return response.status;
 };
+export const getStatistic = async () => {
+  const response = await axios({
+    url: adminUrl + "apartments/statistics",
+    method: "get",
+    headers: authHeader(),
+  });
+  return response.data;
+};

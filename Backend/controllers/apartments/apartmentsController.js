@@ -39,6 +39,7 @@ module.exports.index = async (req, res) => {
       square_min,
       square_max,
     } = req.query;
+    console.log(req.query);
 
     const sql = `SELECT apartment.apartment_id, apartment_detail.price, city.name AS city, district.name AS district, apartment_detail.square AS square
           FROM apartment

@@ -9,6 +9,7 @@ import ListOwnerPost from "./ownerPost/listOwnerPosts";
 import { connect } from "react-redux";
 import { getPrivilege } from "../../../redux/selector/selectors";
 import { Redirect } from "react-router-dom";
+import ListStatisticsPost from "./statistics/listStatistics";
 class AdminBody extends Component {
   constructor(props) {
     super(props);
@@ -66,6 +67,8 @@ class AdminBody extends Component {
               <ListOwnerAccounts />
             ) : title.name === "Quản lý bài đăng" ? (
               <ListOwnerPost />
+            ) : title.name === "Thống kê" ? (
+              <ListStatisticsPost />
             ) : null}
           </div>
         </div>
