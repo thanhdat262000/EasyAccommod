@@ -71,7 +71,7 @@ class PostedApartment extends Component {
                 alt="posted-apartment"
               />
               <div className="posted-apartment-main-info posted-apartment-section">
-                <span className="posted-apartment-main-info-address">
+                <span id="rem" className="posted-apartment-main-info-address">
                   {apartment.city}, {apartment.district}
                 </span>
                 <span className="posted-apartment-main-info-price">
@@ -81,18 +81,18 @@ class PostedApartment extends Component {
             </div>
             <div className="posted-apartment-statistics posted-apartment-section">
               <div className="posted-apartment-statistics-type">
-                <span>Loại phòng: </span>
+                <span id="rem">Loại phòng: </span>
                 <span id="statistic">{apartment.apartment_type}</span>
               </div>
             </div>
             <div className="posted-apartment-more-detail posted-apartment-section">
               <div className="posted-apartment-more-detail-size">
-                <span>Kích thước: </span>
+                <span id="rem">Kích thước: </span>
                 <span id="statistic">{apartment.square}m2</span>
               </div>
             </div>
             <div className="posted-apartment-expiration">
-              <span>Quá hạn: </span>
+              <span id="rem">Quá hạn: </span>
               <span id="statistic">{apartment.expiration}</span>
             </div>
           </div>

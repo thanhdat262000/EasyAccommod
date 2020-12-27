@@ -12,3 +12,9 @@
   align-items: flex-start;
   grid-row-gap: 1rem;
 }
+@media only screen and (max-width: 600px) {
+  .list-apartments {
+    grid-template-columns: 100%;
+    flex-basis: 100%;
+  }
+}

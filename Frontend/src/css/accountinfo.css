@@ -1,7 +1,7 @@
 .contentArea {
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid #ebedf0;
+  padding: 30px;
 }
 .ahaha {
   display: flex;
@@ -9,11 +9,11 @@
   border-bottom: 4px solid #ced3da;
 }
 
-.ct {
+.contentArea .ct {
   border-bottom: 2px solid #ebedf0;
   justify-content: center;
   display: flex;
-  width: 1000px;
+  width: 70%;
 }
 
 .ct h5 {
@@ -22,7 +22,7 @@
   font-weight: 600;
   line-height: 20px;
   padding-left: 50px;
-  width: 220px;
+  width: 10%;
   text-align: left;
 }
 
@@ -32,7 +32,7 @@ p {
   font-weight: 600;
   line-height: 20px;
   margin: auto;
-  width: 190px;
+  width: 10%;
   text-align: left;
 }
 
@@ -44,4 +44,12 @@ h2 {
   padding-left: 50px;
   padding-top: 1%;
   text-align: left;
+}
+@media only screen and (max-width: 600px) {
+  .contentArea {
+    padding: 0;
+  }
+  .contentArea .ct {
+    width: 80%;
+  }
 }

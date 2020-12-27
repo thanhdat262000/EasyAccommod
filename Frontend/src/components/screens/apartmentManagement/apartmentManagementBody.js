@@ -164,7 +164,7 @@ class ApartmentManagementBody extends Component {
                         : "none",
                     }}
                   >
-                    <span>{title.name}</span>
+                    <div>{title.name}</div>
                   </div>
                 ))}
                 <ToastContainer />

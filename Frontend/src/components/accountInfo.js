@@ -27,15 +27,15 @@ class AccountInfo extends Component {
           </div>
           <div className="ct">
             <h5>Số điện thoại</h5>
-            <p>{email}</p>
+            <p>0969008527</p>
           </div>
           <div className="ct">
             <h5>Ngày sinh</h5>
-            <p>{email}</p>
+            <p>27/12/2000</p>
           </div>
           <div className="ct">
             <h5>Số CMTND</h5>
-            <p>{email}</p>
+            <p>10255257</p>
           </div>
         </div>
       </div>

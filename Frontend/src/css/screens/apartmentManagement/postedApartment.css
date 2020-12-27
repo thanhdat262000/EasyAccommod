@@ -101,3 +101,26 @@
 #delay-expiration {
   margin-right: 2rem;
 }
+
+@media screen and (max-width: 600px) {
+  .posted-apartment .posted-apartment-expiration {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    justify-self: stretch;
+  }
+  .posted-apartment-main-info-price {
+    font-size: 0.7rem;
+  }
+
+  #rem {
+    font-size: 0.7rem;
+  }
+  .posted-apartment-action {
+    display: flex;
+    align-self: center;
+  }
+  #statistic {
+    font-size: 0.7rem;
+  }
+}

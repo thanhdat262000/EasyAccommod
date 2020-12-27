@@ -106,3 +106,15 @@ button.apartment-post-previous {
   color: black;
   background-color: #4694dc;
 }
+
+@media screen and (max-width: 600px) {
+  .apartment-post-body .apartment-post-list-titles {
+    display: none;
+    visibility: hidden;
+    clear: both;
+  }
+  .post-apartment-selection label {
+    width: 32px;
+    height: 167px;
+  }
+}
